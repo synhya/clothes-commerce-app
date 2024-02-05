@@ -30,11 +30,11 @@ export const authConfig: NextAuthConfig = {
     Kakao,
     Credentials({
       credentials: {
-        username: { label: 'Username'},
+        username: { label: 'Username' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        console.log('credentials', credentials)
+        console.log('credentials', credentials);
         if (credentials.username === 'admin' && credentials.password === 'admin') {
           return {
             id: '1',
@@ -45,7 +45,8 @@ export const authConfig: NextAuthConfig = {
           };
         }
         return null;
-    }}),
+      },
+    }),
   ],
   callbacks: {
     redirect({ url, baseUrl }) {

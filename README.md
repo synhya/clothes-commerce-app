@@ -1,5 +1,5 @@
-npx create-next-app@latest -e https://github.com/wkd2314/next-template-app
----
+## npx create-next-app@latest -e https://github.com/wkd2314/next-template-app
+
 - includes dependencies which create-next-app don't have such as prettier, cva, clsx...
 - includes cn function using clsx and twMerge
 - includes Icon component that supports dynamic import settings for lucide-react

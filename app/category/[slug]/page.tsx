@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
 
 const ProductPage = () => {
   return (

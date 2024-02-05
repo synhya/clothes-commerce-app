@@ -6,7 +6,6 @@ import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth';
 import ThemeProvider from '@/components/shared/theme-provider';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

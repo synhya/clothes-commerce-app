@@ -31,4 +31,4 @@ export const logoutAction = async () => {
   await signOut();
 };
 
-const wait = (timeToDelay: number) => new Promise((resolve) => setTimeout(resolve, timeToDelay)) //이와 같이 선언 후
+const wait = (timeToDelay: number) => new Promise((resolve) => setTimeout(resolve, timeToDelay)); //이와 같이 선언 후

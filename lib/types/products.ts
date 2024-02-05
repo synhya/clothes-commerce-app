@@ -1,10 +1,9 @@
-
 export interface Product {
   id: string;
   name: string;
   description: string;
   price: number;
-  category: typeof ProductCategories[number];
+  category: (typeof ProductCategories)[number];
   image: string;
 }
 
@@ -74,7 +73,7 @@ export const Products: Product[] = [
     category: 'scarf',
     image: '/scarf.jpg',
   },
-]
+];
 
 export const ProductCategories = [
   'shirt',

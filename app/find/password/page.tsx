@@ -3,7 +3,7 @@ import React from 'react';
 const Page = () => {
   return (
     <div>
-      <h1>User Profile Page</h1>
+      <h1>Find Password</h1>
     </div>
   );
 };

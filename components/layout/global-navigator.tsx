@@ -15,7 +15,7 @@ const GlobalNavigator = () => {
 
   return (
     <div className="w-full relative flex justify-center bg-sky-500">
-      <div className="flex bg-yellow-600 gap-2" >
+      <div className="flex bg-yellow-600 gap-2">
         {ProductCategories.map((category) => (
           <Link key={category} href={`/category/${category}`}>
             {category}
@@ -25,13 +25,13 @@ const GlobalNavigator = () => {
       <div className="absolute right-4 flex h-12 gap-4 items-center justify-end pr-3">
         {session && session.user?.role === 'admin' && <text>관리자</text>}
         {!session && (
-          <Button variant='ghost'>
+          <Button variant="link">
             <Link href="/login">로그인</Link>
           </Button>
         )}
         {session && (
           <Button
-            variant='ghost'
+            variant="link"
             onClick={async () => {
               const res = await logoutAction();
               console.log(res);
