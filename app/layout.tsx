@@ -2,9 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import GlobalNavigator from '@/components/layout/global-navigator';
-import { SessionProvider } from 'next-auth/react';
-import { auth } from '@/auth';
-import ThemeProvider from '@/components/shared/theme-provider';
+import Providers from '@/components/layout/providers';
+import GlobalFooter from '@/components/layout/global-footer';
+import GlobalSidebar from '@/components/layout/global-sidebar';
+import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
+import { NextUIProvider } from '@nextui-org/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,21 +21,32 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data : { user } } = await supabase.auth.getUser()
+  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SessionProvider session={session}>
-            <GlobalNavigator />
-            {children}
-          </SessionProvider>
-        </ThemeProvider>
+          <Providers
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="relative flex min-h-screen flex-col">
+              <div className="sticky top-0 z-10">
+                <GlobalNavigator isLoggedIn={!!user} isAdmin={isAdmin}/>
+              </div>
+              <div className="flex flex-grow">
+                <GlobalSidebar />
+                <main className="flex-grow">{children}</main>
+              </div>
+              <GlobalFooter />
+            </div>
+          </Providers>
       </body>
     </html>
   );

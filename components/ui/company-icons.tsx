@@ -1,8 +1,4 @@
 import React from 'react';
-import Icon from '@ant-design/icons';
-import { GetProps } from 'antd';
-
-type CustomIconComponentProps = GetProps<typeof Icon>;
 
 export const GoogleSvg = () => (
   <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,8 +27,4 @@ export const GoogleSvg = () => (
       fill="#EA4335"
     />
   </svg>
-);
-
-export const GoogleIcon = (props: Partial<CustomIconComponentProps>) => (
-  <Icon component={GoogleSvg} {...props} />
 );
