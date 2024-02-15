@@ -3,23 +3,39 @@ import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
-import { BASE_URL, LOGIN_PATH, NEW_USER_PATH, SIGNUP_PATH } from '@/lib/paths';
+import { BASE_URL, NEW_USER_PATH, SIGNUP_PATH } from '@/lib/paths';
 import { ProfileFormSchema } from '@/components/page/user/profile-form';
 import { SignupFormSchema } from '@/components/page/user/register-email-form';
-import { ProductFormSchema } from '@/components/page/admin/add-product-form';
-import { v4 as uuid } from 'uuid';
+import { v5 as uuid } from 'uuid';
+import { addProductFormSchema, ProductFormSchema } from '@/components/page/admin/add-product-form';
+import { createAdminClient } from '@/lib/supabase/admin';
+import { Enums } from '@/lib/types/database';
 
 
 const bucket = 'products';
+const namespace = '87c9cdf7-101d-4c05-a89d-c7aaff3a3fcf';
 
-export async function createProduct (formData: ProductFormSchema) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore); // role: manager.
+export async function createProduct (formData: FormData) {
+  // const cookieStore = cookies();
+  // const supabase = createClient(cookieStore); // role: manager. not working for now
 
-  const { imageFile, ...dataWithoutImage } = formData;
+  // 이렇게 하면 JSON.parse가 필요없긴한데 더 느릴듯
+  const validatedFields = addProductFormSchema.safeParse(formData);
 
-  // upload image to storage
-  const imageUrl = `${uuid()}.png`;
+  if (!validatedFields.success) {
+    return '입력값이 잘못되었습니다.';
+  }
+
+  const supabase = createAdminClient();
+
+  const imageFile = formData.get('imageFile') as File;
+
+  if (!imageFile) {
+    return '이미지가 없습니다.';
+  }
+
+  const uniqueName = formData.get('name') as string;
+  const imageUrl = `${uuid(uniqueName, namespace)}.png`;
   const imageRes = await supabase
     .storage
     .from(bucket)
@@ -29,31 +45,46 @@ export async function createProduct (formData: ProductFormSchema) {
     })
 
   if (imageRes.error) {
-    return new Error('이미지 업로드 실패: ' + imageRes.error.message);
+    return '이미지 업로드 실패: ' + imageRes.error.message;
   }
 
   // update product table
-
-  const { error } = await supabase.from('products').insert({
-    ...dataWithoutImage,
+  const newProduct = {
+    name: uniqueName,
+    price: Number(formData.get('price')),
+    description: formData.get('description') as string,
+    categories: JSON.parse(formData.get('categories') as string),
+    tags: JSON.parse(formData.get('tags') as string),
+    available_sizes: JSON.parse(formData.get('available_sizes') as string),
+    available_colors: JSON.parse(formData.get('available_colors') as string),
+    sale_state: formData.get('sale_state') as Enums['sale_state'],
     image_url: imageUrl,
-  });
+  } satisfies Omit<ProductFormSchema, 'imageFiles'> | { image_url: string };
+
+  const { error } = await supabase.from('products').insert({...newProduct});
 
   if (error) {
-    return new Error('상품 생성 실패: ' + error.message);
+    return '상품 생성 실패: ' + error.message;
   }
 
-  revalidatePath('/admin');
-  return null;
+  revalidatePath('/', 'layout') // revalidate all data
+}
+
+export async function testAction (formData: File) {
+  console.log(formData.name, formData.size, formData.type);
 }
 
 export async function updateProduct (formData: any) {
-  const supabase = createAdminClient();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+
 }
 
 
 export async function deleteProduct (formData: any) {
-  const supabase = createAdminClient();
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
 
 
 }
@@ -87,20 +118,17 @@ export async function createProfile (formData: ProfileFormSchema) {
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
-    return new Error('로그인이 필요합니다.');
+    return '로그인이 필요합니다.';
   }
 
-  // rls: only read operation is allowed
-  const admin = createAdminClient();
-
-  const { error } = await admin.from('profiles').insert({
+  const { error } = await supabase.from('profiles').insert({
     ...formData,
     id: user.id,
     birthdate: formData.birthdate.toUTCString(),
   });
 
   if (error) {
-    return new Error('프로필 생성 실패: ' + error.message);
+    return '프로필 생성 실패: ' + error.message;
   }
 
   redirect(`/?newUser=${encodeURIComponent(formData.name)}`); //

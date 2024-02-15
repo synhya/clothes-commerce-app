@@ -126,34 +126,43 @@ export type Database = {
           available_colors: string[] | null
           available_sizes: Database["public"]["Enums"]["product_size"][] | null
           categories: string[] | null
+          created_at: string | null
           description: string | null
           id: string
           image_url: string | null
           name: string
           price: number | null
+          sale_state: Database["public"]["Enums"]["sale_state"]
           tags: string[] | null
+          updated_at: string | null
         }
         Insert: {
           available_colors?: string[] | null
           available_sizes?: Database["public"]["Enums"]["product_size"][] | null
           categories?: string[] | null
+          created_at?: string | null
           description?: string | null
           id?: string
           image_url?: string | null
           name: string
           price?: number | null
+          sale_state?: Database["public"]["Enums"]["sale_state"]
           tags?: string[] | null
+          updated_at?: string | null
         }
         Update: {
           available_colors?: string[] | null
           available_sizes?: Database["public"]["Enums"]["product_size"][] | null
           categories?: string[] | null
+          created_at?: string | null
           description?: string | null
           id?: string
           image_url?: string | null
           name?: string
           price?: number | null
+          sale_state?: Database["public"]["Enums"]["sale_state"]
           tags?: string[] | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -205,6 +214,7 @@ export type Database = {
     Enums: {
       invoice_state: "결제완료" | "배송중" | "배송완료" | "환불완료"
       product_size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
+      sale_state: "판매중" | "대기중"
     }
     CompositeTypes: {
       inventory_item: {

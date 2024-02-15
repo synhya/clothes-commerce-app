@@ -4,136 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="feat: login authentication">
-      <change afterPath="$PROJECT_DIR$/app/admin/@analytics/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/admin/@products/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/admin/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/auth/callback/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/auth/confirm/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/auth/signout/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/myshop/address/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/myshop/mileage/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/myshop/order/basket/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/myshop/order/list/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/myshop/reviews/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/myshop/wish-list/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/product-list/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/product/[id]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/user/create-profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/user/register-email/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/user/update-profile/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layout/global-footer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layout/global-sidebar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layout/providers.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layout/search-bar.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/admin/add-product-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/dump/profile-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/home/cloth-carousel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/home/home-side-banner.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/home/trending-clothes.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/product/product-card.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/toaster-on-mount.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/user/postcode.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/user/profile-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/user/register-email-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/authjs.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/fetches.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hooks/useScript.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/hooks/useSidebar.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/jwtutils.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/paths.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/supabase/admin.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/supabase/client.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/supabase/schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/supabase/server.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/types/categories.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/types/database.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/banners/banner-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/banners/banner-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/login-side-img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/product_template.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sample-slides/slide-1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sample-slides/slide-2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sample-slides/slide-3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/sample-slides/slide-4.jpg" afterDir="false" />
+    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="chore: admin dashboard layout">
+      <change afterPath="$PROJECT_DIR$/app/admin/ manage-product/[id]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/admin/invoices/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/admin/dropzone-form-field.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/admin/hashtag-form-field.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/admin/multiselect-form-field.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/admin/product-table.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/admin/search-product-form.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.prettierrc" beforeDir="false" afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/@analytics/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/search-products/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/@products/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/add-products/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/admin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/[...nextauth]/route.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/api/protected/route.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/category/[slug]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/find/id/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/find/id/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/find/password/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/find/password/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/login/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/myshop/deposits/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/myshop/coupon/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/set-profile/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layout/global-navigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/global-navigator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layout/mode-toggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/theme-toggle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/home/ClothCarousel.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/login/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/user/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/shared/theme-provider.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/accordion.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/alert-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/alert-dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/alert.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/alert.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/aspect-ratio.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/aspect-ratio.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/avatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/badge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/badge.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/calendar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/carousel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/carousel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/checkbox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/checkbox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/collapsible.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/collapsible.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/command.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/command.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/company-icons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/company-icons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/context-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/context-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/dialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/drawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/drawer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/dropdown-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/dropdown-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/hover-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/hover-card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/label.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/label.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/menubar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/menubar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/navigation-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/navigation-menu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/pagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/pagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/password-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/password-input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/popover.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/popover.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/progress.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/progress.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/radio-group.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/radio-group.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/resizable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/resizable.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/scroll-area.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/scroll-area.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/select.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/separator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/separator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/sheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/sheet.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/skeleton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/skeleton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/slider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/slider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/sonner.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/sonner.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/switch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/switch.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/tabs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/textarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/textarea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/toast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/toast.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/toaster.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/toaster.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/toggle-group.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/toggle-group.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/toggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/toggle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/tooltip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/tooltip.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/ui/use-toast.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/use-toast.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/global-footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/global-footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/admin/add-product-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/admin/add-product-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/product/product-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/product/product-card.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/types/auth-types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/next-auth.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/types/products.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/types/categories.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/categories.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/types/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/database.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/login-side-img.webp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,8 +167,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.generate db type" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.generate db type" />
         <item itemvalue="npm.database" />
         <item itemvalue="npm.format" />
         <item itemvalue="npm.build" />
@@ -306,7 +199,8 @@
       <workItem from="1707156090250" duration="17999000" />
       <workItem from="1707193668493" duration="128211000" />
       <workItem from="1707492296386" duration="97043000" />
-      <workItem from="1707741076575" duration="2238000" />
+      <workItem from="1707741076575" duration="47291000" />
+      <workItem from="1707985899317" duration="267000" />
     </task>
     <task id="LOCAL-00001" summary="chore: moved file location">
       <option name="closed" value="true" />
@@ -324,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707174907046</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="chore: admin dashboard layout">
+      <option name="closed" value="true" />
+      <created>1707743607235</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1707743607236</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,6 +246,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: moved file location" />
     <MESSAGE value="feat: login authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: login authentication" />
+    <MESSAGE value="chore: admin dashboard layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: admin dashboard layout" />
   </component>
 </project>

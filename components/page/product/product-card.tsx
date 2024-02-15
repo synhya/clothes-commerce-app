@@ -7,13 +7,13 @@ const ProductCard = () => {
   // className="hover:scale-110 transition-transform  duration-300 rounded-md"
   return (
     <div className="flex flex-col items-center border border-background rounded-md gap-y-2">
-      <div className="bg-background">
+      <div>
         <Image
           as={NextImage}
           isZoomed
           width={400}
           height={300}
-          src="/database/baby-cap-black.png"
+          src="/products/baby-cap-black.png"
           alt="Product Image"
         />
       </div>

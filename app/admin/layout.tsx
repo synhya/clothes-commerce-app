@@ -1,34 +1,26 @@
 import React from 'react';
-import { Button } from '@nextui-org/react';
+import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
+import Link from 'next/link';
+import AdminSidebar from '@/components/page/admin/admin-sidebar';
 
-const Layout = ({
+const Layout = async ({
   children,
-  products,
-  analytics,
 }: {
   children: React.ReactNode
-  analytics: React.ReactNode
-  products: React.ReactNode
 }) => {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const data = await supabase.auth.getUser();
+
   return (
-    <div className="flex">
+    <div className="flex h-full bg-background">
       {/* 사이드바 */}
-      <div className="flex flex-col items-center mt-20 min-w-[200px]">
-        <Button
-          isIconOnly color="warning"
-          variant="faded"
-          radius="full"
-          className="px-4 py-2"
-        >
-          테스트
-        </Button>
-        <Button color="primary">
-          Button
-        </Button>
-      </div>
-      <div>
-        {products}
-        {/*{analytics}*/}
+      <AdminSidebar />
+      <div className="flex-grow mb-5 ml-2">
+        {children}
       </div>
     </div>
   )

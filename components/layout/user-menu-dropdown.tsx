@@ -45,11 +45,20 @@ const UserMenuDropdown = ({isAdmin} : {isAdmin: boolean}) => {
         <ul
           typeof="menu"
           className="absolute -translate-x-1/3 top-2 z-10 grid gap-3 rounded-md border border-accent p-1 bg-background/60 backdrop-blur-md">
-          {['개인정보', '장바구니', '주문내역'].map((productCategory, index) => (
+          {[{
+            label: '내 정보',
+            href: '/user/update-profile',
+          }, {
+            label: '주문 내역',
+            href: '/myshop/list',
+          }, {
+            label: '장바구니',
+            href: '/myshop/basket',
+          }].map((menus, index) => (
             <li key={index} className="w-full">
               <Button variant="link" className="w-full">
-                <Link href={`/product-list?category=${productCategory}`} passHref className="w-fit">
-                  {productCategory}
+                <Link href={menus.href} passHref className="w-fit">
+                  {menus.label}
                 </Link>
               </Button>
             </li>

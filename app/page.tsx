@@ -47,7 +47,7 @@ export default async function Home({
       </div>
       {/* 인기 순위 */}
       <div>
-        <TrendingClothes className="border-4 border-red-500"/>
+        <TrendingClothes/>
       </div>
 
       {/* toasters */}

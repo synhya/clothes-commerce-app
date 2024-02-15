@@ -8,6 +8,10 @@ export type Product = Omit<Database['public']['Tables']['products']['Row'], 'cat
 export type Invoice = Database['public']['Tables']['invoices']['Row'];
 export type Enums = Database['public']['Enums'];
 
+//Database['public']['Enums']['product_size'];
+export const productSizeEnums = ["xs" , "sm" , "md" , "lg" , "xl" , "2xl"] as const
+export const productSaleState = ["판매중", "대기중"] as const
+
 const test2: Invoice = {
   id: 1,
   address: '서울시 강남구',
@@ -24,29 +28,3 @@ const test2: Invoice = {
   user_name : '홍길동',
   user_phone : '010-1234-5678',
 }
-
-// sample data
-const test: Product[] = [
-  {
-    id: '1',
-    name: 'product1',
-    description: 'description1',
-    price: 1000,
-    available_colors: ['red', 'brown'],
-    available_sizes: ['sm', 'md', 'lg'],
-    categories: ['아우터'],
-    image_url: 'https://via.placeholder.com/150',
-    tags: ['best', 'sns hot'],
-  },
-  {
-    id: '2',
-    name: 'product2',
-    description: 'description2',
-    price: 2000,
-    available_colors: ['red', 'blue'],
-    available_sizes: ['sm', 'md', 'lg'],
-    categories: ['아우터'],
-    image_url: 'https://via.placeholder.com/150',
-    tags: ['best', 'sns hot'],
-  },
-];

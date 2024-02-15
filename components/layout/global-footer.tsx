@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 const GlobalFooter = () => {
   const pathname = usePathname();
 
-  if (pathname.startsWith('/user/login')) return;
+  if (pathname.startsWith('/user/login') || pathname.startsWith('/admin')) return;
 
   return (
     <footer className="bg-background p-8 mt-auto ">

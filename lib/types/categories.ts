@@ -24,3 +24,9 @@ export const productCategories = {
   outer: ['코트', '자켓', '가디건', '점퍼', '핸드메이드'],
   'ops/sk': ['원피스', '스커트', '미디-롱 스커트'],
 } as const satisfies ProductCategory;
+
+export const uniqueCategories = Array.from(
+  new Set(
+    metaCategories.map((meta) => productCategories[meta]).flat(),
+  )
+)

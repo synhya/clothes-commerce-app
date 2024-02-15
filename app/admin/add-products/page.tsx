@@ -8,17 +8,18 @@ const Page = async () => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
   const session = await auth();
-  if(session) {
+  if (session) {
     const { data } = await supabase.from('notes').select(); //.insert([{ title: "Buy milk" }]);
   }
 
   return (
-    <div>
-      <h1>Admin</h1>
-      {/* Render your dashboard components here */}
-      Add product page
-      <AddProductForm />
-    </div>
+    <>
+      <h1 className="py-4 text-2xl font-semibold">상품 추가</h1>
+      <div className="flex flex-col lg:items-center">
+        {/* Render your dashboard components here */}
+        <AddProductForm />
+      </div>
+    </>
   );
 };
 
