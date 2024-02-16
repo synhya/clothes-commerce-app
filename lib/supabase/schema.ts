@@ -129,9 +129,9 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: string
-          image_url: string | null
+          image_url: string
           name: string
-          price: number | null
+          price: number
           sale_state: Database["public"]["Enums"]["sale_state"]
           tags: string[] | null
           updated_at: string | null
@@ -143,9 +143,9 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string
-          image_url?: string | null
+          image_url: string
           name: string
-          price?: number | null
+          price: number
           sale_state?: Database["public"]["Enums"]["sale_state"]
           tags?: string[] | null
           updated_at?: string | null
@@ -157,9 +157,9 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string
-          image_url?: string | null
+          image_url?: string
           name?: string
-          price?: number | null
+          price?: number
           sale_state?: Database["public"]["Enums"]["sale_state"]
           tags?: string[] | null
           updated_at?: string | null

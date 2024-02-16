@@ -30,6 +30,17 @@ export const fetchProfileById = async (
   });
 };
 
+export const fetchProductByName = async (
+  name: string,
+  supabase: SupabaseClient,
+): Promise<{
+  data: Product | null;
+  error: PostgrestError | null;
+}> => {
+  return supabase.from('products').select('*').eq('name', name).limit(1).single()
+}
+
+
 export const fetchProductsByCategory = async (
   category: string,
   supabase: SupabaseClient,

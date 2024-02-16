@@ -7,7 +7,7 @@ import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { uniqueCategories } from '@/lib/types/categories';
-import { ProductFormSchema } from '@/components/page/admin/add-product-form';
+import { ProductFormSchema } from '@/components/page/admin/product-form';
 import { useFormContext } from 'react-hook-form';
 import { productSizeEnums } from '@/lib/types/database';
 import { Badge } from '@/components/ui/badge';
@@ -70,11 +70,11 @@ export const CategoryFormField = () => {
             </PopoverContent>
           </Popover>
           <FormMessage className="font-semibold" />
-          <FormDescription className="text-md flex flex-wrap gap-1">
+          <div className="text-md flex flex-wrap gap-1" >
             {field.value.map((category) =>
               <Badge key={category} variant="secondary">{category}</Badge>
             )}
-          </FormDescription>
+          </div>
         </FormItem>
       )}
     />
@@ -138,11 +138,11 @@ export const SizeFormField = () => {
             </PopoverContent>
           </Popover>
           <FormMessage className="font-semibold" />
-          <FormDescription className="text-md flex flex-wrap gap-1">
+          <div className="text-md flex flex-wrap gap-1">
             {field.value.map((size) =>
               <Badge key={size} variant="secondary">{size}</Badge>
             )}
-          </FormDescription>
+          </div>
         </FormItem>
       )}
     />

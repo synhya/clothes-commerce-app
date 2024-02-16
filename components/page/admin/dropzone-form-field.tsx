@@ -9,14 +9,18 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Image } from '@nextui-org/react';
-import { ProductFormSchema } from '@/components/page/admin/add-product-form';
+import { ProductFormSchema } from '@/components/page/admin/product-form';
 import { useFormContext } from 'react-hook-form';
 import Dropzone, { useDropzone } from 'react-dropzone';
 import { Button } from '@/components/ui/button';
 
-const DropzoneFormField = () => {
+const DropzoneFormField = ({
+  defaultImageUrl
+}: {
+  defaultImageUrl?: string;
+}) => {
   const form = useFormContext<ProductFormSchema>();
-  const [paths, setPaths] = useState<string[]>([]);
+  const [paths, setPaths] = useState<string[]>([defaultImageUrl ?? '']);
 
   return (
     <div>

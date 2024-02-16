@@ -39,17 +39,20 @@ const GlobalSidebar = () => {
         {metaCategories.map((category, index) => (
           <AccordionItem key={index} value={`item-${index + 1}`}>
             <AccordionTrigger>{category}</AccordionTrigger>
-            <AccordionContent>
+            <AccordionContent className="flex flex-col items-start">
               {productCategories[category].map((productCategory) => (
-                <p key={productCategory + index}>
-                  <Link
-                    href={`/product-list?category=${productCategory}`}
-                    passHref
-                    className="w-fit"
-                  >
-                    {productCategory}
-                  </Link>
-                </p>
+                <div key={productCategory + index} className="flex w-full justify-between">
+                  <Button variant="link" className="peer" asChild>
+                    <Link
+                      href={`/category/${productCategory}`}
+                      passHref
+                      className="w-fit"
+                    >
+                      {productCategory}
+                    </Link>
+                  </Button>
+                  <div className="bg-secondary w-3 min-h-full origin-right scale-x-0 peer-hover:scale-x-100 transition-all duration-500"></div>
+                </div>
               ))}
             </AccordionContent>
           </AccordionItem>

@@ -12,22 +12,17 @@ import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { z, ZodTypeAny } from 'zod';
-import { uniqueCategories } from '@/lib/types/categories';
-import { sub } from 'date-fns';
-
+import { format, sub } from 'date-fns';
 import DateFormField from '@/components/page/admin/date-form-field';
-import { productSaleState } from '@/lib/types/database';
+import { categoryOptions, sellStatusOptions } from '@/lib/types/database';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
-const categoryOptions = ['전체', ...uniqueCategories] as const;
-const sellStatusOptions = ['전체', ...productSaleState] as const;
 
 type SearchParams = {
   category: (typeof categoryOptions)[number];
   startDate: Date;
   endDate: Date;
-  status: (typeof sellStatusOptions)[number];
+  saleState: (typeof sellStatusOptions)[number];
   searchText: string;
 };
 
@@ -35,9 +30,7 @@ const formSchema = z.object({
   category: z.enum(categoryOptions),
   startDate: z.date(),
   endDate: z.date(),
-  status: z.enum(sellStatusOptions, {
-    required_error: 'You need to select a notification type.',
-  }),
+  saleState: z.enum(sellStatusOptions),
   searchText: z.string(),
 } satisfies Record<keyof SearchParams, ZodTypeAny>);
 
@@ -52,24 +45,30 @@ const SearchProductForm = () => {
       category: '전체',
       startDate: sub(new Date(), { days: 7 }),
       endDate: new Date(),
-      status: '전체',
+      saleState: '전체',
       searchText: '',
     },
   });
 
   const onSubmit = (values: FormValues) => {
     const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set('category', values.category);
-    newSearchParams.set('startDate', values.startDate.toISOString());
-    newSearchParams.set('endDate', values.endDate.toISOString());
-    newSearchParams.set('status', values.status);
-    newSearchParams.set('searchText', values.searchText);
+    if (values.category !== '전체') newSearchParams.set('category', values.category);
+    newSearchParams.set(
+      'startDate',
+      format(zonedTimeToUtc(values.startDate, 'Asia/Seoul'), 'yyyy-MM-dd'),
+    );
+    newSearchParams.set(
+      'endDate',
+      format(zonedTimeToUtc(values.endDate, 'Asia/Seoul'), 'yyyy-MM-dd'),
+    );
+    if (values.saleState !== '전체') newSearchParams.set('saleState', values.saleState);
+    if (values.searchText) newSearchParams.set('searchText', values.searchText);
     router.push(`${pathname}?${newSearchParams.toString()}`);
   };
 
   return (
     <div className="mx-auto my-8 max-w-4xl">
-      <div className="mb-6 mr-2">
+      <div className="mb-6">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -153,7 +152,7 @@ const SearchProductForm = () => {
               <div className="flex items-center gap-2 pt-1">
                 <FormField
                   control={form.control}
-                  name="status"
+                  name="saleState"
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                       <FormControl>

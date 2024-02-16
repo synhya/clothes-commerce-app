@@ -14,7 +14,7 @@ export const authConfig: NextAuthConfig = {
   pages: {
     signIn: LOGIN_PATH,
     // verifyRequest: '/login?verify=1', // (used for check email message)
-    error: LOGIN_PATH, // Error code passed in query string as ?error=
+    error: LOGIN_PATH, // NotFound code passed in query string as ?error=
     newUser: NEW_USER_PATH, // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   providers: [
@@ -54,7 +54,7 @@ export const authConfig: NextAuthConfig = {
     //   if (trigger === 'update' && session) {
     //     console.log('update token', token);
     //     console.log('update user', session);
-    //     // keep [id] and email from the session
+    //     // keep [slug] and email from the session
     //     token.name = session.name;
     //     token.picture = session.picture;
     //   }

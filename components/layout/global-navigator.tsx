@@ -102,7 +102,7 @@ const GlobalNavigator = ({ isLoggedIn , isAdmin }: {
                     <li key={productCategory}>
                       <Button variant="link">
                         <Link
-                          href={`/product-list?category=${productCategory}`}
+                          href={`/category/${productCategory}`}
                           passHref
                           className="w-fit "
                         >

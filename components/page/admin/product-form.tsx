@@ -1,11 +1,9 @@
 'use client';
 import React, { useCallback, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { useRouter } from 'next/navigation';
-import { Image } from '@nextui-org/react';
 import { Enums, Product, productSaleState } from '@/lib/types/database';
 import { z, ZodTypeAny } from 'zod';
-import { createProduct } from '@/lib/actions';
+import { createProduct, deleteProduct, updateProduct } from '@/lib/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -17,16 +15,14 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { FileWithPath, useDropzone } from 'react-dropzone';
-import { Toaster } from '@/components/ui/toaster';
-import { toast } from '@/components/ui/use-toast';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import HashtagFormField from '@/components/page/admin/hashtag-form-field';
 import { CategoryFormField, SizeFormField } from '@/components/page/admin/multiselect-form-field';
 import DropzoneFormField from '@/components/page/admin/dropzone-form-field';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import CurrencyInput from 'react-currency-input-field';
+import { toast } from '@/components/ui/use-toast';
+import { Toaster } from '@/components/ui/toaster';
 
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
@@ -69,26 +65,34 @@ export const addProductFormSchema = z.object({
 
 export type ProductFormSchema = z.infer<typeof addProductFormSchema>;
 
-const currentcyFormat = new Intl.NumberFormat("ko-KR", {
-  style: "currency",
-  currency: "KRW"
+const currentcyFormat = new Intl.NumberFormat('ko-KR', {
+  style: 'currency',
+  currency: 'KRW',
 });
 
-const AddProductForm = () => {
+type ProductFormProps = {
+  defaultValues?: Partial<ProductFormSchema>;
+  defaultImageUrl?: string;
+  action: 'create' | 'modify';
+  productId?: string;
+};
+
+const ProductForm = ({ defaultValues, defaultImageUrl, action, productId }: ProductFormProps) => {
   const form = useForm<ProductFormSchema>({
     resolver: zodResolver(addProductFormSchema),
     defaultValues: {
-      name: '검은 청바지',
-      price: 10000,
-      description: '옷입니다',
-      categories: ['top'],
-      tags: [{ value: 'new' }],
-      available_sizes: ['md'],
-      available_colors: [{ value: 'black' }, { value: 'white'}],
-      sale_state: '판매중',
+      name: defaultValues?.name || '티셔츠',
+      price: defaultValues?.price || 10000,
+      description: defaultValues?.description || '시원한 티셔츠',
+      categories: defaultValues?.categories || ['top'],
+      tags: defaultValues?.tags || [{ value: 'new' }],
+      available_sizes: defaultValues?.available_sizes || ['md'],
+      available_colors: defaultValues?.available_colors || [{ value: 'black' }, { value: 'white' }],
+      sale_state: defaultValues?.sale_state || '판매중',
     },
   });
-  const onSubmit: SubmitHandler<ProductFormSchema> = async (data) => {
+
+  const onSubmit: SubmitHandler<ProductFormSchema> = useCallback(async (data) => {
 
     const formData = new FormData();
     formData.append('name', data.name);
@@ -99,20 +103,29 @@ const AddProductForm = () => {
     formData.append('available_sizes', JSON.stringify(data.available_sizes));
     formData.append('available_colors', JSON.stringify(data.available_colors.map((color) => color.value)));
     formData.append('sale_state', data.sale_state);
-    if (!data.imageFiles) {
-      // for (const file of Array.from(data.imageFiles)) {
-      //   formData.append('imageFiles', file);
-      // }
+    if (action == 'create' && !data.imageFiles) {
       toast({
         title: '알림',
         description: '이미지가 없습니다.',
       });
       return;
     }
+    if (action == 'modify') {
+      if (!productId) {
+        toast({
+          title: '경고',
+          description: '상품 id가 없습니다.',
+        });
+        return;
+      }
+      formData.append('id', productId);
+    }
 
-    formData.append('imageFile', data.imageFiles[0] as Blob);
+    if (data.imageFiles)
+      formData.append('imageFile', data.imageFiles[0] as Blob);
 
-    const error = await createProduct(formData);
+    const error = action == 'create' ? await createProduct(formData) : await updateProduct(formData);
+
     if (error) {
       toast({
         title: '알림',
@@ -124,9 +137,33 @@ const AddProductForm = () => {
     // also show toast
     toast({
       title: '알림',
-      description: '상품이 추가되었습니다.',
+      description: `상품이 ${action == 'create' ? '추가' : '수정'}되었습니다.`,
     });
-  };
+  }, []);
+
+  const handleDelete = useCallback(async () => {
+    if (!productId) {
+      toast({
+        title: '경고',
+        description: '상품 id가 없습니다.',
+      });
+      return;
+    }
+    const error = await deleteProduct(productId);
+
+    if (error) {
+      toast({
+        title: '알림',
+        description: '상품 삭제에 실패했습니다.',
+      });
+      return;
+    }
+
+    toast({
+      title: '알림',
+      description: '상품이 삭제되었습니다.',
+    });
+  }, []);
 
   return (
     <>
@@ -150,7 +187,7 @@ const AddProductForm = () => {
                   <Input placeholder='상품 이름을 입력해주세요' {...field} />
                 </FormControl>
                 <FormDescription>상품 이름을 입력해주세요.</FormDescription>
-                <FormMessage className="font-semibold"/>
+                <FormMessage className='font-semibold' />
               </FormItem>
             )}
           />
@@ -164,21 +201,21 @@ const AddProductForm = () => {
             //     integer: (value) => Number.isInteger(value) || '가격은 정수입니다.',
             //   },
             // }}
-            render={({ field: {onChange, value, ref, onBlur}}) => (
-              <FormItem className="max-w-[200px]">
+            render={({ field: { onChange, value, ref, onBlur } }) => (
+              <FormItem className='max-w-[200px]'>
                 <FormLabel>가격</FormLabel>
-                <div className="relative">
-                  <span className="absolute top-1/2 left-3 transform -translate-y-1/2 text-sm">₩</span>
+                <div className='relative'>
+                  <span className='absolute top-1/2 left-3 transform -translate-y-1/2 text-sm'>₩</span>
                   <FormControl>
                     <Input
                       type='number'
                       placeholder='가격을 입력해주세요'
-                      {...{onChange, value, ref, onBlur}}
-                      className="pl-8"
+                      {...{ onChange, value, ref, onBlur }}
+                      className='pl-8'
                     />
                   </FormControl>
                 </div>
-                <FormMessage className="font-semibold"/>
+                <FormMessage className='font-semibold' />
               </FormItem>
             )}
           />
@@ -192,7 +229,7 @@ const AddProductForm = () => {
                 <FormControl>
                   <Textarea {...field} className='min-h-[100px]' />
                 </FormControl>
-                <FormMessage className="font-semibold"/>
+                <FormMessage className='font-semibold' />
               </FormItem>
             )}
           />
@@ -200,8 +237,8 @@ const AddProductForm = () => {
           <SizeFormField />
           <HashtagFormField arrayPath={'tags'} label='태그' />
           <HashtagFormField arrayPath={'available_colors'} label='색상' />
-          <DropzoneFormField />
-          <div className="pt-1.5">
+          <DropzoneFormField defaultImageUrl={defaultImageUrl} />
+          <div className='pt-1.5'>
             <FormField
               control={form.control}
               name='sale_state'
@@ -211,7 +248,7 @@ const AddProductForm = () => {
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="판매상태를 선택하세요" />
+                        <SelectValue placeholder='판매상태를 선택하세요' />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -222,13 +259,20 @@ const AddProductForm = () => {
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormMessage className="font-semibold"/>
+                  <FormMessage className='font-semibold' />
                 </FormItem>
               )}
             />
-            <Button className='mt-3 w-full' type='submit'>
-              상품 추가
-            </Button>
+            <div className="flex gap-2">
+              <Button className='mt-3 w-full' type='submit'>
+                {action == 'create' ? '상품 추가' : '상품 수정'}
+              </Button>
+              {action == 'modify' && (
+                <Button className='mt-3 w-full' variant='destructive' type='button' onClick={async () => handleDelete()}>
+                  상품 삭제
+                </Button>
+              )}
+            </div>
           </div>
         </form>
       </Form>
@@ -244,4 +288,4 @@ const AddProductForm = () => {
 //   available_sizes: z.array(z.custom<Enums['product_size']>()),
 //   available_colors: z.array(z.string()),
 
-export default AddProductForm;
+export default ProductForm;

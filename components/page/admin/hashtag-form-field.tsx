@@ -4,7 +4,7 @@ import { FormControl, FormField, FormItem, FormMessage } from '@/components/ui/f
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ArrayPath, FieldValues, useFieldArray, useFormContext } from 'react-hook-form';
-import { ProductFormSchema } from '@/components/page/admin/add-product-form';
+import { ProductFormSchema } from '@/components/page/admin/product-form';
 
 type Props<T extends FieldValues> = {
   arrayPath : ArrayPath<T>

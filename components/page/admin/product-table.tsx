@@ -13,14 +13,13 @@ import { Badge } from '@/components/ui/badge';
 import { Product } from '@/lib/types/database';
 import { ko } from 'date-fns/locale';
 import { format } from 'date-fns';
+import { ExternalLinkIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
 const ProductTable = ({ tableData }: { tableData: Product[] }) => {
   return (
     <>
-      <div className="mb-4">
-        <Button variant="secondary">엑셀 다운로드</Button>
-      </div>
-      <div className="mr-2 rounded-md border">
+      <div className="rounded-md border max-w-5xl mx-auto">
         <Table>
           <TableHeader>
             <TableRow>
@@ -31,51 +30,57 @@ const ProductTable = ({ tableData }: { tableData: Product[] }) => {
               <TableHead>금액</TableHead>
               <TableHead>카테고리</TableHead>
               <TableHead className="max-md:hidden">판매상태</TableHead>
-              <TableHead className="max-lg:hidden">상품등록시간</TableHead>
-              <TableHead className="max-lg:hidden">수정일시</TableHead>
+              <TableHead className="max-lg:hidden">등록시간</TableHead>
+              <TableHead className="max-lg:hidden">수정시간</TableHead>
+              <TableHead className="max-lg:hidden"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {tableData.map((product) => (
+            {tableData?.map((product) => (
               <TableRow key={product.id}>
                 <TableCell>
                   <Checkbox />
                 </TableCell>
-                <TableCell>{product.name}</TableCell>
+                <TableCell>
+                  {product.name}
+                  <Button size="icon" variant="ghost" className="size-5 lg:hidden">
+                    <Link href={`/admin/manage-products/${product.name}`}>
+                      <ExternalLinkIcon />
+                    </Link>
+                  </Button>
+                </TableCell>
                 <TableCell>{product.price}원</TableCell>
-                <TableCell className="flex flex-wrap gap-0.5">
-                  {product.categories.map((category) => (
-                    <Badge key={category} variant="secondary">
-                      {category}
-                    </Badge>
-                  ))}
+                <TableCell>
+                  <div className="flex h-full flex-wrap gap-0.5">
+                    {product.categories.map((category) => (
+                      <Badge key={category} variant="secondary">
+                        {category}
+                      </Badge>
+                    ))}
+                  </div>
                 </TableCell>
                 <TableCell className="max-md:hidden">
                   <Badge variant={product.sale_state === '판매중' ? 'default' : 'secondary'}>
                     {product.sale_state}
                   </Badge>
                 </TableCell>
-                <TableCell className="max-lg:hidden">{format(product.created_at!, "PPP", { locale: ko })}</TableCell>
-                <TableCell className="max-lg:hidden">{format(product.created_at!, "PPP", { locale: ko })}</TableCell>
+                <TableCell className="max-lg:hidden">
+                  {format(product.created_at!, 'Pp', { locale: ko })}
+                </TableCell>
+                <TableCell className="max-lg:hidden">
+                  {format(product.updated_at!, 'Pp', { locale: ko })}
+                </TableCell>
+                <TableCell className="max-lg:hidden">
+                  <Button size="sm" variant="secondary" asChild>
+                    <Link href={`/admin/manage-products/${product.name}`}>수정</Link>
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
-            {/*<TableRow>*/}
-            {/*  <TableCell>*/}
-            {/*    <Checkbox id="product-1" />*/}
-            {/*  </TableCell>*/}
-            {/*  <TableCell className="font-medium">A0001</TableCell>*/}
-            {/*  <TableCell>apple iPhone 14 Pro</TableCell>*/}
-            {/*  <TableCell>1,550,000원</TableCell>*/}
-            {/*  <TableCell>*/}
-            {/*    <Badge variant="secondary">SALE</Badge>*/}
-            {/*  </TableCell>*/}
-            {/*  <TableCell>2023/02/02 10:00</TableCell>*/}
-            {/*  <TableCell>2023/02/02 10:00</TableCell>*/}
-            {/*</TableRow>*/}
           </TableBody>
         </Table>
-        <div className="mt-4 mx-2 mb-2 flex items-center justify-between">
-          <div>총 {tableData.length}건</div>
+        <div className="mx-2 mb-2 mt-4 flex items-center justify-between">
+          <div>총 {tableData?.length ?? 0}건</div>
           <div className="flex space-x-1">
             <Button variant="ghost">{`<`}</Button>
             <Button variant="ghost">1</Button>

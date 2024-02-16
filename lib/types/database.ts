@@ -1,16 +1,21 @@
-import { metaCategories, productCategories } from '@/lib/types/categories';
+import { metaCategories, productCategories, uniqueCategories } from '@/lib/types/categories';
 import { Database } from '@/lib/supabase/schema';
 
 export type Profile = Database['public']['Tables']['profiles']['Row'];
+
 export type Product = Omit<Database['public']['Tables']['products']['Row'], 'categories'> & {
   categories: (typeof productCategories)[keyof typeof productCategories][number][];
 };
+
 export type Invoice = Database['public']['Tables']['invoices']['Row'];
 export type Enums = Database['public']['Enums'];
 
-//Database['public']['Enums']['product_size'];
 export const productSizeEnums = ["xs" , "sm" , "md" , "lg" , "xl" , "2xl"] as const
 export const productSaleState = ["판매중", "대기중"] as const
+
+export const categoryOptions = ['전체', ...uniqueCategories] as const;
+export const sellStatusOptions = ['전체', ...productSaleState] as const;
+
 
 const test2: Invoice = {
   id: 1,
