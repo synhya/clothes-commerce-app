@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { Enums, Product, productSaleState } from '@/lib/types/database';
+import { Enums, productSaleState, ProductSubmit } from '@/lib/types/database';
 import { z, ZodTypeAny } from 'zod';
 import { createProduct, deleteProduct, updateProduct } from '@/lib/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -61,7 +61,7 @@ export const addProductFormSchema = z.object({
   }).array(),
   imageFiles: z.custom<FileList>(),
   sale_state: z.enum(productSaleState),
-} satisfies Record<keyof Omit<Product, 'id' | 'image_url' | 'created_at' | 'updated_at'> | 'imageFiles', ZodTypeAny>);
+} satisfies Record<keyof Omit<ProductSubmit, 'image_url'> | 'imageFiles', ZodTypeAny>);
 
 export type ProductFormSchema = z.infer<typeof addProductFormSchema>;
 
@@ -170,7 +170,7 @@ const ProductForm = ({ defaultValues, defaultImageUrl, action, productId }: Prod
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='w-[400px] space-y-8 lg:space-y-0 lg:gap-y-8 lg:grid lg:w-[800px] lg:grid-cols-2 lg:gap-x-6'
+          className='max-w-[400px] space-y-8 lg:space-y-0 lg:gap-y-8 lg:grid lg:max-w-[800px] lg:grid-cols-2 lg:gap-x-6'
         >
           <FormField
             control={form.control}

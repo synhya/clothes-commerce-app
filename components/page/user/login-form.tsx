@@ -41,7 +41,7 @@ const formSchema = z.object({
       message: '비밀번호는 5자이상 20자이하입니다.',
     }),
 });
-export type LoginFormSchema = z.infer<typeof formSchema>;
+export type LoginFormSchema = Required<z.infer<typeof formSchema>>;
 
 interface LoginFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 

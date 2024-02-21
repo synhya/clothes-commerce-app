@@ -7,7 +7,6 @@ import GlobalFooter from '@/components/layout/global-footer';
 import GlobalSidebar from '@/components/layout/global-sidebar';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import { NextUIProvider } from '@nextui-org/react';
 
 const inter = Inter({ subsets: ['latin'] });
 

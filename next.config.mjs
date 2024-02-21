@@ -10,6 +10,10 @@ const nextConfig = {
         hostname: 'lh3.googleusercontent.com',
         port: '',
       },
+      {
+        hostname: 'ggvgrgddongthsuycbym.supabase.co',
+        port: '',
+      }
     ],
   },
   transpilePackages: ['lucide-react'],

@@ -16,32 +16,32 @@ const AdminSidebar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="relative border-r">
+    <div className='border-r h-full relative'>
       <div
         className={cn('flex h-full min-w-[200px] flex-col justify-between', {
           hidden: !open,
         })}
       >
-        <div className="mx-4 flex flex-col items-center gap-y-6">
-          <p className="mt-4 text-xl">관리자 페이지</p>
+        <div className='mx-4 flex flex-col items-center gap-y-6 sticky top-12'>
+          <p className='mt-4 text-xl'>관리자 페이지</p>
 
-          <Accordion type="multiple" className="w-full">
-            <AccordionItem value="products">
+          <Accordion type='multiple' className='w-full'>
+            <AccordionItem value='products'>
               <AccordionTrigger>상품</AccordionTrigger>
-              <AccordionContent className="flex flex-col items-start gap-0.5">
-                <Button variant="link" asChild>
-                  <Link href="/admin/add-products">상품 추가</Link>
+              <AccordionContent className='flex flex-col items-start gap-0.5'>
+                <Button variant='link' asChild>
+                  <Link href='/admin/add-products'>상품 추가</Link>
                 </Button>
-                <Button variant="link" asChild>
-                  <Link href="/admin/search-products">상품 관리</Link>
+                <Button variant='link' asChild>
+                  <Link href='/admin/search-products'>상품 관리</Link>
                 </Button>
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="invoices">
+            <AccordionItem value='invoices'>
               <AccordionTrigger>주문</AccordionTrigger>
-              <AccordionContent  className="flex flex-col items-start gap-0.5">
-                <Button variant="link" asChild>
-                <Link href="/admin/invoices">주문 관리</Link>
+              <AccordionContent className='flex flex-col items-start gap-0.5'>
+                <Button variant='link' asChild>
+                  <Link href='/admin/invoices'>주문 관리</Link>
                 </Button>
               </AccordionContent>
             </AccordionItem>
@@ -49,8 +49,8 @@ const AdminSidebar = () => {
         </div>
       </div>
       <Button
-        size="icon"
-        className={cn('absolute bottom-0 left-0 m-4', {
+        size='icon'
+        className={cn('fixed bottom-0 left-0 m-4 z-10', {
           'bg-secondary': open,
         })}
         onClick={() => setOpen(!open)}

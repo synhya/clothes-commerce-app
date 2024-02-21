@@ -10,8 +10,8 @@ const GlobalFooter = () => {
 
   return (
     <footer className="bg-background p-8 mt-auto ">
-      <div className="flex flex-nowrap justify-around">
-        <div className="w-1/4">
+      <div className="gap-y-3 flex flex-nowrap flex-col sm:flex-row justify-around">
+        <div className=" sm:w-1/4">
           <h3 className="mb-4 text-lg font-semibold line-clamp-1">회사 정보</h3>
           <p className="line-clamp-2">
             우리 회사는 고객에게 최상의 서비스를
@@ -22,7 +22,7 @@ const GlobalFooter = () => {
           <p className="line-clamp-1">Email: info@example.com</p>
         </div>
 
-        <div className="w-1/4">
+        <div className=" sm:w-1/4">
           <h3 className="mb-4 text-lg font-semibold">서비스</h3>
           <ul className="*:line-clamp-1">
             <li>
@@ -48,7 +48,7 @@ const GlobalFooter = () => {
           </ul>
         </div>
 
-        <div className="w-1/4">
+        <div className=" sm:w-1/4">
           <h3 className="mb-4 text-lg font-semibold line-clamp-1">팔로우하기</h3>
           <p className="line-clamp-2">최신 소식과 업데이트를 받아보세요.</p>
           <ul className="social-icons mt-2 flex gap-3">

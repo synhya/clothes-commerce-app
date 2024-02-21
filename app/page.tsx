@@ -1,12 +1,17 @@
-import ClothCarousel from '@/components/page/home/cloth-carousel';
+import HeroSection from '@/components/page/home/hero-section';
 import React from 'react';
 import ToasterOnMount from '@/components/page/toaster-on-mount';
 import { fetchProfileById } from '@/lib/fetches';
 import { AuthError } from '@supabase/supabase-js';
-import HomeSideBanner from '@/components/page/home/home-side-banner';
+import ProfileSection from '@/components/page/home/profile-section';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import TrendingClothes from '@/components/page/home/trending-clothes';
+import { productDataToCardData } from '@/lib/utils';
+import { Product } from '@/lib/types/database';
+import { Categories } from '@/lib/types/client';
+import { z } from 'zod';
+import { notFound } from 'next/navigation';
 
 export default async function Home({
   searchParams,
@@ -23,16 +28,24 @@ export default async function Home({
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { data, error } = user
+  const { data, error: profileFetchError } = user
     ? await fetchProfileById(user.id, supabase)
     : { data: null, error: null };
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
+  const {data: trendingProducts, error: trendingFetchError } = await supabase.from('products').select('*').limit(5).order('sold', { ascending: false });
+
+  if(trendingFetchError) notFound();
+
+  const trendingClothes = trendingProducts.map((product) => {
+    return productDataToCardData(product as Product, supabase);
+  });
+
   return (
     <div className=" bg-accent">
       <div className="flex pt-5">
-        <ClothCarousel />
-        <HomeSideBanner
+        <HeroSection />
+        <ProfileSection
           isAdmin={isAdmin}
           profile={data}
           className="hidden rounded-l-md border-b border-l border-t p-4 lg:flex lg:basis-1/3 bg-background/60 text-foreground/80"
@@ -47,7 +60,7 @@ export default async function Home({
       </div>
       {/* 인기 순위 */}
       <div>
-        <TrendingClothes/>
+        {!trendingFetchError && <TrendingClothes trendingClothes={trendingClothes} />}
       </div>
 
       {/* toasters */}
@@ -60,8 +73,11 @@ export default async function Home({
       {searchParams.alert && (
         <ToasterOnMount title={`경고`} description={`${searchParams.alert}`} />
       )}
-      {error && (
+      {profileFetchError && (
         <ToasterOnMount title={`알림`} description={`개인정보를 입력하고 가입을 완료해주세요!`} />
+      )}
+      {trendingFetchError && (
+        <ToasterOnMount title={`알림`} description={`트랜딩 의류를 가져오는데 실패했습니다.`} />
       )}
     </div>
   );

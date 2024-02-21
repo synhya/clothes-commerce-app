@@ -49,7 +49,7 @@ const DropzoneFormField = ({
                   <FormLabel htmlFor="file">상품 이미지</FormLabel>
                   <Button type="button" size="sm" onClick={open}>직접선택</Button>
                 </div>
-                <div className="h-fit min-h-[300px] rounded-md border p-4" {...getRootProps()}>
+                <div className="h-fit rounded-md border p-4" {...getRootProps()}>
                   <FormControl>
                     <Input
                       {...getInputProps({

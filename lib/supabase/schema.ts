@@ -133,6 +133,7 @@ export type Database = {
           name: string
           price: number
           sale_state: Database["public"]["Enums"]["sale_state"]
+          sold: number | null
           tags: string[] | null
           updated_at: string | null
         }
@@ -147,6 +148,7 @@ export type Database = {
           name: string
           price: number
           sale_state?: Database["public"]["Enums"]["sale_state"]
+          sold?: number | null
           tags?: string[] | null
           updated_at?: string | null
         }
@@ -161,6 +163,7 @@ export type Database = {
           name?: string
           price?: number
           sale_state?: Database["public"]["Enums"]["sale_state"]
+          sold?: number | null
           tags?: string[] | null
           updated_at?: string | null
         }

@@ -1,13 +1,11 @@
 import React from 'react';
 
 import { cookies } from 'next/headers';
-import ProductForm from '@/components/page/admin/product-form';
 import { createClient } from '@/lib/supabase/server';
 import SearchProductForm from '@/components/page/admin/search-product-form';
 import ProductTable from '@/components/page/admin/product-table';
-import { createAdminClient } from '@/lib/supabase/admin';
-import { categoryOptions, Product, productSaleState } from '@/lib/types/database';
-import { addDays, endOfDay, format, formatISO } from 'date-fns';
+import {  Product, productSaleState } from '@/lib/types/database';
+
 
 const AdminPage = async ({
   searchParams,
@@ -22,8 +20,6 @@ const AdminPage = async ({
 }) => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
-
-  console.log(searchParams.endDate);
 
   const { data, error } = await supabase
     .from('products')
@@ -41,7 +37,11 @@ const AdminPage = async ({
     <div className="mr-2">
       <h1 className="py-4 text-2xl font-semibold">상품 관리</h1>
       <SearchProductForm />
-      <ProductTable tableData={tableData} />
+      {error ? (
+        <p>에러가 발생했습니다</p>
+      ) : (
+        <ProductTable tableData={tableData} />
+      )}
     </div>
   );
 };

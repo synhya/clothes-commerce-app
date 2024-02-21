@@ -19,7 +19,7 @@ interface PropType extends React.HTMLAttributes<typeof Carousel> {
   cardClassName?: string;
 }
 
-const ClothCarousel: React.FC<PropType> = ({ options, className }: PropType) => {
+const HeroSection = ({ options, className }: PropType) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -60,23 +60,18 @@ const ClothCarousel: React.FC<PropType> = ({ options, className }: PropType) => 
       >
         {/*https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg*/}
         <CarouselContent>
-          {Array.from({ length: 4 }).map((_, index) => (
-            <CarouselItem key={index}>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <CarouselItem key={index} className="flex items-center justify-center">
               <div
-                className={cn('relative m-0 flex items-center justify-center rounded-md')}
+                className={cn('relative m-0 rounded-md')}
               >
-                {/*<Image*/}
-                {/*  alt={'sampleImage'}*/}
-                {/*  src={`/sample-slides/slide-${index + 1}.jpg`}*/}
-                {/*  fill*/}
-                {/*/>*/}
                 <Image
-                  src={`/sample-slides/slide-${index + 1}.jpg`}
+                  src={`/sample-slides/slide-${index + 1}.png`}
                   alt="sampleImage"
-                  width={568}
-                  height={200}
-                  style={{ objectFit: 'cover', width: "auto"}}
-                  className="rounded-md"
+                  width={800}
+                  height={500}
+                  style={{ objectFit: 'cover'}}
+                  className="rounded-md aspect-video"
                   priority={index === 0}
                 />
               </div>
@@ -85,7 +80,7 @@ const ClothCarousel: React.FC<PropType> = ({ options, className }: PropType) => 
         </CarouselContent>
 
         <div className="absolute inset-x-0 bottom-3 flex items-center justify-center gap-2">
-          {Array.from({ length: 4 }).map((_, index) => (
+          {Array.from({ length: 3 }).map((_, index) => (
             <Button
               key={index}
               onClick={() => api?.scrollTo(index)}
@@ -102,4 +97,4 @@ const ClothCarousel: React.FC<PropType> = ({ options, className }: PropType) => 
   );
 };
 
-export default ClothCarousel;
+export default HeroSection;

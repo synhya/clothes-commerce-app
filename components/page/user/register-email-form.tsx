@@ -30,7 +30,7 @@ const formSchema = z.object({
     }),
   // additional check box
 });
-export type SignupFormSchema = z.infer<typeof formSchema>;
+export type SignupFormSchema = Required<z.infer<typeof formSchema>>;
 
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 

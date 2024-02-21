@@ -16,14 +16,14 @@ const Layout = async ({
   const data = await supabase.auth.getUser();
 
   return (
-    <div className="flex h-full bg-background">
+    <div className='flex h-full bg-background'>
       {/* 사이드바 */}
       <AdminSidebar />
-      <div className="flex-grow mb-5 ml-2">
+      <div className='flex-grow mb-5 ml-2'>
         {children}
       </div>
     </div>
-  )
+  );
 };
 
 export default Layout;

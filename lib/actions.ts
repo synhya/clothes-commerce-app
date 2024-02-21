@@ -12,16 +12,27 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { Enums } from '@/lib/types/database';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { fetchProductById, fetchProductByName } from '@/lib/fetches';
 
 const bucket = 'products';
 const namespace = '87c9cdf7-101d-4c05-a89d-c7aaff3a3fcf';
 
-export async function updateProduct (formData: any) {
+export async function updateProduct (formData: FormData) {
   const supabase = createAdminClient();
   const imageFile = formData.get('imageFile') as File;
 
   const uniqueName = formData.get('name') as string;
   const imageUrl = `${uuid(uniqueName, namespace)}.png`;
+
+  const { data: prevProduct } = await fetchProductById(formData.get('id') as string);
+  if (prevProduct.name !== uniqueName) {
+    // 이름이 바뀌었으므로 기존 이미지 삭제
+    const { error } = await supabase.storage.from(bucket).remove([prevProduct.image_url]);
+
+    if (error) {
+      return '이름 변경으로 인한 기존이미지 삭제 실패: ' + error.message;
+    }
+  }
 
   if (imageFile) {
     const imageRes = await supabase
@@ -96,16 +107,6 @@ export async function deleteProduct (productId: string) {
 }
 
 export async function createProduct (formData: FormData) {
-  // const cookieStore = cookies();
-  // const supabase = createClient(cookieStore); // role: manager. not working for now
-
-  // 이렇게 하면 JSON.parse가 필요없긴한데 더 느릴듯
-  // const validatedFields = addProductFormSchema.safeParse(formData);
-  //
-  // if (!validatedFields.success) {
-  //   return '입력값이 잘못되었습니다.';
-  // }
-
   const supabase = createAdminClient();
   const imageFile = formData.get('imageFile') as File;
 
@@ -114,6 +115,14 @@ export async function createProduct (formData: FormData) {
   }
 
   const uniqueName = formData.get('name') as string;
+
+  // first check if unique name exists
+  const { data: dupName, error:dupNameError } = await fetchProductByName(uniqueName);
+
+  if (dupName.name) {
+    return '이미 존재하는 상품명입니다.';
+  }
+
   const imageUrl = `${uuid(uniqueName, namespace)}.png`;
   const imageRes = await supabase
     .storage

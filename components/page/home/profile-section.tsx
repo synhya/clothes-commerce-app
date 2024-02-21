@@ -11,7 +11,7 @@ interface HomeProfileProps extends React.ComponentPropsWithRef<'div'> {
   isAdmin: boolean;
 }
 
-const HomeSideBanner = ({ profile, isAdmin, className, ...props }: HomeProfileProps) => {
+const ProfileSection = ({ profile, isAdmin, className, ...props }: HomeProfileProps) => {
   return (
     <div
       className={cn('flex flex-col justify-between', className)}
@@ -26,25 +26,27 @@ const HomeSideBanner = ({ profile, isAdmin, className, ...props }: HomeProfilePr
       <div className="relative space-y-2">
         <div>
           <p className="text-foreground text-sm">신상 코너</p>
-          <Link href="/product-list?category=new">
+          <Link href="/category/new">
             <div className="relative h-20 rounded-md border border-accent/70">
               <Image
                 src="/banners/banner-1.png"
                 alt="banner1"
                 fill
+                sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 20vw"
                 className="rounded-md object-cover"
               />
             </div>
           </Link>
         </div>
         <div>
-          <p className="text-foreground text-sm">여름 할인</p>
-          <Link href="/product-list?category=summer">
+          <p className="text-foreground text-sm">브랜드 코너</p>
+          <Link href="/category/made">
           <div className="relative h-20 rounded-md border border-accent/70">
             <Image
               src="/banners/banner-2.png"
               alt="banner2"
               fill
+              sizes="(max-width: 768px) 80vw, (max-width: 1200px) 40vw, 20vw"
               className="rounded-md object-cover"
             />
           </div>
@@ -55,4 +57,4 @@ const HomeSideBanner = ({ profile, isAdmin, className, ...props }: HomeProfilePr
   );
 };
 
-export default HomeSideBanner;
+export default ProfileSection;

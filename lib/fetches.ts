@@ -32,32 +32,52 @@ export const fetchProfileById = async (
 
 export const fetchProductByName = async (
   name: string,
-  supabase: SupabaseClient,
+  supabase?: SupabaseClient,
 ): Promise<{
   data: Product | null;
   error: PostgrestError | null;
 }> => {
-  return supabase.from('products').select('*').eq('name', name).limit(1).single()
-}
+  if (!supabase) {
+    const cookieStore = cookies();
+    supabase = createClient(cookieStore);
+  }
 
+  return supabase.from('products').select('*').eq('name', name).limit(1).single();
+};
 
-export const fetchProductsByCategory = async (
+export const fetchProductById = async (
+  id: string,
+  supabase?: SupabaseClient,
+): Promise<{
+  data: Product | null;
+  error: PostgrestError | null;
+}> => {
+  if (!supabase) {
+    const cookieStore = cookies();
+    supabase = createClient(cookieStore);
+  }
+
+  return supabase.from('products').select('*').eq('id', id).limit(1).single();
+};
+
+export const fetchSellingProductsByCategory = async (
   category: string,
-  supabase: SupabaseClient,
+  limit: number,
+  supabase?: SupabaseClient,
 ): Promise<{
   data: Product[] | null;
   error: PostgrestError | Error | null;
 }> => {
-  return new Promise((resolve) => {
-    supabase
-      .from('products')
-      .select()
-      .contains('categories', category)
-      .then(({ data, error }) => {
-        if (error) {
-          resolve({ data: null, error: error });
-        }
-        resolve({ data: data, error: null });
-      });
-  });
+  if (supabase === undefined) {
+    const cookieStore = cookies();
+    supabase = createClient(cookieStore);
+  }
+
+  return supabase
+    .from('products')
+    .select('*')
+    .contains('categories', [category === 'all' ? '' : category])
+    .eq('sale_state', "판매중")
+    .order('sold', { ascending: false })
+    .limit(limit);
 };

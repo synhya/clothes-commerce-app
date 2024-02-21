@@ -1,11 +1,12 @@
-import { metaCategories, productCategories, uniqueCategories } from '@/lib/types/categories';
+import { Categories, uniqueCategories } from '@/lib/types/client';
 import { Database } from '@/lib/supabase/schema';
 
 export type Profile = Database['public']['Tables']['profiles']['Row'];
 
 export type Product = Omit<Database['public']['Tables']['products']['Row'], 'categories'> & {
-  categories: (typeof productCategories)[keyof typeof productCategories][number][];
+  categories: Categories;
 };
+export type ProductSubmit = Omit<Product, 'id' | 'created_at' | 'updated_at' | 'sold'>;
 
 export type Invoice = Database['public']['Tables']['invoices']['Row'];
 export type Enums = Database['public']['Enums'];

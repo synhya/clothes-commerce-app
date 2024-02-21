@@ -1,3 +1,21 @@
+export type BreadCrumb = {
+  label: string;
+  href: string;
+}
+
+export type ProductCardData = {
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  categories: Categories;
+  tags?: string[];
+}
+
+export type Categories = ((typeof productCategories)[keyof typeof productCategories][number]
+  | (typeof metaCategories)[number])[]
+  ;
+
 export const metaCategories = [
   'made',
   'new',
@@ -27,6 +45,6 @@ export const productCategories = {
 
 export const uniqueCategories = Array.from(
   new Set(
-    metaCategories.map((meta) => productCategories[meta]).flat(),
-  )
-)
+    metaCategories.map((meta) => [meta, ...productCategories[meta]]).flat(),
+  ),
+);

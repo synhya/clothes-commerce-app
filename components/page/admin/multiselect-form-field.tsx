@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { uniqueCategories } from '@/lib/types/categories';
+import { metaCategories, productCategories } from '@/lib/types/client';
 import { ProductFormSchema } from '@/components/page/admin/product-form';
 import { useFormContext } from 'react-hook-form';
 import { productSizeEnums } from '@/lib/types/database';
@@ -21,66 +21,102 @@ export const CategoryFormField = () => {
       name='categories'
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="mr-2">{label}</FormLabel>
+          <FormLabel className='mr-2'>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
-                  variant="outline"
-                  role="combobox"
+                  variant='outline'
+                  role='combobox'
                   className={cn(
                     'w-fit justify-between',
                     !field.value && 'text-muted-foreground',
                   )}
                 >
                   {`${label}를 선택해주세요`}
-                  <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-fit p-0">
+            <PopoverContent className='w-fit p-0'>
               <Command>
                 <CommandInput placeholder={`${label} 검색...`} />
                 <CommandEmpty>결과 없음</CommandEmpty>
-                <ScrollArea className="h-72 w-full">
+                <ScrollArea className='h-72 w-full'>
                   <CommandGroup>
-                    {uniqueCategories.map((subCategory) => (
-                      <CommandItem
-                        value={subCategory}
-                        key={subCategory}
-                        onSelect={() => {
-                          const newCategories = field.value?.includes(subCategory)
-                            ? field.value.filter((c) => c !== subCategory)
-                            : [...field.value, subCategory];
-                          form.setValue('categories', newCategories);
-                        }}
-                      >
-                        <CheckIcon
-                          className={cn(
-                            'mr-2 h-4 w-4',
-                            field.value.includes(subCategory) ? 'opacity-100' : 'opacity-0',
-                          )}
-                        />
-                        {subCategory}
-                      </CommandItem>
+                    {metaCategories.map((subCategory) => (
+                      <>
+                        <CommandItem
+                          value={subCategory}
+                          key={subCategory}
+                          onSelect={() => {
+                            const isAdding = !field.value?.includes(subCategory)
+                            let newCategories = isAdding
+                              ? [...field.value, subCategory]
+                              : field.value.filter((c) => c !== subCategory);
+
+                            if(!isAdding) {
+                              const removingCategories = productCategories[subCategory] as string[];
+                              newCategories = newCategories.filter((c) => !removingCategories.includes(c));
+                            }
+
+                            form.setValue('categories', newCategories);
+                          }}
+                          className='font-semibold text-lg'
+                        >
+                          <CheckIcon
+                            className={cn(
+                              'mr-2 h-4 w-4',
+                              field.value.includes(subCategory) ? 'opacity-100' : 'opacity-0',
+                            )}
+                          />
+                          {subCategory}
+                        </CommandItem>
+                        {productCategories[subCategory].map((category) => (
+                          <CommandItem
+                            value={category}
+                            key={category}
+                            onSelect={() => {
+                              const isAdding = !field.value?.includes(category)
+                              let newCategories = isAdding
+                                ? [...field.value, category]
+                                : field.value.filter((c) => c !== category);
+
+                              if(isAdding && !field.value?.includes(subCategory)) {
+                                newCategories = [...newCategories, subCategory];
+                              }
+
+                              form.setValue('categories', newCategories);
+                            }}
+                          >
+                            <CheckIcon
+                              className={cn(
+                                'mr-2 h-4 w-4',
+                                field.value.includes(category) ? 'opacity-100' : 'opacity-0',
+                              )}
+                            />
+                            {category}
+                          </CommandItem>
+                        ))}
+                      </>
                     ))}
                   </CommandGroup>
                 </ScrollArea>
               </Command>
             </PopoverContent>
           </Popover>
-          <FormMessage className="font-semibold" />
-          <div className="text-md flex flex-wrap gap-1" >
+          <FormMessage className='font-semibold' />
+          <div className='text-md flex flex-wrap gap-1'>
             {field.value.map((category) =>
-              <Badge key={category} variant="secondary">{category}</Badge>
+              <Badge key={category} variant='secondary'>{category}</Badge>,
             )}
           </div>
         </FormItem>
       )}
     />
-  );
+  )
+    ;
 };
-
 
 export const SizeFormField = () => {
   const form = useFormContext<ProductFormSchema>();
@@ -88,29 +124,29 @@ export const SizeFormField = () => {
   return (
     <FormField
       control={form.control}
-      name="available_sizes"
+      name='available_sizes'
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="mr-2">{label}</FormLabel>
+          <FormLabel className='mr-2'>{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
-                  variant="outline"
-                  role="combobox"
+                  variant='outline'
+                  role='combobox'
                   className={cn(
                     'w-fit justify-between',
                     !field.value && 'text-muted-foreground',
                   )}
                 >
                   {`가능한 ${label}를 선택해주세요`}
-                  <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className="w-fit min-w-[200px] p-0">
+            <PopoverContent className='w-fit min-w-[200px] p-0'>
               <Command>
-                <ScrollArea className="max-h-72 w-full">
+                <ScrollArea className='max-h-72 w-full'>
                   <CommandGroup>
                     {productSizeEnums.map((size) => (
                       <CommandItem
@@ -137,10 +173,10 @@ export const SizeFormField = () => {
               </Command>
             </PopoverContent>
           </Popover>
-          <FormMessage className="font-semibold" />
-          <div className="text-md flex flex-wrap gap-1">
+          <FormMessage className='font-semibold' />
+          <div className='text-md flex flex-wrap gap-1'>
             {field.value.map((size) =>
-              <Badge key={size} variant="secondary">{size}</Badge>
+              <Badge key={size} variant='secondary'>{size}</Badge>,
             )}
           </div>
         </FormItem>
