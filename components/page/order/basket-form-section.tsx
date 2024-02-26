@@ -40,8 +40,7 @@ const BasketFormSection = ({
     },
   });
   const [price, setPrice] = useState(
-    basketInfo.reduce((acc, item) => acc + item.price * item.quantity, 0),
-  );
+    basketInfo.reduce((acc, item) => acc + item.price * item.quantity, 0));
   const supabase = createClient();
   const [isDeleting, setIsDeleting] = useState(basketInfo.map(() => false));
 
@@ -52,7 +51,7 @@ const BasketFormSection = ({
     form.setValue('selectedItems',
       form.getValues('selectedItems').filter((value) => value !== item.id));
 
-    setPrice(price - item.price * item.quantity);
+    setPrice((p) => p - item.price * item.quantity);
     setIsDeleting((state) => ({ ...state, [index]: false }));
   };
 
@@ -81,7 +80,9 @@ const BasketFormSection = ({
                             className='md:size-6'
                             checked={field.value.includes(item.id)}
                             onCheckedChange={(checked) => {
-                              setPrice(checked ? price + item.price : price - item.price);
+                              setPrice(checked ?
+                                price + item.price * item.quantity
+                                : price - item.price * item.quantity);
 
                               return checked
                                 ? field.onChange([...field.value, item.id])

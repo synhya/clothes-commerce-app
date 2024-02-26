@@ -140,16 +140,17 @@ const InvoiceFormSection = ({ lineItems, itemsPrice, customInfoFromUser, custome
                   </DialogTrigger>
                   <DialogContent className="bg-white">
                     <DialogHeader>
-                      <DialogTitle className="text-slate-800">실제 결제되지 않아요😄</DialogTitle>
-                      <DialogDescription>
-                        <TossWidget
-                          customerKey={customerId}
-                          price={price}
-                          orderName={customerId + ' 주문'}
-                          customerEmail={customerEmail}
-                          lineItems={lineItems}
-                        />
-                      </DialogDescription>
+                      <DialogTitle className="text-slate-800">실제 결제되지 않아요</DialogTitle>
+                      <TossWidget
+                        customerKey={customerId}
+                        price={price}
+                        orderName={customerId + ' 주문'}
+                        customerEmail={customerEmail}
+                        lineItems={lineItems}
+                      />
+                      {/*<DialogDescription>*/}
+                      {/*  */}
+                      {/*</DialogDescription>*/}
                     </DialogHeader>
                   </DialogContent>
                 </Dialog>
