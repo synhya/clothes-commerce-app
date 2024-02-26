@@ -1,7 +1,6 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { useFormState } from 'react-dom';
@@ -9,8 +8,8 @@ import { createBasketItem } from '@/lib/actions/basket-actions';
 import { DBEnums, productSizeEnums } from '@/lib/types/database';
 import { Toaster } from '@/components/ui/toaster';
 import { toast } from '@/components/ui/use-toast';
-import { Input } from '@/components/ui/input';
 import RadioInput from '@/components/page/radio-input';
+import SubmitButton from '@/components/page/product/submit-button';
 
 type ProductOptionFormProps = {
   productId: string;
@@ -22,6 +21,7 @@ const ProductOptionForm = ({ productId, availableColors, availableSizes }: Produ
   const initialState = { message: '', errors: {} };
   const createBasketItemWithId = createBasketItem.bind(null, productId);
   const [state, dispatch] = useFormState(createBasketItemWithId, initialState);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (state.message) {
@@ -84,20 +84,8 @@ const ProductOptionForm = ({ productId, availableColors, availableSizes }: Produ
           )}
         </div>
         <div className='grid sm:grid-cols-2 gap-4'>
-          <Button
-            size='lg'
-            name='action'
-            value='add-to-basket'
-          >
-            장바구니 추가
-          </Button>
-          <Button
-            size='lg'
-            name='action'
-            value='checkout'
-          >
-            바로결제
-          </Button>
+          <SubmitButton value='add-to-basket' label='장바구니 추가' />
+          <SubmitButton value='checkout' label='바로결제' />
         </div>
       </form>
       <Toaster />

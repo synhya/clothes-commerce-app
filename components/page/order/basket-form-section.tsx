@@ -43,13 +43,17 @@ const BasketFormSection = ({
     basketInfo.reduce((acc, item) => acc + item.price * item.quantity, 0),
   );
   const supabase = createClient();
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(basketInfo.map(() => false));
 
-  const handleItemDelete = async (id: string) => {
-    await deleteBasketItem(id);
+  const handleItemDelete = async (item: BasketInfo, index: number) => {
+    setIsDeleting((state) => ({ ...state, [index]: true }));
+
+    await deleteBasketItem(item.id);
     form.setValue('selectedItems',
-      form.getValues('selectedItems').filter((value) => value !== id));
+      form.getValues('selectedItems').filter((value) => value !== item.id));
+
+    setPrice(price - item.price * item.quantity);
+    setIsDeleting((state) => ({ ...state, [index]: false }));
   };
 
   const onSubmit = async (data: FormValues) => {
@@ -99,7 +103,14 @@ const BasketFormSection = ({
                         </div>
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <Button variant='destructive' size='sm'>삭제</Button>
+                            <Button
+                              variant='destructive' size='sm'
+                              disabled={isDeleting[index]}
+                            >{isDeleting[index]
+                              ? <ReloadIcon className='h-4 w-4 animate-spin' />
+                              : '삭제'
+                            }
+                            </Button>
                           </AlertDialogTrigger>
                           <AlertDialogContent>
                             <AlertDialogHeader>
@@ -111,7 +122,7 @@ const BasketFormSection = ({
                             <AlertDialogFooter>
                               <AlertDialogCancel>취소</AlertDialogCancel>
                               <AlertDialogAction
-                                onClick={async () => await handleItemDelete(item.id)}
+                                onClick={async () => await handleItemDelete(item, index)}
                               >삭제</AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
@@ -131,21 +142,21 @@ const BasketFormSection = ({
             )}
           </ScrollArea>
         </div>
-        <div className="lg:basis-1/4">
+        <div className='lg:basis-1/4'>
           <h2 className='text-xl font-semibold mb-4'>주문표</h2>
           <FormField
             name='selectedItems'
             control={form.control}
             render={({ field }) => (
-              <Card className="rounded-md p-4 mb-10 shadow-border shadow-xl">
+              <Card className='rounded-md p-4 mb-10 shadow-border shadow-xl'>
                 <p className='text-lg font-semibold mb-4'>총 상품금액</p>
                 <p className='text-lg font-semibold mb-4'>{price}원</p>
-                <FormMessage className="mb-4"/>
+                <FormMessage className='mb-4' />
                 <Button
                   size='lg' onClick={form.handleSubmit(onSubmit)}
                   disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting ? <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> : null}
+                  {form.formState.isSubmitting ? <ReloadIcon className='mr-2 h-4 w-4 animate-spin' /> : null}
                   주문하기
                 </Button>
               </Card>
