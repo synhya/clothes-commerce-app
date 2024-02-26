@@ -21,7 +21,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { revalidatePath } from 'next/cache';
 import { redirect, useRouter } from 'next/navigation';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons';
 import { deleteBasketItem, updateBasketItem } from '@/lib/actions/basket-actions';
 
 const FormSchema = z.object({
@@ -40,10 +40,11 @@ const BasketFormSection = ({
     },
   });
   const [price, setPrice] = useState(
-    basketInfo.reduce((acc, item) => acc + item.price, 0),
+    basketInfo.reduce((acc, item) => acc + item.price * item.quantity, 0),
   );
   const supabase = createClient();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleItemDelete = async (id: string) => {
     await deleteBasketItem(id);
@@ -140,7 +141,13 @@ const BasketFormSection = ({
                 <p className='text-lg font-semibold mb-4'>총 상품금액</p>
                 <p className='text-lg font-semibold mb-4'>{price}원</p>
                 <FormMessage className="mb-4"/>
-                <Button size='lg' onClick={form.handleSubmit(onSubmit)}>주문하기</Button>
+                <Button
+                  size='lg' onClick={form.handleSubmit(onSubmit)}
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? <ReloadIcon className="mr-2 h-4 w-4 animate-spin" /> : null}
+                  주문하기
+                </Button>
               </Card>
             )} />
         </div>
