@@ -1,3 +1,5 @@
+import { DBEnums } from '@/lib/types/database';
+
 export type BreadCrumb = {
   label: string;
   href: string;
@@ -10,6 +12,15 @@ export type ProductCardData = {
   imageUrl: string;
   categories: Categories;
   tags?: string[];
+}
+
+export type BasketItemData = {
+  imageUrl: string;
+  productName: string;
+  price: number;
+  selectedColor: string;
+  selectedSize: DBEnums['product_size'];
+  quantity: number;
 }
 
 export type Categories = ((typeof productCategories)[keyof typeof productCategories][number]

@@ -35,65 +35,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      invoices: {
+      basket: {
         Row: {
-          address: string | null
-          extra_address: string | null
-          id: number
+          id: string
+          is_selected: boolean
           product_id: string | null
-          product_name: string | null
-          product_price: number | null
           profile_id: string | null
-          quantity: number
-          selected_color: string | null
-          selected_size: Database["public"]["Enums"]["product_size"] | null
-          state: Database["public"]["Enums"]["invoice_state"] | null
-          user_email: string | null
-          user_name: string | null
-          user_phone: string | null
+          quantity: number | null
+          selected_color: string
+          selected_size: Database["public"]["Enums"]["product_size"]
         }
         Insert: {
-          address?: string | null
-          extra_address?: string | null
-          id?: number
+          id?: string
+          is_selected?: boolean
           product_id?: string | null
-          product_name?: string | null
-          product_price?: number | null
           profile_id?: string | null
-          quantity?: number
-          selected_color?: string | null
-          selected_size?: Database["public"]["Enums"]["product_size"] | null
-          state?: Database["public"]["Enums"]["invoice_state"] | null
-          user_email?: string | null
-          user_name?: string | null
-          user_phone?: string | null
+          quantity?: number | null
+          selected_color: string
+          selected_size: Database["public"]["Enums"]["product_size"]
         }
         Update: {
-          address?: string | null
-          extra_address?: string | null
-          id?: number
+          id?: string
+          is_selected?: boolean
           product_id?: string | null
-          product_name?: string | null
-          product_price?: number | null
           profile_id?: string | null
-          quantity?: number
-          selected_color?: string | null
-          selected_size?: Database["public"]["Enums"]["product_size"] | null
-          state?: Database["public"]["Enums"]["invoice_state"] | null
-          user_email?: string | null
-          user_name?: string | null
-          user_phone?: string | null
+          quantity?: number | null
+          selected_color?: string
+          selected_size?: Database["public"]["Enums"]["product_size"]
         }
         Relationships: [
           {
-            foreignKeyName: "invoices_product_id_fkey"
+            foreignKeyName: "basket_product_id_fkey"
             columns: ["product_id"]
             isOneToOne: false
             referencedRelation: "products"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "invoices_profile_id_fkey"
+            foreignKeyName: "basket_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile_info"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "basket_profile_id_fkey"
             columns: ["profile_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -101,22 +87,116 @@ export type Database = {
           }
         ]
       }
-      managers: {
+      invoice_products: {
         Row: {
-          user_id: string
+          basket_id: string
+          id: number
+          invoice_id: string | null
+          product_id: string | null
+          quantity: number | null
+          selected_color: string
+          selected_size: Database["public"]["Enums"]["product_size"]
         }
         Insert: {
-          user_id: string
+          basket_id: string
+          id?: number
+          invoice_id?: string | null
+          product_id?: string | null
+          quantity?: number | null
+          selected_color: string
+          selected_size: Database["public"]["Enums"]["product_size"]
         }
         Update: {
-          user_id?: string
+          basket_id?: string
+          id?: number
+          invoice_id?: string | null
+          product_id?: string | null
+          quantity?: number | null
+          selected_color?: string
+          selected_size?: Database["public"]["Enums"]["product_size"]
         }
         Relationships: [
           {
-            foreignKeyName: "managers_user_id_fkey"
-            columns: ["user_id"]
+            foreignKeyName: "invoice_products_invoice_id_fkey"
+            columns: ["invoice_id"]
             isOneToOne: false
-            referencedRelation: "users"
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_invoice_products_basket_id_fkey"
+            columns: ["basket_id"]
+            isOneToOne: false
+            referencedRelation: "basket"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_invoice_products_basket_id_fkey"
+            columns: ["basket_id"]
+            isOneToOne: false
+            referencedRelation: "basket_info"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "public_invoice_products_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      invoices: {
+        Row: {
+          created_at: string | null
+          customer_info:
+            | Database["public"]["CompositeTypes"]["invoice_customer"]
+            | null
+          id: string
+          profile_id: string | null
+          shipment_method: Database["public"]["Enums"]["shipment_method"] | null
+          state: Database["public"]["Enums"]["invoice_state"]
+          total_price: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          customer_info?:
+            | Database["public"]["CompositeTypes"]["invoice_customer"]
+            | null
+          id?: string
+          profile_id?: string | null
+          shipment_method?:
+            | Database["public"]["Enums"]["shipment_method"]
+            | null
+          state?: Database["public"]["Enums"]["invoice_state"]
+          total_price?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          customer_info?:
+            | Database["public"]["CompositeTypes"]["invoice_customer"]
+            | null
+          id?: string
+          profile_id?: string | null
+          shipment_method?:
+            | Database["public"]["Enums"]["shipment_method"]
+            | null
+          state?: Database["public"]["Enums"]["invoice_state"]
+          total_price?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "invoices_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile_info"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "invoices_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
           }
         ]
@@ -169,33 +249,69 @@ export type Database = {
         }
         Relationships: []
       }
+      profile_address: {
+        Row: {
+          extra_address: string | null
+          id: number
+          is_main: boolean | null
+          main_address: string | null
+          profile_id: string | null
+        }
+        Insert: {
+          extra_address?: string | null
+          id?: number
+          is_main?: boolean | null
+          main_address?: string | null
+          profile_id?: string | null
+        }
+        Update: {
+          extra_address?: string | null
+          id?: number
+          is_main?: boolean | null
+          main_address?: string | null
+          profile_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profile_address_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile_info"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profile_address_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       profiles: {
         Row: {
-          address: string | null
           birthdate: string | null
           email: string | null
-          extra_address: string | null
           id: string
           name: string | null
           phone: string | null
+          stripe_customer: string | null
         }
         Insert: {
-          address?: string | null
           birthdate?: string | null
           email?: string | null
-          extra_address?: string | null
           id: string
           name?: string | null
           phone?: string | null
+          stripe_customer?: string | null
         }
         Update: {
-          address?: string | null
           birthdate?: string | null
           email?: string | null
-          extra_address?: string | null
           id?: string
           name?: string | null
           phone?: string | null
+          stripe_customer?: string | null
         }
         Relationships: [
           {
@@ -209,21 +325,100 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      basket_info: {
+        Row: {
+          id: string | null
+          image_url: string | null
+          is_selected: boolean | null
+          name: string | null
+          price: number | null
+          product_id: string | null
+          profile_id: string | null
+          quantity: number | null
+          selected_color: string | null
+          selected_size: Database["public"]["Enums"]["product_size"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "basket_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "basket_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "basket_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profile_info"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      profile_info: {
+        Row: {
+          birthdate: string | null
+          email: string | null
+          extra_address: string | null
+          id: string | null
+          main_address: string | null
+          name: string | null
+          phone: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      add_subscriber: {
+        Args: {
+          writer_name: string
+          subscriber_name: string
+          plan: "Gold" | "Silver" | "Bronze"
+        }
+        Returns: undefined
+      }
+      example_condition: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
-      invoice_state: "결제완료" | "배송중" | "배송완료" | "환불완료"
+      invoice_state:
+        | "결제대기"
+        | "결제완료"
+        | "배송중"
+        | "배송완료"
+        | "환불완료"
       product_size: "xs" | "sm" | "md" | "lg" | "xl" | "2xl"
       sale_state: "판매중" | "대기중"
+      shipment_method: "택배배송" | "퀵서비스" | "직접수령"
     }
     CompositeTypes: {
       inventory_item: {
         name: string
         supplier_id: number
         price: number
+      }
+      invoice_customer: {
+        name: string
+        phone: string
+        main_address: string
+        extra_address: string
       }
     }
   }

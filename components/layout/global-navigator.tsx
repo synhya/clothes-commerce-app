@@ -19,7 +19,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { HamburgerMenuIcon, PersonIcon, RowsIcon } from '@radix-ui/react-icons';
-import useSideBar from '@/lib/hooks/useSidebar';
+import useSideBar from '@/lib/stores/useSidebar';
 import { LOGIN_PATH, NEW_USER_PATH, SIGNUP_PATH } from '@/lib/paths';
 import UserMenuDropdown from '@/components/layout/user-menu-dropdown';
 import { User } from 'next-auth';
@@ -125,15 +125,15 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: {
                 <ul className='grid gap-3 p-1'>
                   {productCategories[upperCategory].map((productCategory) => (
                     <li key={productCategory}>
-                      <Button variant='link'>
-                        <Link
-                          href={`/category/${encodeURIComponent(productCategory)}?from=${upperCategory}`}
-                          passHref
-                          className='w-fit'
-                        >
+                      <Link
+                        href={`/category/${encodeURIComponent(productCategory)}?from=${upperCategory}`}
+                        passHref
+                        className='w-fit'
+                      >
+                        <Button variant='link'>
                           {productCategory}
-                        </Link>
-                      </Button>
+                        </Button>
+                      </Link>
                     </li>
                   ))}
                 </ul>

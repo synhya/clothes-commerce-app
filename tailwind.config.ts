@@ -22,7 +22,7 @@ const config = {
     },
     extend: {
       screens: {
-        'nav-md': '964px',
+        'nav-md': '978px',
       },
       colors: {
         border: 'hsl(var(--border))',

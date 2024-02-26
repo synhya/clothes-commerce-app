@@ -11,7 +11,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { Cross1Icon, HomeIcon } from '@radix-ui/react-icons';
-import useSideBar from '@/lib/hooks/useSidebar';
+import useSideBar from '@/lib/stores/useSidebar';
 import { cn } from '@/lib/utils';
 import { metaCategories, productCategories } from '@/lib/types/client';
 import Link from 'next/link';

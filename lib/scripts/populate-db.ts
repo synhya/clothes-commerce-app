@@ -72,7 +72,7 @@ export const populateDb = async () => {
     });
 
     if (error) {
-      console.log('Error inserting product: ', error);
+      console.log('Error inserting category: ', error);
     } else {
       console.log('Product inserted successfully: ' + fileName);
     }

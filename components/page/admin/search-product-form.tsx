@@ -27,13 +27,13 @@ type SearchParams = {
   searchText: string;
 };
 
-const formSchema = z.object({
+const formSchema = z.object<Record<keyof SearchParams, ZodTypeAny>>({
   category: z.enum(categoryOptions),
   startDate: z.date(),
   endDate: z.date(),
   saleState: z.enum(sellStatusOptions),
   searchText: z.string(),
-} satisfies Record<keyof SearchParams, ZodTypeAny>);
+});
 
 type FormValues = z.infer<typeof formSchema>;
 

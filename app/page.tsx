@@ -6,7 +6,7 @@ import { AuthError } from '@supabase/supabase-js';
 import ProfileSection from '@/components/page/home/profile-section';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import TrendingClothes from '@/components/page/home/trending-clothes';
+import TrendingClothes from '@/components/page/trending-clothes';
 import { productDataToCardData } from '@/lib/utils';
 import { Product } from '@/lib/types/database';
 import { Categories } from '@/lib/types/client';
@@ -34,8 +34,6 @@ export default async function Home({
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
   const {data: trendingProducts, error: trendingFetchError } = await supabase.from('products').select('*').limit(5).order('sold', { ascending: false });
-
-  if(trendingFetchError) notFound();
 
   const trendingClothes = trendingProducts.map((product) => {
     return productDataToCardData(product as Product, supabase);

@@ -1,9 +1,9 @@
 'use client';
 import React, { useCallback, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { Enums, productSaleState, ProductSubmit } from '@/lib/types/database';
+import { DBEnums, productSaleState, ProductSubmit } from '@/lib/types/database';
 import { z, ZodTypeAny } from 'zod';
-import { createProduct, deleteProduct, updateProduct } from '@/lib/actions';
+import { createProduct, deleteProduct, updateProduct } from '@/lib/actions/actions';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -50,7 +50,7 @@ export const addProductFormSchema = z.object({
       })
       .min(1, { message: '태그를 입력해주세요.' }),
   }).array(),
-  available_sizes: z.custom<Enums['product_size']>().array()
+  available_sizes: z.custom<DBEnums['product_size']>().array()
     .min(1, { message: '사이즈를 한개 이상 선택해주세요' }),
   available_colors: z.object({
     value: z
@@ -263,12 +263,13 @@ const ProductForm = ({ defaultValues, defaultImageUrl, action, productId }: Prod
                 </FormItem>
               )}
             />
-            <div className="flex gap-2">
+            <div className='flex gap-2'>
               <Button className='mt-3 w-full' type='submit'>
                 {action == 'create' ? '상품 추가' : '상품 수정'}
               </Button>
               {action == 'modify' && (
-                <Button className='mt-3 w-full' variant='destructive' type='button' onClick={async () => handleDelete()}>
+                <Button className='mt-3 w-full' variant='destructive' type='button'
+                        onClick={async () => handleDelete()}>
                   상품 삭제
                 </Button>
               )}

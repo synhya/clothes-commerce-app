@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Icons } from '@/components/ui/icons';
 import { useToast } from '@/components/ui/use-toast';
-import { signUp } from '@/lib/actions';
+import { signUp } from '@/lib/actions/actions';
 import { Toaster } from '@/components/ui/toaster';
 
 

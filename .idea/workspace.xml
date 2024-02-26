@@ -4,8 +4,63 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="feat: add category section with infinite scroll">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="chore: update README.md">
+      <change afterPath="$PROJECT_DIR$/app/api/create-stripe-client/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/order/checkout/request/fail/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/order/checkout/request/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/order/checkout/request/success/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/address-form-field.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/not-fount-alert-dialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/order/basket-item.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/order/invoice-form-section.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/order/order-items-section.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/order/sample-item.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/product/product-option-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/radio-input.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/toss-widget.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/actions/basket-actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/actions/checkout-actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/stores/useCheckoutProps.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/stores/useLineItems.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/manage-products/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/manage-products/[slug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/category/[category]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/category/[category]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/address/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/coupon/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/deposits/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/mileage/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/order/basket/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/order/list/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/reviews/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/myshop/wish-list/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/product/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[slug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user/update-profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/update-profile/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/global-navigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/global-navigator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/global-sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/global-sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/providers.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/admin/product-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/admin/product-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/admin/search-product-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/admin/search-product-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/home/trending-clothes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/home/trending-clothes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/product/breadcrumb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/category/breadcrumb.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/product/category-scroll-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/category/category-scroll-section.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/product/product-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/category/product-card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/user/profile-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/user/profile-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/user/register-email-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/user/register-email-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/actions/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/hooks/useScript.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/hooks/useSidebar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/stores/useSidebar.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/paths.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/paths.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scripts/populate-db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scripts/populate-db.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/supabase/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/supabase/schema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/types/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/types/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/database.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +98,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -63,7 +118,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "last_directory_selection": "C:/Users/Administrator/Desktop/AfterGrad/jang-admin-app/app/order/list",
-    "last_opened_file_path": "C:/Users/ja/Desktop/AfterGrad/jang-admin-app/public/sample-slides",
+    "last_opened_file_path": "C:/Users/ja/Desktop/AfterGrad/jang-admin-app/app/order/checkout/success",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,18 +138,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout\success" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\public\sample-slides" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\scripts" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app" />
-      <recent name="C:\Users\Administrator\Desktop\AfterGrad\jang-admin-app\app\admin" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout\request" />
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\myshop" />
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\actions" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\scripts" />
       <recent name="C:\Users\Administrator\Desktop\AfterGrad\jang-admin-app\app\admin\@analytics" />
-      <recent name="C:\Users\Administrator\Desktop\AfterGrad\jang-admin-app\components\page" />
-      <recent name="C:\Users\Administrator\Desktop\AfterGrad\jang-admin-app\components\layout" />
-      <recent name="C:\Users\Administrator\Desktop\AfterGrad\jang-admin-app\app\product-list" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -150,10 +205,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.categorize-products db" />
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.populate db" />
         <item itemvalue="npm.generate db type" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.categorize-products db" />
+        <item itemvalue="npm.populate db" />
         <item itemvalue="npm.database" />
       </list>
     </recent_temporary>
@@ -185,7 +240,11 @@
       <workItem from="1707741076575" duration="47291000" />
       <workItem from="1707985899317" duration="267000" />
       <workItem from="1708125875531" duration="3326000" />
-      <workItem from="1708146787645" duration="58677000" />
+      <workItem from="1708146787645" duration="60032000" />
+      <workItem from="1708538210347" duration="609000" />
+      <workItem from="1708611156383" duration="21811000" />
+      <workItem from="1708679913718" duration="3547000" />
+      <workItem from="1708683508488" duration="51601000" />
     </task>
     <task id="LOCAL-00001" summary="chore: moved file location">
       <option name="closed" value="true" />
@@ -219,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708530250346</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="chore: update README.md">
+      <option name="closed" value="true" />
+      <created>1708530883296</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1708530883296</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +313,8 @@
     <MESSAGE value="feat: login authentication" />
     <MESSAGE value="chore: admin dashboard layout" />
     <MESSAGE value="feat: add category section with infinite scroll" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add category section with infinite scroll" />
+    <MESSAGE value="chore: update README.md" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update README.md" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -254,7 +322,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/page/home/trending-clothes.tsx</url>
           <line>20</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

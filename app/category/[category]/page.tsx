@@ -1,14 +1,14 @@
 import React from 'react';
 import { fetchSellingProductsByCategory } from '@/lib/fetches';
 import { notFound } from 'next/navigation';
-import ProductCard from '@/components/page/product/product-card';
+import ProductCard from '@/components/page/category/product-card';
 import { productDataToCardData } from '@/lib/utils';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { metaCategories, MetaCategory, productCategories } from '@/lib/types/client';
-import Breadcrumb from '@/components/page/product/breadcrumb';
+import Breadcrumb from '@/components/page/category/breadcrumb';
 import { ChevronsDownIcon } from 'lucide-react';
-import CategoryScrollSection from '@/components/page/product/category-scroll-section';
+import CategoryScrollSection from '@/components/page/category/category-scroll-section';
 
 const Page = async ({
   params: { category },

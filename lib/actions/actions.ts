@@ -9,13 +9,15 @@ import { SignupFormSchema } from '@/components/page/user/register-email-form';
 import { v5 as uuid } from 'uuid';
 import { ProductFormSchema } from '@/components/page/admin/product-form';
 import { createAdminClient } from '@/lib/supabase/admin';
-import { Enums } from '@/lib/types/database';
+import { DBEnums } from '@/lib/types/database';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { fetchProductById, fetchProductByName } from '@/lib/fetches';
+import Stripe from 'stripe';
 
 const bucket = 'products';
 const namespace = '87c9cdf7-101d-4c05-a89d-c7aaff3a3fcf';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function updateProduct (formData: FormData) {
   const supabase = createAdminClient();
@@ -48,7 +50,7 @@ export async function updateProduct (formData: FormData) {
     }
   }
 
-  // update product table
+  // update category table
   let newProduct = {
     name: uniqueName,
     price: Number(formData.get('price')),
@@ -57,7 +59,7 @@ export async function updateProduct (formData: FormData) {
     tags: JSON.parse(formData.get('tags') as string),
     available_sizes: JSON.parse(formData.get('available_sizes') as string),
     available_colors: JSON.parse(formData.get('available_colors') as string),
-    sale_state: formData.get('sale_state') as Enums['sale_state'],
+    sale_state: formData.get('sale_state') as DBEnums['sale_state'],
   } satisfies Omit<ProductFormSchema, 'imageFiles'>;
 
   const updated_at = new Date().toISOString();
@@ -136,7 +138,7 @@ export async function createProduct (formData: FormData) {
     return '이미지 업로드 실패: ' + imageRes.error.message;
   }
 
-  // update product table
+  // update category table
   const newProduct = {
     name: uniqueName,
     price: Number(formData.get('price')),
@@ -145,7 +147,7 @@ export async function createProduct (formData: FormData) {
     tags: JSON.parse(formData.get('tags') as string),
     available_sizes: JSON.parse(formData.get('available_sizes') as string),
     available_colors: JSON.parse(formData.get('available_colors') as string),
-    sale_state: formData.get('sale_state') as Enums['sale_state'],
+    sale_state: formData.get('sale_state') as DBEnums['sale_state'],
     image_url: imageUrl,
   } satisfies Omit<ProductFormSchema, 'imageFiles'> | {
     image_url: string
@@ -192,14 +194,33 @@ export async function createProfile (formData: ProfileFormSchema) {
     return '로그인이 필요합니다.';
   }
 
-  const { error } = await supabase.from('profiles').insert({
-    ...formData,
-    id: user.id,
-    birthdate: formData.birthdate.toUTCString(),
+  const { main_address, extra_address, birthdate, ...profileData } = formData;
+
+  // webhook only works when deployed
+  const customer = await stripe.customers.create({
+    email: profileData.email,
   });
 
-  if (error) {
-    return '프로필 생성 실패: ' + error.message;
+  const { error: profileError } = await supabase.from('profiles').insert({
+    ...profileData,
+    id: user.id,
+    birthdate: birthdate.toUTCString(),
+    stripe_customer: customer.id,
+  });
+
+  if (profileError) {
+    return '프로필 생성 실패: ' + profileError.message;
+  }
+
+  const { error: addressError } = await supabase.from('profile_address').insert({
+    profile_id: user.id,
+    main_address,
+    extra_address,
+    is_main: true,
+  });
+
+  if (addressError) {
+    return '주소 생성 실패: ' + addressError.message;
   }
 
   redirect(`/?newUser=${encodeURIComponent(formData.name)}`); //
@@ -216,15 +237,6 @@ export async function signUp (formData: SignupFormSchema) {
       emailRedirectTo: BASE_URL + SIGNUP_PATH,
     },
   });
-
-  // const admin = createAdminClient();
-  // if(user) {
-  //   const { data } = await admin.auth.admin.getUserById(user.id);
-  //
-  //   if(data) {
-  //     throw "이미 가입된 이메일입니다.";
-  //   }
-  // }
 
   if (error) {
     return error;

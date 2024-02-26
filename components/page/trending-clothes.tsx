@@ -2,9 +2,10 @@
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { cn } from '@/lib/utils';
-import ProductCard from '@/components/page/product/product-card';
+import ProductCard from '@/components/page/category/product-card';
 import { ProductCardData } from '@/lib/types/client';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { motion } from 'framer-motion';
 
 type TrendingClothesProps = {
   trendingClothes: ProductCardData[];
@@ -19,7 +20,7 @@ const TrendingClothes = ({ trendingClothes, className, ...props }: TrendingCloth
 
   return (
     <div ref={ref} className={cn('flex flex-col items-center text-xl py-8', className)}>
-      <p className='text-3xl font-semibold '>실시간 인기 물품</p>
+      <p className='text-3xl font-semibold mb-10'>실시간 인기 물품</p>
       {/* carousel */}
       <Carousel
         opts={{
@@ -31,20 +32,31 @@ const TrendingClothes = ({ trendingClothes, className, ...props }: TrendingCloth
         <CarouselContent>
           {trendingClothes.map((product, index) => (
             <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3 xl:basis-1/4'>
-              <div className='p-1'>
-                <ProductCard
-                  key={product.name}
-                  cardData={product}
-                />
-              </div>
+              <motion.div
+                key={product.name}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 2,
+                  ease: [0.25, 0.25, 0, 1],
+                  delay: index / 2,
+                }}
+              >
+                <div className='p-1'>
+                  <ProductCard
+                    key={product.name}
+                    cardData={product}
+                  />
+                </div>
+              </motion.div>
             </CarouselItem>
-          ))}
+            ))}
         </CarouselContent>
         <CarouselPrevious className='max-[320px]:hidden' />
         <CarouselNext className='max-[320px]:hidden' />
       </Carousel>
     </div>
-  );
+);
 };
 
 export default TrendingClothes;
