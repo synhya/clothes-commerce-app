@@ -1,10 +1,24 @@
 import React from 'react';
+import { cookies } from 'next/headers';
+import { createClient } from '@/lib/supabase/server';
+import UpdateProfileForm from '@/components/page/user/update-profile-form';
+import { notFound } from 'next/navigation';
 
-const Page = () => {
+const Page = async () => {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const { data: profile, error: profileError } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+
+  if(profileError) {
+    notFound();
+  }
+
   return (
-    <div>
-      <h1>Not implemented yet</h1>
-    </div>
+    <section className='p-4 rounded-md border shadow-xl shadow-border h-fit'>
+      <UpdateProfileForm email={profile?.email} name={profile?.name} phone={profile?.phone} />
+    </section>
   );
 };
 

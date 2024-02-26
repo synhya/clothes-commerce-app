@@ -25,7 +25,7 @@ const formSchema = z.object({
     .max(20, { message: '이름은 20자 이하입니다.' })
     .regex(/^[가-힣a-zA-Z]+$/, { message: '이름은 한글 또는 영문으로 입력하세요.' }),
   phone: z.string()
-    .regex(/^\d{3}\d{3,4}\d{4}$/, { message: '전화번호는 01012345678 형식입니다.' }),
+    .regex(/^\d{3}-\d{3,4}-\d{4}$/, { message: '전화번호는 010-1234-5678 형식입니다.' }),
   main_address: z.string({
     invalid_type_error: '주소를 입력해주세요.',
   }),
@@ -110,7 +110,7 @@ const InvoiceFormSection = ({ lineItems, itemsPrice, customInfoFromUser, custome
                     <FormDescription>결제에 사용됩니다 정확히 입력해주세요!</FormDescription>
                   </FormItem>
                 )} />
-                <AddressFormField />
+                <AddressFormField isMainAddress mainAddressName='main_address' extraAddressName='extra_address' />
               </div>
             </div>
           </div>
@@ -134,26 +134,13 @@ const InvoiceFormSection = ({ lineItems, itemsPrice, customInfoFromUser, custome
                   <span>총 결제금액</span>
                   <span className='text-lg'>{itemsPrice + deliveryPrice}원</span>
                 </div>
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant='secondary' size='lg'>결제하기</Button>
-                  </DialogTrigger>
-                  <DialogContent className="bg-white">
-                    <DialogHeader>
-                      <DialogTitle className="text-slate-800">실제 결제되지 않아요</DialogTitle>
-                      <TossWidget
-                        customerKey={customerId}
-                        price={price}
-                        orderName={customerId + ' 주문'}
-                        customerEmail={customerEmail}
-                        lineItems={lineItems}
-                      />
-                      {/*<DialogDescription>*/}
-                      {/*  */}
-                      {/*</DialogDescription>*/}
-                    </DialogHeader>
-                  </DialogContent>
-                </Dialog>
+                <TossWidget
+                  customerKey={customerId}
+                  price={price}
+                  orderName={customerId + ' 주문'}
+                  customerEmail={customerEmail}
+                  lineItems={lineItems}
+                />
               </div>
             </div>
           </div>

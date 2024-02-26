@@ -25,10 +25,7 @@ const Page = async () => {
     .select('*').eq('profile_id', user.id);
 
   return (
-    <div>
-      <h1 className="m-6 text-2xl font-semibold">장바구니</h1>
-      <BasketFormSection basketInfo={basketInfo} />
-    </div>
+    <BasketFormSection basketInfo={basketInfo} />
   );
 };
 

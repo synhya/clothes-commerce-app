@@ -4,61 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="chore: update README.md">
-      <change afterPath="$PROJECT_DIR$/app/api/create-stripe-client/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/order/checkout/request/fail/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/order/checkout/request/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/order/checkout/request/success/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/address-form-field.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/not-fount-alert-dialog.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/order/basket-item.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/order/invoice-form-section.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/order/order-items-section.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/order/sample-item.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/product/product-option-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/radio-input.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/page/toss-widget.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/actions/basket-actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/actions/checkout-actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/stores/useCheckoutProps.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/stores/useLineItems.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="fix: price bugfix">
+      <change afterPath="$PROJECT_DIR$/app/order/basket/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/order/list/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/user/update-profile/address/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/user/update-profile/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/layout/default-layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/sidebar-nav.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/user/update-address-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/page/user/update-profile-form.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/hooks/useTossWidget.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/admin/manage-products/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/admin/manage-products/[slug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/category/[category]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/category/[category]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/address/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/coupon/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/deposits/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/mileage/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/order/basket/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/order/list/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/reviews/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/myshop/wish-list/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/product/[slug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/product/[slug]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/order/basket/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/basket/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/order/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/checkout/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/order/checkout/success/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/checkout/success/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/order/list/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/order/list/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/user/create-profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/create-profile/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/user/update-profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/user/update-profile/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layout/global-navigator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/global-navigator.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layout/global-sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/global-sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layout/providers.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/providers.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/user-menu-dropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/admin/product-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/admin/product-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/admin/search-product-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/admin/search-product-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/home/trending-clothes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/home/trending-clothes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/product/breadcrumb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/category/breadcrumb.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/product/category-scroll-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/category/category-scroll-section.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/product/product-card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/category/product-card.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/user/profile-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/user/profile-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/page/user/register-email-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/user/register-email-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/actions/actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hooks/useScript.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hooks/useSidebar.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/stores/useSidebar.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/paths.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/paths.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/scripts/populate-db.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scripts/populate-db.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/supabase/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/supabase/schema.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/types/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/types/database.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/types/database.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/address-form-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/address-form-field.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/order/invoice-form-section.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/order/invoice-form-section.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/order/toss-widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/order/toss-widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/page/user/profile-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/page/user/create-profile-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/actions/actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/actions/actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/authjs.ts" beforeDir="false" afterPath="$PROJECT_DIR$/lib/authjs.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -72,8 +42,8 @@
       <list>
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -111,45 +81,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_directory_selection": "C:/Users/Administrator/Desktop/AfterGrad/jang-admin-app/app/order/list",
-    "last_opened_file_path": "C:/Users/ja/Desktop/AfterGrad/jang-admin-app/app/order/checkout/success",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.categorize-products db.executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.generate db type.executor": "Run",
-    "npm.populate db.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\Administrator\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "ts.external.directory.path": "C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/Administrator/Desktop/AfterGrad/jang-admin-app/app/order/list&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ja/Desktop/AfterGrad/jang-admin-app/app/order/checkout/fail&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.categorize-products db.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.generate db type.executor&quot;: &quot;Run&quot;,
+    &quot;npm.populate db.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\Administrator\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout\fail" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout\success" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\public\sample-slides" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\scripts" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app" />
-      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\components\page" />
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout" />
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout\success" />
+      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\components\page\order" />
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\order\checkout\request" />
-      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\myshop" />
-      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\actions" />
-      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\scripts" />
-      <recent name="C:\Users\Administrator\Desktop\AfterGrad\jang-admin-app\app\admin\@analytics" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -205,8 +176,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.generate db type" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.generate db type" />
         <item itemvalue="npm.categorize-products db" />
         <item itemvalue="npm.populate db" />
         <item itemvalue="npm.database" />
@@ -245,6 +216,8 @@
       <workItem from="1708611156383" duration="21811000" />
       <workItem from="1708679913718" duration="3547000" />
       <workItem from="1708683508488" duration="51601000" />
+      <workItem from="1708809036977" duration="59015000" />
+      <workItem from="1708938152801" duration="22542000" />
     </task>
     <task id="LOCAL-00001" summary="chore: moved file location">
       <option name="closed" value="true" />
@@ -286,7 +259,79 @@
       <option name="project" value="LOCAL" />
       <updated>1708530883296</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="feat: add basket, checkout feature">
+      <option name="closed" value="true" />
+      <created>1708922671470</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708922671470</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add login fallback">
+      <option name="closed" value="true" />
+      <created>1708924635585</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1708924635585</updated>
+    </task>
+    <task id="LOCAL-00008" summary="chore: update README.md">
+      <option name="closed" value="true" />
+      <created>1708924665540</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708924665540</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: create profile page redirection bugfix">
+      <option name="closed" value="true" />
+      <created>1708927200503</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1708927200503</updated>
+    </task>
+    <task id="LOCAL-00010" summary="chore: change profile Error toast to dialog">
+      <option name="closed" value="true" />
+      <created>1708928757548</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1708928757548</updated>
+    </task>
+    <task id="LOCAL-00011" summary="chore: remove email default value">
+      <option name="closed" value="true" />
+      <created>1708928896192</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1708928896192</updated>
+    </task>
+    <task id="LOCAL-00012" summary="chore: add loading animation">
+      <option name="closed" value="true" />
+      <created>1708929959581</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1708929959581</updated>
+    </task>
+    <task id="LOCAL-00013" summary="chore: add loading button">
+      <option name="closed" value="true" />
+      <created>1708932478624</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1708932478624</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: price bugfix">
+      <option name="closed" value="true" />
+      <created>1708934834361</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1708934834361</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,14 +358,22 @@
     <MESSAGE value="feat: login authentication" />
     <MESSAGE value="chore: admin dashboard layout" />
     <MESSAGE value="feat: add category section with infinite scroll" />
+    <MESSAGE value="feat: add basket, checkout feature" />
+    <MESSAGE value="feat: add login fallback" />
     <MESSAGE value="chore: update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update README.md" />
+    <MESSAGE value="fix: create profile page redirection bugfix" />
+    <MESSAGE value="chore: change profile Error toast to dialog" />
+    <MESSAGE value="chore: remove email default value" />
+    <MESSAGE value="chore: add loading animation" />
+    <MESSAGE value="chore: add loading button" />
+    <MESSAGE value="fix: price bugfix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: price bugfix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/page/home/trending-clothes.tsx</url>
+          <url>file://$PROJECT_DIR$/components/page/trending-clothes.tsx</url>
           <line>20</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>

@@ -44,7 +44,7 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
       >
         <ul
           typeof='menu'
-          className='absolute -translate-x-1/3 top-2 z-10 grid gap-3 rounded-md border border-accent p-1 bg-background/60 backdrop-blur-md'>
+          className='absolute -translate-x-1/3 top-2 z-10 grid gap-3 rounded-md border border-accent p-1 bg-background/90 backdrop-blur-md'>
           {[{
             label: '내 정보',
             href: '/user/update-profile',

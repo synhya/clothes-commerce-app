@@ -142,7 +142,7 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: {
           ))}
         </NavigationMenuList>
         <NavigationMenuViewport
-          className='submenu-viewport min-w-[130px] items-center bg-background/60 backdrop-blur-md' />
+          className='submenu-viewport min-w-[130px] items-center bg-background/90 backdrop-blur-lg' />
       </NavigationMenu>
       <div className='mr-1 flex flex-grow items-center justify-end gap-0 sm:gap-2'>
         <UserMenuDropdown isAdmin={isAdmin} />

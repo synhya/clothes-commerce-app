@@ -4,16 +4,16 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { BASE_URL, NEW_USER_PATH, SIGNUP_PATH } from '@/lib/paths';
-import { ProfileFormSchema } from '@/components/page/user/profile-form';
+import { ProfileFormSchema } from '@/components/page/user/create-profile-form';
 import { SignupFormSchema } from '@/components/page/user/register-email-form';
 import { v5 as uuid } from 'uuid';
 import { ProductFormSchema } from '@/components/page/admin/product-form';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { DBEnums } from '@/lib/types/database';
-import { format } from 'date-fns';
-import { ko } from 'date-fns/locale';
 import { fetchProductById, fetchProductByName } from '@/lib/fetches';
 import Stripe from 'stripe';
+import { UpdateFormSchema } from '@/components/page/user/update-profile-form';
+import { AddressInfo } from '@/components/page/user/update-address-form';
 
 const bucket = 'products';
 const namespace = '87c9cdf7-101d-4c05-a89d-c7aaff3a3fcf';
@@ -224,6 +224,52 @@ export async function createProfile (formData: ProfileFormSchema) {
   }
 
   redirect(`/?newUser=${encodeURIComponent(formData.name)}`); //
+}
+
+export async function updateProfile (formData: UpdateFormSchema) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const { error: profileError } = await supabase.from('profiles').update({
+    ...formData,
+  }).eq('id', user.id);
+
+  if (profileError) {
+    return { error: '프로필 업데이트 실패: ' + profileError.message };
+  }
+
+  revalidatePath('/');
+  return { message: '프로필 업데이트 성공' };
+}
+
+export async function updateAddress (json: string) {
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+  const { data: { user } } = await supabase.auth.getUser();
+
+  const addressList: AddressInfo[] = JSON.parse(json);
+
+  const newArrayList = addressList.map((address) => ({
+    ...address,
+    profile_id: user.id,
+  }))
+
+  const { error: deleteError } = await supabase.from('profile_address')
+    .delete().eq('profile_id', user.id);
+
+  const { error: insertError } = await supabase.from('profile_address').insert([
+    ...newArrayList
+  ]);
+
+  if (deleteError || insertError) {
+    return {
+      message: '주소 업데이트 실패: ' + (deleteError || insertError).message,
+    };
+  }
+
+  revalidatePath('/');
+  return { message: '주소 업데이트 성공' };
 }
 
 // move to browser context

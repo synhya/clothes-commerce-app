@@ -1,38 +1,14 @@
 'use client';
-import React, { useCallback, useEffect, useRef } from 'react';
-import { nanoid } from 'nanoid';
-import type { PaymentWidgetInstance } from '@tosspayments/payment-widget__types';
-import { useQuery } from 'react-query';
-import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
 import { BASE_URL } from '@/lib/paths';
-import { PaymentRequestParameters } from '@tosspayments/payment-widget__types/types/types/widget';
 import { useFormContext } from 'react-hook-form';
 import { checkoutAction } from '@/lib/actions/checkout-actions';
 import { InvoiceFormValues } from '@/components/page/order/invoice-form-section';
 import { LineItem } from '@/lib/types/database';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-
-const clientKey = 'test_ck_DnyRpQWGrNWDKpYjAxWO8Kwv1M9E';
-
-function usePaymentWidget (clientKey: string, customerKey: string) {
-  return useQuery({
-    queryKey: ['payment-widget', clientKey, customerKey],
-    queryFn: () => {
-      // ------  결제위젯 초기화 ------
-      // @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
-      return loadPaymentWidget(clientKey, customerKey);
-    },
-  });
-}
+import { usePaymentWidget } from '@/lib/hooks/useTossWidget';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 type TossWidgetProps = {
   customerKey: string;
@@ -45,12 +21,13 @@ type TossWidgetProps = {
 const TossWidget = ({
   customerKey, price, lineItems, ...orderInfo
 }: TossWidgetProps) => {
-  const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
   const pathname = usePathname();
   const { handleSubmit } = useFormContext();
+  const { data: paymentWidget } = usePaymentWidget(customerKey);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    if (paymentWidget == null) {
+    if (paymentWidget == null || !isOpen) {
       return;
     }
 
@@ -67,7 +44,7 @@ const TossWidget = ({
       variantKey: 'AGREEMENT',
     });
 
-  }, [paymentWidget]);
+  }, [paymentWidget, isOpen]);
 
   // http://localhost:3000/api/auth/callback/kakao
   //   https://jang-admin-app.vercel.app/api/auth/callback/kakao
@@ -85,8 +62,6 @@ const TossWidget = ({
   // }, [price]);
 
   const onSubmit = async (data: InvoiceFormValues) => {
-    console.log('결제 처리');
-
     const formData = {
       ...data,
       lineItems: JSON.stringify(lineItems),
@@ -111,7 +86,7 @@ const TossWidget = ({
         orderName: orderInfo.orderName,
         customerEmail: orderInfo.customerEmail,
         customerName: name,
-        customerMobilePhone: phone,
+        customerMobilePhone: phone.replace(/-/g, ''),
         orderId: invoiceId,
         successUrl: BASE_URL + pathname + '/success',
         failUrl: BASE_URL + pathname + '/fail',
@@ -123,20 +98,29 @@ const TossWidget = ({
   };
 
   return (
-    <>
-      <div id='payment-widget' style={{ width: '100%' }} />
-      <div id='agreement' style={{ width: '100%' }} />
-      <div className='bg-white flex justify-center pb-6'>
-        <Button
-          variant='secondary'
-          size='lg'
-          onClick={handleSubmit(onSubmit)}
-        >
-          결제하기
-        </Button>
-      </div>
-    </>
+    <Dialog onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
+        <Button variant='secondary' size='lg'>결제하기</Button>
+      </DialogTrigger>
+      <DialogContent className='bg-white h-fit'>
+        <div className='min-h-[480px]'>
+          <div id='payment-widget' style={{ width: '100%' }} />
+          <div id='agreement' style={{ width: '100%' }} />
+        </div>
+        <div className='bg-white flex justify-center pb-6'>
+          <Button
+            variant='secondary'
+            size='lg'
+            onClick={handleSubmit(onSubmit)}
+          >
+            결제하기
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
   )
+    ;
 };
 
 export default TossWidget;
+

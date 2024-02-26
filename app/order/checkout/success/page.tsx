@@ -66,15 +66,13 @@ const Page = async ({
   const { data: basketData } = await supabase.from('invoice_products')
     .select('basket_id').eq('invoice_id', payment.orderId);
 
-  basketData.map(async ({basket_id}) => {
-    const { error: deleteError } = await supabase.from('basket')
-      .delete().eq('id', basket_id);
+  const { error: deleteError } = await supabase.from('basket')
+    .delete().in('id', basketData.map((data) => data.basket_id));
 
-    if (deleteError) {
-      console.error(deleteError);
-      // show toast instead of throwing error
-    }
-  });
+  if (deleteError) {
+    console.error(deleteError);
+    // show toast instead of throwing error
+  }
 
   const { error: invoiceError } = await supabase.from('invoices')
     .update({state: '결제완료'}).eq('id', payment.orderId);

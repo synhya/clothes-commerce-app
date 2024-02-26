@@ -54,12 +54,12 @@ const formSchema = z.object<{ [key in (keyof Omit<ProfileInfo, 'id'>)]: ZodTypeA
     .regex(/^[가-힣a-zA-Z]+$/, { message: '이름은 한글 또는 영문으로 입력하세요.' }),
   phone: z
     .string()
-    .regex(/^\d{3}\d{3,4}\d{4}$/, { message: '전화번호는 01012345678 형식입니다.' }),
+    .regex(/^\d{3}-\d{3,4}-\d{4}$/, { message: '전화번호는 010-1234-5678 형식입니다.' }),
 });
 
 export type ProfileFormSchema = z.infer<typeof formSchema>;
 
-const ProfileForm = ({ className, ...props }: Partial<Profile> & React.ComponentPropsWithRef<'div'>) => {
+const CreateProfileForm = ({ className, ...props }: Partial<Profile> & React.ComponentPropsWithRef<'div'>) => {
   const form = useForm<ProfileFormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -172,7 +172,7 @@ const ProfileForm = ({ className, ...props }: Partial<Profile> & React.Component
           />
         </div>
         <div className='mt-6 space-y-4'>
-          <AddressFormField />
+          <AddressFormField isMainAddress mainAddressName='main_address' extraAddressName='extra_address'/>
         </div>
         <div className='mt-8 flex items-center md:justify-center'>
           <Button type='submit' className='min-w-[200px]' disabled={isLoading}>
@@ -185,4 +185,4 @@ const ProfileForm = ({ className, ...props }: Partial<Profile> & React.Component
   );
 };
 
-export default ProfileForm;
+export default CreateProfileForm;

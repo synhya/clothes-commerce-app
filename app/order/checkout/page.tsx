@@ -40,7 +40,7 @@ const Page = async ({
     return <NotFoundAlertDialog description='해당 장바구니가 없습니다.' />;
   }
 
-  const totalPrice = basketInfos.reduce((acc, current) => acc + current.price, 0);
+  const totalPrice = basketInfos.reduce((acc, current) => acc + current.price * current.quantity, 0);
 
   const { data: profileInfo, error: profileError } =
     await supabase.from('profile_info').select('*').eq('id', user.id).single();

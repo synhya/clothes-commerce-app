@@ -5,7 +5,15 @@ import { Button } from '@/components/ui/button';
 import { useFormContext } from 'react-hook-form';
 import { Address, useDaumPostcodePopup } from 'react-daum-postcode';
 
-const AddressFormField = () => {
+const AddressFormField = ({
+  isMainAddress,
+  mainAddressName,
+  extraAddressName,
+}: {
+  isMainAddress: boolean;
+  mainAddressName: string;
+  extraAddressName: string;
+}) => {
   const form = useFormContext();
 
   const openPostcode = useDaumPostcodePopup();
@@ -24,7 +32,7 @@ const AddressFormField = () => {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
-    form.setValue('main_address', fullAddress);
+    form.setValue(mainAddressName, fullAddress);
   };
   const onPostButtonClick = async () => {
     await openPostcode({ onComplete: handlePostComplete });
@@ -34,7 +42,7 @@ const AddressFormField = () => {
     <>
       <FormField
         control={form.control}
-        name='main_address'
+        name={mainAddressName}
         render={({ field }) => (
           <FormItem>
             <FormLabel>주소</FormLabel>
@@ -53,7 +61,7 @@ const AddressFormField = () => {
       />
       <FormField
         control={form.control}
-        name='extra_address'
+        name={extraAddressName}
         render={({ field }) => (
           <FormItem
             className='col-span-2'
@@ -62,7 +70,9 @@ const AddressFormField = () => {
             <FormControl>
               <Input {...field} placeholder='상세주소' />
             </FormControl>
-            <FormDescription>기본 배송지로 등록됩니다.</FormDescription>
+            {isMainAddress && (
+              <FormDescription>기본 배송지로 등록됩니다.</FormDescription>
+            )}
             <FormMessage />
           </FormItem>
         )}

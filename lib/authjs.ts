@@ -31,7 +31,7 @@ export const authConfig: NextAuthConfig = {
             id: '1',
             name: 'admin',
             email: 'admin@admin.com',
-            image: '/test.png',
+            image: '/pay.png',
             role: 'admin',
           };
         }
