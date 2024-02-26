@@ -81,14 +81,14 @@ export async function middleware(request: NextRequest) {
     if (signedUp) return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // personal page
-  const personalPage = request.nextUrl.pathname.startsWith(ACCOUNT_PATH) ||
-    request.nextUrl.pathname.startsWith(UPDATE_USER_PATH);
-
-  if (!isValidUser && personalPage) {
-    if(!signedIn) return NextResponse.redirect(new URL(LOGIN_PATH, request.url));
-    if(!signedUp) return NextResponse.redirect(new URL(NEW_USER_PATH, request.url));
-  }
+  // // personal page
+  // const personalPage = request.nextUrl.pathname.startsWith(ACCOUNT_PATH) ||
+  //   request.nextUrl.pathname.startsWith(UPDATE_USER_PATH);
+  //
+  // if (!isValidUser && personalPage) {
+  //   if(!signedIn) return NextResponse.redirect(new URL(LOGIN_PATH, request.url));
+  //   if(!signedUp) return NextResponse.redirect(new URL(NEW_USER_PATH, request.url));
+  // }
 
   // login page
   if (signedIn && request.nextUrl.pathname.startsWith(LOGIN_PATH)) {

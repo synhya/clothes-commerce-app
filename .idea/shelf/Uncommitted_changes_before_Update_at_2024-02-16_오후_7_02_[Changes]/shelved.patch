@@ -1,0 +1,110 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a1905d83-2d37-4b17-87ff-c3e5bb3926bd\" name=\"Changes\" comment=\"chore: moved file location\">\r\n      <change afterPath=\"$PROJECT_DIR$/app/category/[slug]/page.tsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/components/shared/ui/company-icons.tsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/lib/types/products.ts\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/public/google_login.svg\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/public/kakao_login.svg\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/layout.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/layout.tsx\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/app/page.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/page.tsx\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/components/shared/ui/Icon.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/components/shared/ui/icon.tsx\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/components/shared/ui/button.tsx\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/package.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/package.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/tailwind.config.ts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/tailwind.config.ts\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"TypeScript JSX File\" />\r\n        <option value=\"TypeScript File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 3\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2boUqelDJwef0QwS0tTcrboKU4Q\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"last_opened_file_path\": \"C:/Users/ja/Desktop/AfterGrad/jang-admin-app/public\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"npm.build.executor\": \"Run\",\r\n    \"npm.dev.executor\": \"Run\",\r\n    \"prettierjs.PrettierConfiguration.Package\": \"C:\\\\Users\\\\ja\\\\AppData\\\\Roaming\\\\npm\\\\node_modules\\\\prettier\",\r\n    \"settings.editor.selected.configurable\": \"preferences.pluginManager\",\r\n    \"ts.external.directory.path\": \"C:\\\\Users\\\\ja\\\\Desktop\\\\AfterGrad\\\\jang-admin-app\\\\node_modules\\\\typescript\\\\lib\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\public\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\lib\\types\" />\r\n      <recent name=\"C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\app\\category\" />\r\n      <recent name=\"C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\lib\" />\r\n      <recent name=\"C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\app\\api\\auth\" />\r\n      <recent name=\"C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\app\\api\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"npm.dev\">\r\n    <configuration name=\"build\" type=\"js.build_tools.npm\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <package-json value=\"$PROJECT_DIR$/package.json\" />\r\n      <command value=\"run\" />\r\n      <scripts>\r\n        <script value=\"build\" />\r\n      </scripts>\r\n      <node-interpreter value=\"project\" />\r\n      <envs />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"dev\" type=\"js.build_tools.npm\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <package-json value=\"$PROJECT_DIR$/package.json\" />\r\n      <command value=\"run\" />\r\n      <scripts>\r\n        <script value=\"dev\" />\r\n      </scripts>\r\n      <node-interpreter value=\"project\" />\r\n      <envs />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"npm.dev\" />\r\n        <item itemvalue=\"npm.build\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"SvnConfiguration\">\r\n    <configuration />\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a1905d83-2d37-4b17-87ff-c3e5bb3926bd\" name=\"Changes\" comment=\"\" />\r\n      <created>1706858501311</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1706858501311</updated>\r\n      <workItem from=\"1706881118408\" duration=\"3193000\" />\r\n      <workItem from=\"1706886440521\" duration=\"135000\" />\r\n      <workItem from=\"1706937961213\" duration=\"1989000\" />\r\n      <workItem from=\"1706939977390\" duration=\"21414000\" />\r\n      <workItem from=\"1706969877148\" duration=\"119000\" />\r\n      <workItem from=\"1707060105111\" duration=\"80000\" />\r\n      <workItem from=\"1707060296528\" duration=\"20000\" />\r\n      <workItem from=\"1707064351471\" duration=\"3172000\" />\r\n      <workItem from=\"1707068840393\" duration=\"23356000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"chore: moved file location\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1706939477762</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1706939477762</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"2\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"chore: moved file location\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"chore: moved file location\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 53688fc6e86625ef73d97c436d81809842e44fb5)
++++ b/.idea/workspace.xml	(date 1708077757157)
+@@ -4,19 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="chore: moved file location">
+-      <change afterPath="$PROJECT_DIR$/app/category/[slug]/page.tsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/components/shared/ui/company-icons.tsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/lib/types/products.ts" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/public/google_login.svg" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/public/kakao_login.svg" afterDir="false" />
++    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="chore: add shadcn uis">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/components/shared/ui/Icon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/shared/ui/icon.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/components/shared/ui/button.tsx" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -53,7 +42,7 @@
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "git-widget-placeholder": "main",
+-    "last_opened_file_path": "C:/Users/ja/Desktop/AfterGrad/jang-admin-app/public",
++    "last_opened_file_path": "C:/Users/ja/Desktop/AfterGrad/kirimase-study-app",
+     "node.js.detected.package.eslint": "true",
+     "node.js.detected.package.tslint": "true",
+     "node.js.selected.package.eslint": "(autodetect)",
+@@ -62,7 +51,7 @@
+     "npm.build.executor": "Run",
+     "npm.dev.executor": "Run",
+     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\ja\\AppData\\Roaming\\npm\\node_modules\\prettier",
+-    "settings.editor.selected.configurable": "preferences.pluginManager",
++    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+     "ts.external.directory.path": "C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\typescript\\lib",
+     "vue.rearranger.settings.migration": "true"
+   }
+@@ -72,11 +61,11 @@
+       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\public" />
+     </key>
+     <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\components\ui" />
+       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib\types" />
+       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\category" />
+       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\lib" />
+       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\api\auth" />
+-      <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\app\api" />
+     </key>
+   </component>
+   <component name="RunManager" selected="npm.dev">
+@@ -126,7 +115,10 @@
+       <workItem from="1707060105111" duration="80000" />
+       <workItem from="1707060296528" duration="20000" />
+       <workItem from="1707064351471" duration="3172000" />
+-      <workItem from="1707068840393" duration="23356000" />
++      <workItem from="1707068840393" duration="31278000" />
++      <workItem from="1707163110510" duration="24000" />
++      <workItem from="1708049103394" duration="1246000" />
++      <workItem from="1708076860176" duration="475000" />
+     </task>
+     <task id="LOCAL-00001" summary="chore: moved file location">
+       <option name="closed" value="true" />
+@@ -136,7 +128,23 @@
+       <option name="project" value="LOCAL" />
+       <updated>1706939477762</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="chore: add product sample data">
++      <option name="closed" value="true" />
++      <created>1707142204058</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1707142204058</updated>
++    </task>
++    <task id="LOCAL-00003" summary="chore: add shadcn uis">
++      <option name="closed" value="true" />
++      <created>1707142222040</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1707142222040</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -144,6 +152,8 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="chore: moved file location" />
+-    <option name="LAST_COMMIT_MESSAGE" value="chore: moved file location" />
++    <MESSAGE value="chore: add product sample data" />
++    <MESSAGE value="chore: add shadcn uis" />
++    <option name="LAST_COMMIT_MESSAGE" value="chore: add shadcn uis" />
+   </component>
+ </project>
+\ No newline at end of file

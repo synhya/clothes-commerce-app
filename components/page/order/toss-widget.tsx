@@ -69,6 +69,9 @@ const TossWidget = ({
 
   }, [paymentWidget]);
 
+  // http://localhost:3000/api/auth/callback/kakao
+  //   https://jang-admin-app.vercel.app/api/auth/callback/kakao
+
   // useEffect(() => {
   //   const paymentMethodsWidget = paymentMethodsWidgetRef.current;
   //
