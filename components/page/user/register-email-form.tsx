@@ -41,10 +41,6 @@ const RegisterEmailForm = ({ className, ...props }: RegisterFormProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const form = useForm<SignupFormSchema>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: 'admin@gmail.com',
-      password: 'admin1234',
-    },
   });
   const { toast } = useToast();
 
