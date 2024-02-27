@@ -19,10 +19,10 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
   }, [isAdmin]);
 
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <Button
-        variant='ghost'
-        className='px-1.5'
+        variant="ghost"
+        className="px-1.5"
         onMouseOver={() => {
           debouncedHoverEvent(true);
         }}
@@ -30,11 +30,11 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
           debouncedHoverEvent(false);
         }}
       >
-        <PersonIcon className='size-6' />
+        <PersonIcon className="size-6" />
       </Button>
       <div
         data-state={showDropdown ? 'open' : 'close'}
-        className='relative scale-0 data-[state=open]:scale-100 transition-all duration-300'
+        className="relative scale-0 transition-all duration-300 data-[state=open]:scale-100"
         onMouseOver={() => {
           debouncedHoverEvent(true);
         }}
@@ -43,30 +43,35 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
         }}
       >
         <ul
-          typeof='menu'
-          className='absolute -translate-x-1/3 top-2 z-10 grid gap-3 rounded-md border border-accent p-1 bg-background/90 backdrop-blur-md'>
-          {[{
-            label: '내 정보',
-            href: '/user/update-profile',
-          }, {
-            label: '주문 내역',
-            href: '/order/list',
-          }, {
-            label: '장바구니',
-            href: '/order/basket',
-          }].map((menus, index) => (
-            <li key={index} className='w-full'>
+          typeof="menu"
+          className="absolute top-2 z-10 grid -translate-x-1/3 gap-3 rounded-md border border-accent bg-background/90 p-1 backdrop-blur-md"
+        >
+          {[
+            {
+              label: '내 정보',
+              href: '/user/update-profile',
+            },
+            {
+              label: '주문 내역',
+              href: '/order/list',
+            },
+            {
+              label: '장바구니',
+              href: '/order/basket',
+            },
+          ].map((menus, index) => (
+            <li key={index} className="w-full">
               <Link href={menus.href}>
-                <Button variant='link' className='w-full'>
+                <Button variant="link" className="w-full">
                   {menus.label}
                 </Button>
               </Link>
             </li>
           ))}
           {adminState && (
-            <li className='w-full'>
-              <Link href='/admin'>
-                <Button variant='link' className='w-full'>
+            <li className="w-full">
+              <Link href="/admin">
+                <Button variant="link" className="w-full">
                   관리자
                 </Button>
               </Link>

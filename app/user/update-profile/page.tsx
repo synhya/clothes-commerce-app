@@ -8,15 +8,22 @@ const Page = async () => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  const { data: profile, error: profileError } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
+  const { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
 
-  if(profileError) {
+  if (profileError) {
     notFound();
   }
 
   return (
-    <section className='p-4 rounded-md border shadow-xl shadow-border h-fit'>
+    <section className="h-fit rounded-md border p-4 shadow-xl shadow-border">
       <UpdateProfileForm email={profile?.email} name={profile?.name} phone={profile?.phone} />
     </section>
   );

@@ -5,7 +5,7 @@ import {
   GearIcon,
   PersonIcon,
   RocketIcon,
-} from "@radix-ui/react-icons"
+} from '@radix-ui/react-icons';
 
 import {
   Command,
@@ -16,8 +16,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command"
-
+} from '@/components/ui/command';
 
 // 클릭시에 검색창이 나오는데, 이때 나오는 창을 만들어주는 것이다.
 const SearchBar = () => {
@@ -60,7 +59,7 @@ const SearchBar = () => {
         </CommandGroup>
       </CommandList>
     </Command>
-  )
-}
+  );
+};
 
 export default SearchBar;

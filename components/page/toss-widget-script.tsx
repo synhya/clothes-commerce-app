@@ -10,10 +10,10 @@ const TossWidgetScript = () => {
 
   return (
     <>
-      <div id='payment-method'></div>
-      <div id='agreement'></div>
+      <div id="payment-method"></div>
+      <div id="agreement"></div>
       <button
-        id='payment-button'
+        id="payment-button"
         onClick={async () => {
           console.log('결제하기 버튼 클릭');
           await paymentWidgetRef.current?.requestPayment({
@@ -26,10 +26,11 @@ const TossWidgetScript = () => {
             customerMobilePhone: '01012341234',
           });
         }}
-      >결제하기
+      >
+        결제하기
       </button>
       <Script
-        src='https://js.tosspayments.com/v1/payment-widget'
+        src="https://js.tosspayments.com/v1/payment-widget"
         onLoad={() => {
           const button = document.getElementById('payment-button');
 
@@ -47,10 +48,7 @@ const TossWidgetScript = () => {
             { variantKey: 'DEFAULT' },
           );
 
-          paymentWidget.renderAgreement(
-            '#agreement',
-            { variantKey: 'AGREEMENT' },
-          );
+          paymentWidget.renderAgreement('#agreement', { variantKey: 'AGREEMENT' });
         }}
       />
     </>

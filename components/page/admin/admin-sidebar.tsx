@@ -1,9 +1,8 @@
 'use client';
 import React, { useState } from 'react';
-import { Separator } from '@/components/ui/separator';
+import { Divide as Hamburger } from 'hamburger-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 import { cn } from '@/lib/utils';
 import {
   Accordion,
@@ -16,47 +15,49 @@ const AdminSidebar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className='border-r h-full relative'>
+    <div className="relative h-full border-r">
       <div
         className={cn('flex h-full min-w-[200px] flex-col justify-between', {
           hidden: !open,
         })}
       >
-        <div className='mx-4 flex flex-col items-center gap-y-6 sticky top-12'>
-          <p className='mt-4 text-xl'>관리자 페이지</p>
+        <div className="sticky top-12 mx-4 flex flex-col items-center gap-y-4">
+          <p className="mt-8 text-xl font-medium">관리자 페이지</p>
 
-          <Accordion type='multiple' className='w-full'>
-            <AccordionItem value='products'>
-              <AccordionTrigger>상품</AccordionTrigger>
-              <AccordionContent className='flex flex-col items-start gap-0.5'>
-                <Button variant='link' asChild>
-                  <Link href='/admin/add-products'>상품 추가</Link>
-                </Button>
-                <Button variant='link' asChild>
-                  <Link href='/admin/search-products'>상품 관리</Link>
+          <Accordion type="multiple" className="w-full">
+            <AccordionItem value="dashboard">
+              <AccordionTrigger>메인</AccordionTrigger>
+              <AccordionContent className="flex flex-col items-start gap-0.5">
+                <Button variant="link" asChild>
+                  <Link href="/admin">대시보드</Link>
                 </Button>
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value='invoices'>
+            <AccordionItem value="products">
+              <AccordionTrigger>상품</AccordionTrigger>
+              <AccordionContent className="flex flex-col items-start gap-0.5">
+                <Button variant="link" asChild>
+                  <Link href="/admin/add-products">상품 추가</Link>
+                </Button>
+                <Button variant="link" asChild>
+                  <Link href="/admin/search-products">상품 관리</Link>
+                </Button>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="invoices">
               <AccordionTrigger>주문</AccordionTrigger>
-              <AccordionContent className='flex flex-col items-start gap-0.5'>
-                <Button variant='link' asChild>
-                  <Link href='/admin/invoices'>주문 관리</Link>
+              <AccordionContent className="flex flex-col items-start gap-0.5">
+                <Button variant="link" asChild>
+                  <Link href="/admin/invoices">주문 관리</Link>
                 </Button>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
         </div>
       </div>
-      <Button
-        size='icon'
-        className={cn('fixed bottom-0 left-0 m-4 z-10', {
-          'bg-secondary': open,
-        })}
-        onClick={() => setOpen(!open)}
-      >
-        <HamburgerMenuIcon />
-      </Button>
+      <div className="fixed left-1 top-7 z-10 mt-0.5">
+        <Hamburger toggled={open} toggle={setOpen} color="grey" size={24} />
+      </div>
     </div>
   );
 };

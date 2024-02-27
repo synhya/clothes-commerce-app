@@ -12,13 +12,14 @@ const GET = async (req: NextRequest) => {
 
   const customer = await stripe.customers.create({
     email: (req.body as any).record.email,
-  })
+  });
 
-  await supabase.from('profiles')
-    .update({stripe_customer: customer.id})
+  await supabase
+    .from('profiles')
+    .update({ stripe_customer: customer.id })
     .eq('id', (req.body as any).record.id);
 
   return NextResponse.json({
     customerId: customer.id,
   });
-}
+};

@@ -1,4 +1,3 @@
-
 import { LineItem } from '@/lib/types/database';
 import { create } from 'zustand';
 
@@ -19,7 +18,6 @@ const useLineItems = create<{
 }));
 
 export default useLineItems;
-
 
 // Multistep form example
 

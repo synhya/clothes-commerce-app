@@ -2,7 +2,7 @@ import { CheckoutActionProps } from '@/lib/actions/checkout-actions';
 import { create } from 'zustand';
 
 const useCheckoutProps = create<{
-  checkoutProps: CheckoutActionProps,
+  checkoutProps: CheckoutActionProps;
   setCheckoutProps: (props: CheckoutActionProps) => void;
 }>((set) => ({
   checkoutProps: null,

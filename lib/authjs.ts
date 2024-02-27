@@ -8,6 +8,7 @@ import { SupabaseAdapter } from '@auth/supabase-adapter';
 import { Adapter } from '@auth/core/adapters';
 import { sign } from '@/lib/jwtutils';
 import { LOGIN_PATH, NEW_USER_PATH } from '@/lib/paths';
+import { env } from '@/lib/env';
 
 export const authConfig: NextAuthConfig = {
   // debug: true,
@@ -40,8 +41,8 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   adapter: SupabaseAdapter({
-    url: process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    secret: process.env.SUPABASE_SERVICE_ROLE_KEY!,  // SUPABASE_SERVICE_ROLE_KEY
+    url: env.NEXT_PUBLIC_SUPABASE_URL!,
+    secret: env.SUPABASE_SERVICE_ROLE_KEY!, // SUPABASE_SERVICE_ROLE_KEY
   }) as Adapter,
   callbacks: {
     redirect({ url, baseUrl }) {
@@ -64,25 +65,24 @@ export const authConfig: NextAuthConfig = {
       session,
       user,
       trigger,
-      newUser
+      newUser,
     }: {
       session: Session;
       user?: User;
       trigger?: 'update' | undefined;
       newUser?: boolean;
     }) {
-      const signingSecret = process.env.SUPABASE_JWT_SECRET!;
+      const signingSecret = env.SUPABASE_JWT_SECRET!;
       if (signingSecret && newUser) {
-        const exp = Math.floor(new Date(session.expires).getTime() /1000);
+        const exp = Math.floor(new Date(session.expires).getTime() / 1000);
 
         const payload = {
-          aud: "authendticated",
+          aud: 'authendticated',
           sub: user?.id,
           email: user?.email,
           exp: exp,
-          role: "authenticated",
-        }
-
+          role: 'authenticated',
+        };
 
         session.supabaseAccessToken = await sign(payload, exp, signingSecret);
       }
@@ -106,15 +106,18 @@ export const authConfig: NextAuthConfig = {
       }
 
       // auth parts 버튼 없어도 페이지 이동 가능하니 미들웨어로 처리
-      if ((pathname.startsWith('/myshop') || pathname.startsWith('/user/update-profile')) && !auth?.user) {
-         return NextResponse.redirect(new URL('/user/login', request.url));
+      if (
+        (pathname.startsWith('/myshop') || pathname.startsWith('/user/update-profile')) &&
+        !auth?.user
+      ) {
+        return NextResponse.redirect(new URL('/user/login', request.url));
       }
       // if (pathname.startsWith('/admin')) {
       //   return auth?.user?.role === 'admin';
       // }
       return true;
     },
-  }
+  },
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);

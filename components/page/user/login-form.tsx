@@ -27,11 +27,9 @@ import { NEW_USER_PATH, SIGNUP_PATH } from '@/lib/paths';
 import { revalidatePath } from 'next/cache';
 
 const formSchema = z.object({
-  email: z
-    .string()
-    .email({
-      message: '이메일 형식이 아닙니다.',
-    }),
+  email: z.string().email({
+    message: '이메일 형식이 아닙니다.',
+  }),
   password: z
     .string()
     .min(5, {
@@ -56,7 +54,7 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
       password: 'admin1234',
     },
   });
-  const router = useRouter()
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<LoginFormSchema> = async (data) => {
     setIsLoading(true);
@@ -64,15 +62,22 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword(data);
 
-    if(error) {
+    if (error) {
       setIsLoading(false);
       setShowLoginAlert(true);
     } else {
       // 프로필이없으면 생성 아니면 메인페이지로
-      const { data: { session }} = await supabase.auth.getSession();
-      if(session) {
-        const { data } = await supabase.from('profiles').select().eq('id', session.user.id).limit(1).single();
-        if(!!data) {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (session) {
+        const { data } = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', session.user.id)
+          .limit(1)
+          .single();
+        if (!!data) {
           router.push(NEW_USER_PATH);
         }
       }
@@ -84,15 +89,15 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
 
   const handleSignInWithOAuth = async (provider: Provider) => {
     const supabase = createClient();
-    const { data } =  await supabase.auth.signInWithOAuth({
+    const { data } = await supabase.auth.signInWithOAuth({
       provider: provider,
       options: {
-        redirectTo: `${location.origin}/auth/callback`
+        redirectTo: `${location.origin}/auth/callback`,
       },
     });
     console.log(data);
     router.refresh();
-  }
+  };
 
   return (
     <div className={cn('grid gap-4', className)} {...props}>

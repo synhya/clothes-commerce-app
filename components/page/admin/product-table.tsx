@@ -19,7 +19,7 @@ import Link from 'next/link';
 const ProductTable = ({ tableData }: { tableData: Product[] }) => {
   return (
     <>
-      <div className="rounded-md border max-w-5xl mx-auto">
+      <div className="mx-auto max-w-5xl rounded-md border">
         <Table>
           <TableHeader>
             <TableRow>

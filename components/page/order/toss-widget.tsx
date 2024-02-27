@@ -13,14 +13,12 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 type TossWidgetProps = {
   customerKey: string;
   price: number;
-  orderName: string,
-  customerEmail: string,
-  lineItems: LineItem[],
+  orderName: string;
+  customerEmail: string;
+  lineItems: LineItem[];
 };
 
-const TossWidget = ({
-  customerKey, price, lineItems, ...orderInfo
-}: TossWidgetProps) => {
+const TossWidget = ({ customerKey, price, lineItems, ...orderInfo }: TossWidgetProps) => {
   const pathname = usePathname();
   const { handleSubmit } = useFormContext();
   const { data: paymentWidget } = usePaymentWidget(customerKey);
@@ -43,7 +41,6 @@ const TossWidget = ({
     paymentWidget.renderAgreement('#agreement', {
       variantKey: 'AGREEMENT',
     });
-
   }, [paymentWidget, isOpen]);
 
   // http://localhost:3000/api/auth/callback/kakao
@@ -100,27 +97,23 @@ const TossWidget = ({
   return (
     <Dialog onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant='secondary' size='lg'>결제하기</Button>
+        <Button variant="secondary" size="lg">
+          결제하기
+        </Button>
       </DialogTrigger>
-      <DialogContent className='bg-white h-fit'>
-        <div className='min-h-[480px]'>
-          <div id='payment-widget' style={{ width: '100%' }} />
-          <div id='agreement' style={{ width: '100%' }} />
+      <DialogContent className="h-fit bg-white">
+        <div className="min-h-[480px]">
+          <div id="payment-widget" style={{ width: '100%' }} />
+          <div id="agreement" style={{ width: '100%' }} />
         </div>
-        <div className='bg-white flex justify-center pb-6'>
-          <Button
-            variant='secondary'
-            size='lg'
-            onClick={handleSubmit(onSubmit)}
-          >
+        <div className="flex justify-center bg-white pb-6">
+          <Button variant="secondary" size="lg" onClick={handleSubmit(onSubmit)}>
             결제하기
           </Button>
         </div>
       </DialogContent>
     </Dialog>
-  )
-    ;
+  );
 };
 
 export default TossWidget;
-

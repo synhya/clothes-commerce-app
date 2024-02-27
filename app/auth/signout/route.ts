@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   } = await supabase.auth.getSession();
 
   if (session) {
-    await  supabase.auth.signOut();
+    await supabase.auth.signOut();
   }
 
   // status 301 is a permanent redirect

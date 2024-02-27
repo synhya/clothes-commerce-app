@@ -4,8 +4,7 @@ import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import SearchProductForm from '@/components/page/admin/search-product-form';
 import ProductTable from '@/components/page/admin/product-table';
-import {  Product, productSaleState } from '@/lib/types/database';
-
+import { Product, productSaleState } from '@/lib/types/database';
 
 const AdminPage = async ({
   searchParams,
@@ -35,13 +34,8 @@ const AdminPage = async ({
 
   return (
     <div className="mr-2">
-      <h1 className="py-4 text-2xl font-semibold">상품 관리</h1>
       <SearchProductForm />
-      {error ? (
-        <p>에러가 발생했습니다</p>
-      ) : (
-        <ProductTable tableData={tableData} />
-      )}
+      {error ? <p>에러가 발생했습니다</p> : <ProductTable tableData={tableData} />}
     </div>
   );
 };

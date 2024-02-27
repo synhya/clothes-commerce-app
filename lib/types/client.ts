@@ -3,7 +3,7 @@ import { DBEnums } from '@/lib/types/database';
 export type BreadCrumb = {
   label: string;
   href: string;
-}
+};
 
 export type ProductCardData = {
   name: string;
@@ -12,7 +12,8 @@ export type ProductCardData = {
   imageUrl: string;
   categories: Categories;
   tags?: string[];
-}
+  availableColors?: string[];
+};
 
 export type BasketItemData = {
   imageUrl: string;
@@ -21,11 +22,12 @@ export type BasketItemData = {
   selectedColor: string;
   selectedSize: DBEnums['product_size'];
   quantity: number;
-}
+};
 
-export type Categories = ((typeof productCategories)[keyof typeof productCategories][number]
-  | (typeof metaCategories)[number])[]
-  ;
+export type Categories = (
+  | (typeof productCategories)[keyof typeof productCategories][number]
+  | (typeof metaCategories)[number]
+)[];
 
 export const metaCategories = [
   'made',
@@ -55,7 +57,5 @@ export const productCategories = {
 } as const satisfies ProductCategory;
 
 export const uniqueCategories = Array.from(
-  new Set(
-    metaCategories.map((meta) => [meta, ...productCategories[meta]]).flat(),
-  ),
+  new Set(metaCategories.map((meta) => [meta, ...productCategories[meta]]).flat()),
 );

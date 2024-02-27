@@ -20,9 +20,7 @@ const Providers = ({ children, ...props }: ThemeProviderProps) => {
   return (
     <NextUIProvider navigate={router.push}>
       <NextThemesProvider {...props}>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       </NextThemesProvider>
     </NextUIProvider>
   );

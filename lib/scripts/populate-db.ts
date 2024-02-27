@@ -4,11 +4,7 @@ import * as fs from 'fs';
 import { uniqueCategories } from '@/lib/types/client';
 import { productSizeEnums, ProductSubmit } from '@/lib/types/database';
 
-function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-const dirName = 'C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\public\\products';
+const dirName = process.cwd() + '\\public\\products';
 
 const uploadImage = async (files: string[], supabase: SupabaseClient) => {
   for (let i = 0; i < files.length; i++) {
@@ -17,11 +13,10 @@ const uploadImage = async (files: string[], supabase: SupabaseClient) => {
     const fileData = fs.readFileSync(dirName + '\\' + fileName);
     const blob = new Blob([fileData], { type: 'image/png' });
 
-    const { error } = await supabase.storage.from('products')
-      .upload(fileName, blob, {
-        contentType: 'image/png',
-        upsert: true,
-      });
+    const { error } = await supabase.storage.from('products').upload(fileName, blob, {
+      contentType: 'image/png',
+      upsert: true,
+    });
 
     if (error) {
       console.log('Error uploading file: ', error);
@@ -29,7 +24,7 @@ const uploadImage = async (files: string[], supabase: SupabaseClient) => {
       console.log('File uploaded successfully: ' + fileName);
     }
   }
-}
+};
 
 export const populateDb = async () => {
   const supabase = createClient<Database>(
@@ -42,7 +37,16 @@ export const populateDb = async () => {
   // await uploadImage(files, supabase);
 
   const randomDescPrefix = [
-    '멋진', '좋은', '훌륭한', '최고의', '아름다운', '훈훈한', '귀여운', '멋있는', '좋은', '행복한',
+    '멋진',
+    '좋은',
+    '훌륭한',
+    '최고의',
+    '아름다운',
+    '훈훈한',
+    '귀여운',
+    '멋있는',
+    '좋은',
+    '행복한',
   ];
   const randomColors = ['red', 'blue', 'green', 'yellow', 'black', 'white'];
   const randomTags = ['new', 'hot', 'sale', 'best', 'limited', 'trending'];
@@ -61,7 +65,8 @@ export const populateDb = async () => {
       price: Math.floor(Math.random() * 10000) * 10,
       sale_state: '판매중',
       categories: shuffledCat.slice(0, Math.ceil(Math.random() * 2)),
-      description: randomDescPrefix[Math.floor(Math.random() * randomDescPrefix.length)] + ' 상품입니다.',
+      description:
+        randomDescPrefix[Math.floor(Math.random() * randomDescPrefix.length)] + ' 상품입니다.',
       available_sizes: shuffledSizes.slice(0, Math.ceil(Math.random() * 3)),
       available_colors: shuffledColors.slice(0, Math.ceil(Math.random() * 3)),
       tags: shuffledTags.slice(0, Math.ceil(Math.random() * 2)),
@@ -77,7 +82,6 @@ export const populateDb = async () => {
       console.log('Product inserted successfully: ' + fileName);
     }
   });
-
 };
 
 populateDb();

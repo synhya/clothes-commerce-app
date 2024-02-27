@@ -74,7 +74,6 @@ export async function middleware(request: NextRequest) {
 
   // new user page
   if (request.nextUrl.pathname.startsWith(NEW_USER_PATH)) {
-
     if (!signedIn) {
       return NextResponse.redirect(new URL(LOGIN_PATH, request.url));
     }
@@ -92,7 +91,7 @@ export async function middleware(request: NextRequest) {
 
   // login page
   if (signedIn && request.nextUrl.pathname.startsWith(LOGIN_PATH)) {
-    if(isValidUser) return NextResponse.redirect(new URL('/', request.url));
+    if (isValidUser) return NextResponse.redirect(new URL('/', request.url));
     else return NextResponse.redirect(new URL(NEW_USER_PATH, request.url));
   }
 

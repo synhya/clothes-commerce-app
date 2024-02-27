@@ -1,5 +1,12 @@
 import React from 'react';
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useFormContext } from 'react-hook-form';
@@ -46,10 +53,10 @@ const AddressFormField = ({
         render={({ field }) => (
           <FormItem>
             <FormLabel>주소</FormLabel>
-            <div className='flex flex-col items-start gap-4 sm:flex-row '>
-              <Input {...field} placeholder='주소' className='max-w-[304px]' readOnly />
+            <div className="flex flex-col items-start gap-4 sm:flex-row ">
+              <Input {...field} placeholder="주소" className="max-w-[304px]" readOnly />
               <FormControl>
-                <Button type='button' onClick={() => onPostButtonClick()}>
+                <Button type="button" onClick={() => onPostButtonClick()}>
                   우편번호 찾기
                 </Button>
               </FormControl>
@@ -63,16 +70,12 @@ const AddressFormField = ({
         control={form.control}
         name={extraAddressName}
         render={({ field }) => (
-          <FormItem
-            className='col-span-2'
-          >
+          <FormItem className="col-span-2">
             <FormLabel />
             <FormControl>
-              <Input {...field} placeholder='상세주소' />
+              <Input {...field} placeholder="상세주소" />
             </FormControl>
-            {isMainAddress && (
-              <FormDescription>기본 배송지로 등록됩니다.</FormDescription>
-            )}
+            {isMainAddress && <FormDescription>기본 배송지로 등록됩니다.</FormDescription>}
             <FormMessage />
           </FormItem>
         )}

@@ -10,8 +10,12 @@ import BasketItem from '@/components/page/order/basket-item';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel,
-  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -30,9 +34,7 @@ const FormSchema = z.object({
   }),
 });
 type FormValues = z.infer<typeof FormSchema>;
-const BasketFormSection = ({
-  basketInfo,
-}: { basketInfo: BasketInfo[] }) => {
+const BasketFormSection = ({ basketInfo }: { basketInfo: BasketInfo[] }) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -40,7 +42,8 @@ const BasketFormSection = ({
     },
   });
   const [price, setPrice] = useState(
-    basketInfo.reduce((acc, item) => acc + item.price * item.quantity, 0));
+    basketInfo.reduce((acc, item) => acc + item.price * item.quantity, 0),
+  );
   const supabase = createClient();
   const [isDeleting, setIsDeleting] = useState(basketInfo.map(() => false));
 
@@ -48,8 +51,10 @@ const BasketFormSection = ({
     setIsDeleting((state) => ({ ...state, [index]: true }));
 
     await deleteBasketItem(item.id);
-    form.setValue('selectedItems',
-      form.getValues('selectedItems').filter((value) => value !== item.id));
+    form.setValue(
+      'selectedItems',
+      form.getValues('selectedItems').filter((value) => value !== item.id),
+    );
 
     setPrice((p) => p - item.price * item.quantity);
     setIsDeleting((state) => ({ ...state, [index]: false }));
@@ -60,39 +65,41 @@ const BasketFormSection = ({
   };
 
   return (
-    <section className='mx-4 md:mx-10 flex flex-col lg:flex-row gap-6'>
+    <section className="mx-4 flex flex-col gap-6 md:mx-10 lg:flex-row">
       <Form {...form}>
-        <div className='flex-grow'>
-          <h2 className='text-xl font-semibold mb-4'>상품목록</h2>
-          <ScrollArea className='h-[600px] rounded-md border px-4 shadow-xl shadow-border'>
+        <div className="flex-grow">
+          <h2 className="mb-4 text-xl font-semibold">상품목록</h2>
+          <ScrollArea className="h-[600px] rounded-md border px-4 shadow-xl shadow-border">
             {basketInfo.map((item, index) => {
-              const { data: { publicUrl } } = supabase.storage.from('products').getPublicUrl(item.image_url);
+              const {
+                data: { publicUrl },
+              } = supabase.storage.from('products').getPublicUrl(item.image_url);
               return (
                 <FormField
                   key={index}
-                  name='selectedItems'
+                  name="selectedItems"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <div className='flex items-center gap-1 md:gap-4'>
+                      <div className="flex items-center gap-1 md:gap-4">
                         <FormControl>
                           <Checkbox
-                            className='md:size-6'
+                            className="md:size-6"
                             checked={field.value.includes(item.id)}
                             onCheckedChange={(checked) => {
-                              setPrice(checked ?
-                                price + item.price * item.quantity
-                                : price - item.price * item.quantity);
+                              setPrice(
+                                checked
+                                  ? price + item.price * item.quantity
+                                  : price - item.price * item.quantity,
+                              );
 
                               return checked
                                 ? field.onChange([...field.value, item.id])
-                                : field.onChange(
-                                  field.value.filter((value) => value !== item.id),
-                                );
+                                : field.onChange(field.value.filter((value) => value !== item.id));
                             }}
                           />
                         </FormControl>
-                        <div className='w-full'>
+                        <div className="w-full">
                           <BasketItem
                             imageUrl={publicUrl}
                             productName={item.name}
@@ -104,13 +111,12 @@ const BasketFormSection = ({
                         </div>
                         <AlertDialog>
                           <AlertDialogTrigger asChild>
-                            <Button
-                              variant='destructive' size='sm'
-                              disabled={isDeleting[index]}
-                            >{isDeleting[index]
-                              ? <ReloadIcon className='h-4 w-4 animate-spin' />
-                              : '삭제'
-                            }
+                            <Button variant="destructive" size="sm" disabled={isDeleting[index]}>
+                              {isDeleting[index] ? (
+                                <ReloadIcon className="h-4 w-4 animate-spin" />
+                              ) : (
+                                '삭제'
+                              )}
                             </Button>
                           </AlertDialogTrigger>
                           <AlertDialogContent>
@@ -124,7 +130,9 @@ const BasketFormSection = ({
                               <AlertDialogCancel>취소</AlertDialogCancel>
                               <AlertDialogAction
                                 onClick={async () => await handleItemDelete(item, index)}
-                              >삭제</AlertDialogAction>
+                              >
+                                삭제
+                              </AlertDialogAction>
                             </AlertDialogFooter>
                           </AlertDialogContent>
                         </AlertDialog>
@@ -136,32 +144,36 @@ const BasketFormSection = ({
               );
             })}
             {basketInfo.length == 0 && (
-              <div className='flex flex-col gap-2 justify-center items-center h-[600px]'>
-                <ExclamationTriangleIcon className='w-10 h-10 text-amber-400' />
-                <p className='font-semibold text-xl animated-underline'>장바구니가 비어있습니다.</p>
+              <div className="flex h-[600px] flex-col items-center justify-center gap-2">
+                <ExclamationTriangleIcon className="h-10 w-10 text-amber-400" />
+                <p className="animated-underline text-xl font-semibold">장바구니가 비어있습니다.</p>
               </div>
             )}
           </ScrollArea>
         </div>
-        <div className='lg:basis-1/4'>
-          <h2 className='text-xl font-semibold mb-4'>주문표</h2>
+        <div className="lg:basis-1/4">
+          <h2 className="mb-4 text-xl font-semibold">주문표</h2>
           <FormField
-            name='selectedItems'
+            name="selectedItems"
             control={form.control}
             render={({ field }) => (
-              <Card className='rounded-md p-4 mb-10 shadow-border shadow-xl'>
-                <p className='text-lg font-semibold mb-4'>총 상품금액</p>
-                <p className='text-lg font-semibold mb-4'>{price}원</p>
-                <FormMessage className='mb-4' />
+              <Card className="mb-10 rounded-md p-4 shadow-xl shadow-border">
+                <p className="mb-4 text-lg font-semibold">총 상품금액</p>
+                <p className="mb-4 text-lg font-semibold">{price}원</p>
+                <FormMessage className="mb-4" />
                 <Button
-                  size='lg' onClick={form.handleSubmit(onSubmit)}
+                  size="lg"
+                  onClick={form.handleSubmit(onSubmit)}
                   disabled={form.formState.isSubmitting}
                 >
-                  {form.formState.isSubmitting ? <ReloadIcon className='mr-2 h-4 w-4 animate-spin' /> : null}
+                  {form.formState.isSubmitting ? (
+                    <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                  ) : null}
                   주문하기
                 </Button>
               </Card>
-            )} />
+            )}
+          />
         </div>
       </Form>
     </section>

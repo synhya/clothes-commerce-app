@@ -1,16 +1,16 @@
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
-import { SidebarNav } from '@/components/page/sidebar-nav';
+import { SidebarNav } from '@/components/page/shared/sidebar-nav';
 
 const sidebarNavItems = [
   { href: '/user/update-profile', title: '프로필 수정' },
   { href: '/user/update-profile/address', title: '배송주소 관리' },
 ];
 
-const ProfilesLayout = ({children}: {children: React.ReactNode}) => {
+const ProfilesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='min-h-[500px] m-10'>
-      <div className='mb-10'>
+    <div className="m-10 min-h-[500px]">
+      <div className="mb-10">
         <h1 className="text-2xl font-semibold">내 정보</h1>
         <Separator />
       </div>

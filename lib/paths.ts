@@ -1,6 +1,5 @@
 // stores constants for paths
 
-
 export const BASE_URL = 'http://localhost:3000';
 // account starting path
 export const ACCOUNT_PATH = '/myshop';

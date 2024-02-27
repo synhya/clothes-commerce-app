@@ -24,36 +24,37 @@ const GlobalSidebar = () => {
   return (
     <aside
       className={cn(
-        'nav-md:hidden fixed top-0 left-0 z-20 h-screen w-[250px] bg-background/80 backdrop-blur-sm transition-transform duration-300 ease-in-out border-r border-accent',
+        'fixed left-0 top-0 z-20 h-screen w-[250px] border-r border-accent bg-background/80 backdrop-blur-sm transition-transform duration-300 ease-in-out nav-md:hidden',
         open ? 'translate-x-0' : '-translate-x-full',
       )}
     >
-      <div className='flex justify-end px-1 py-1'>
-
-        <Button variant='ghost' onClick={() => setOpen(false)}
-                className='px-1.5 hover:bg-background border border-transparent hover:border-accent'>
-          <Cross1Icon className='size-6' />
+      <div className="flex justify-end px-1 py-1">
+        <Button
+          variant="ghost"
+          onClick={() => setOpen(false)}
+          className="border border-transparent px-1.5 hover:border-accent hover:bg-background"
+        >
+          <Cross1Icon className="size-6" />
         </Button>
       </div>
 
-      <Accordion type='single' collapsible className='w-full px-4'>
+      <Accordion type="single" collapsible className="w-full px-4">
         {metaCategories.map((upperCategory, index) => (
           <AccordionItem key={index} value={`item-${index + 1}`}>
             <AccordionTrigger>{upperCategory}</AccordionTrigger>
-            <AccordionContent className='flex flex-col items-start'>
+            <AccordionContent className="flex flex-col items-start">
               {productCategories[upperCategory].map((productCategory) => (
-                <div key={productCategory + index} className='flex w-full justify-between'>
-                  <Button variant='link' className='peer' asChild>
+                <div key={productCategory + index} className="flex w-full justify-between">
+                  <Button variant="link" className="peer" asChild>
                     <Link
                       href={`/category/${encodeURIComponent(productCategory)}?from=${upperCategory}`}
                       passHref
-                      className='w-fit'
+                      className="w-fit"
                     >
                       {productCategory}
                     </Link>
                   </Button>
-                  <div
-                    className='bg-secondary w-3 min-h-full origin-right scale-x-0 peer-hover:scale-x-100 transition-all duration-500'></div>
+                  <div className="min-h-full w-3 origin-right scale-x-0 bg-secondary transition-all duration-500 peer-hover:scale-x-100"></div>
                 </div>
               ))}
             </AccordionContent>
@@ -67,15 +68,15 @@ const GlobalSidebar = () => {
 const tags = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 
 const GlobalSidebarWithScroll = () => (
-  <ScrollArea className='h-72 w-48 rounded-md border'>
-    <div className='p-4'>
-      <h4 className='mb-4 text-sm font-medium leading-none'>Tags</h4>
+  <ScrollArea className="h-72 w-48 rounded-md border">
+    <div className="p-4">
+      <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
       {tags.map((tag) => (
         <>
-          <div key={tag} className='text-sm'>
+          <div key={tag} className="text-sm">
             {tag}
           </div>
-          <Separator className='my-2' />
+          <Separator className="my-2" />
         </>
       ))}
     </div>

@@ -3,7 +3,7 @@ import { loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 
 const clientKey = 'test_ck_DnyRpQWGrNWDKpYjAxWO8Kwv1M9E';
 
-export function usePaymentWidget (customerKey: string) {
+export function usePaymentWidget(customerKey: string) {
   return useQuery({
     queryKey: ['payment-widget', clientKey, customerKey],
     queryFn: () => {

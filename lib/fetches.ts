@@ -77,7 +77,7 @@ export const fetchSellingProductsByCategory = async (
     .from('products')
     .select('*')
     .contains('categories', [category === 'all' ? '' : category])
-    .eq('sale_state', "판매중")
+    .eq('sale_state', '판매중')
     .order('sold', { ascending: false })
     .limit(limit);
 };

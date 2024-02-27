@@ -1,10 +1,22 @@
 import React from 'react';
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '@/components/ui/command';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+} from '@/components/ui/command';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { metaCategories, productCategories } from '@/lib/types/client';
 import { ProductFormSchema } from '@/components/page/admin/product-form';
@@ -18,51 +30,49 @@ export const CategoryFormField = () => {
   return (
     <FormField
       control={form.control}
-      name='categories'
+      name="categories"
       render={({ field }) => (
         <FormItem>
-          <FormLabel className='mr-2'>{label}</FormLabel>
+          <FormLabel className="mr-2">{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
-                  variant='outline'
-                  role='combobox'
-                  className={cn(
-                    'w-fit justify-between',
-                    !field.value && 'text-muted-foreground',
-                  )}
+                  variant="outline"
+                  role="combobox"
+                  className={cn('w-fit justify-between', !field.value && 'text-muted-foreground')}
                 >
                   {`${label}를 선택해주세요`}
-                  <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                  <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className='w-fit p-0'>
+            <PopoverContent className="w-fit p-0">
               <Command>
                 <CommandInput placeholder={`${label} 검색...`} />
                 <CommandEmpty>결과 없음</CommandEmpty>
-                <ScrollArea className='h-72 w-full'>
+                <ScrollArea className="h-72 w-full">
                   <CommandGroup>
                     {metaCategories.map((subCategory) => (
-                      <>
+                      <React.Fragment key={subCategory}>
                         <CommandItem
                           value={subCategory}
-                          key={subCategory}
                           onSelect={() => {
-                            const isAdding = !field.value?.includes(subCategory)
+                            const isAdding = !field.value?.includes(subCategory);
                             let newCategories = isAdding
                               ? [...field.value, subCategory]
                               : field.value.filter((c) => c !== subCategory);
 
-                            if(!isAdding) {
+                            if (!isAdding) {
                               const removingCategories = productCategories[subCategory] as string[];
-                              newCategories = newCategories.filter((c) => !removingCategories.includes(c));
+                              newCategories = newCategories.filter(
+                                (c) => !removingCategories.includes(c),
+                              );
                             }
 
                             form.setValue('categories', newCategories);
                           }}
-                          className='font-semibold text-lg'
+                          className="text-lg font-semibold"
                         >
                           <CheckIcon
                             className={cn(
@@ -72,17 +82,17 @@ export const CategoryFormField = () => {
                           />
                           {subCategory}
                         </CommandItem>
-                        {productCategories[subCategory].map((category) => (
+                        {productCategories[subCategory].map((category, index) => (
                           <CommandItem
                             value={category}
-                            key={category}
+                            key={category + index}
                             onSelect={() => {
-                              const isAdding = !field.value?.includes(category)
+                              const isAdding = !field.value?.includes(category);
                               let newCategories = isAdding
                                 ? [...field.value, category]
                                 : field.value.filter((c) => c !== category);
 
-                              if(isAdding && !field.value?.includes(subCategory)) {
+                              if (isAdding && !field.value?.includes(subCategory)) {
                                 newCategories = [...newCategories, subCategory];
                               }
 
@@ -98,24 +108,25 @@ export const CategoryFormField = () => {
                             {category}
                           </CommandItem>
                         ))}
-                      </>
+                      </React.Fragment>
                     ))}
                   </CommandGroup>
                 </ScrollArea>
               </Command>
             </PopoverContent>
           </Popover>
-          <FormMessage className='font-semibold' />
-          <div className='text-md flex flex-wrap gap-1'>
-            {field.value.map((category) =>
-              <Badge key={category} variant='secondary'>{category}</Badge>,
-            )}
+          <FormMessage className="font-semibold" />
+          <div className="text-md flex flex-wrap gap-1">
+            {field.value.map((category, index) => (
+              <Badge key={index} variant="secondary">
+                {category}
+              </Badge>
+            ))}
           </div>
         </FormItem>
       )}
     />
-  )
-    ;
+  );
 };
 
 export const SizeFormField = () => {
@@ -124,34 +135,31 @@ export const SizeFormField = () => {
   return (
     <FormField
       control={form.control}
-      name='available_sizes'
+      name="available_sizes"
       render={({ field }) => (
         <FormItem>
-          <FormLabel className='mr-2'>{label}</FormLabel>
+          <FormLabel className="mr-2">{label}</FormLabel>
           <Popover>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
-                  variant='outline'
-                  role='combobox'
-                  className={cn(
-                    'w-fit justify-between',
-                    !field.value && 'text-muted-foreground',
-                  )}
+                  variant="outline"
+                  role="combobox"
+                  className={cn('w-fit justify-between', !field.value && 'text-muted-foreground')}
                 >
                   {`가능한 ${label}를 선택해주세요`}
-                  <CaretSortIcon className='ml-2 h-4 w-4 shrink-0 opacity-50' />
+                  <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
-            <PopoverContent className='w-fit min-w-[200px] p-0'>
+            <PopoverContent className="w-fit min-w-[200px] p-0">
               <Command>
-                <ScrollArea className='max-h-72 w-full'>
+                <ScrollArea className="max-h-72 w-full">
                   <CommandGroup>
-                    {productSizeEnums.map((size) => (
+                    {productSizeEnums.map((size, index) => (
                       <CommandItem
                         value={size}
-                        key={size}
+                        key={index}
                         onSelect={() => {
                           const newSizes = field.value.includes(size)
                             ? field.value.filter((c) => c !== size)
@@ -173,15 +181,16 @@ export const SizeFormField = () => {
               </Command>
             </PopoverContent>
           </Popover>
-          <FormMessage className='font-semibold' />
-          <div className='text-md flex flex-wrap gap-1'>
-            {field.value.map((size) =>
-              <Badge key={size} variant='secondary'>{size}</Badge>,
-            )}
+          <FormMessage className="font-semibold" />
+          <div className="text-md flex flex-wrap gap-1">
+            {field.value.map((size, index) => (
+              <Badge key={index} variant="secondary">
+                {size}
+              </Badge>
+            ))}
           </div>
         </FormItem>
       )}
     />
   );
 };
-

@@ -1,7 +1,11 @@
 import React from 'react';
 import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel,
-  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
@@ -14,9 +18,9 @@ type NotFoundAlertDialogProps = {
     label: string;
   };
   description?: string;
-}
+};
 
-const NotFoundAlertDialog = ({additionalLink, description} : NotFoundAlertDialogProps) => {
+const NotFoundAlertDialog = ({ additionalLink, description }: NotFoundAlertDialogProps) => {
   return (
     <AlertDialog defaultOpen>
       {/*<AlertDialogTrigger asChild>*/}
@@ -31,7 +35,7 @@ const NotFoundAlertDialog = ({additionalLink, description} : NotFoundAlertDialog
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction asChild>
-            <Link href="/">홈으로</Link>
+            <Link href="/public">홈으로</Link>
           </AlertDialogAction>
           {additionalLink && (
             <AlertDialogAction asChild>

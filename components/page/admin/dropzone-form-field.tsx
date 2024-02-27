@@ -14,11 +14,7 @@ import { useFormContext } from 'react-hook-form';
 import Dropzone, { useDropzone } from 'react-dropzone';
 import { Button } from '@/components/ui/button';
 
-const DropzoneFormField = ({
-  defaultImageUrl
-}: {
-  defaultImageUrl?: string;
-}) => {
+const DropzoneFormField = ({ defaultImageUrl }: { defaultImageUrl?: string }) => {
   const form = useFormContext<ProductFormSchema>();
   const [paths, setPaths] = useState<string[]>([defaultImageUrl ?? '']);
 
@@ -47,11 +43,13 @@ const DropzoneFormField = ({
               <FormItem>
                 <div className="flex items-center gap-x-4">
                   <FormLabel htmlFor="file">상품 이미지</FormLabel>
-                  <Button type="button" size="sm" onClick={open}>직접선택</Button>
+                  <Button type="button" size="sm" onClick={open}>
+                    직접선택
+                  </Button>
                 </div>
                 <div className="h-fit rounded-md border p-4" {...getRootProps()}>
                   <FormControl>
-                    <Input
+                    <Input id="file"
                       {...getInputProps({
                         onChange,
                         onBlur,

@@ -10,7 +10,7 @@ const FormSchema = z.object({
   selectedColor: z.string({
     invalid_type_error: '사이즈를 선택 해주세요.',
   }),
-  selectedSize: z.enum(productSizeEnums ,{
+  selectedSize: z.enum(productSizeEnums, {
     invalid_type_error: '색상을 선택 해주세요.',
   }),
   quantity: z.coerce.number({
@@ -28,18 +28,17 @@ export type State = {
   message?: string | null;
 };
 
-export async function createBasketItem (
-  productId: string,
-  prevState: State,
-  formData: FormData
-) {
+export async function createBasketItem(productId: string, prevState: State, formData: FormData) {
   const supabase = createClient(cookies());
-  const {data: {user}, error: authError} = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
-  if(authError) {
+  if (authError) {
     return {
       message: '로그인이 필요합니다! ',
-    }
+    };
   }
 
   // validate
@@ -56,7 +55,7 @@ export async function createBasketItem (
     return {
       errors: validatedFields.error.flatten().fieldErrors,
       message: 'Missing Fields. Failed to Create Basket Item.',
-    }
+    };
   }
 
   const { selectedColor, selectedSize, quantity } = validatedFields.data;
@@ -73,25 +72,26 @@ export async function createBasketItem (
   if (error && !redirectToCheckout) {
     return {
       message: 'Failed to add item to basket. ' + error.message,
-    }
+    };
   }
 
   revalidatePath('/order/basket');
 
-  if(redirectToCheckout) {
-    const { data: basketItem, error } =
-      await supabase.from('basket').select('id')
-        .eq('profile_id', user.id)
-        .eq('product_id', productId)
-        .eq('selected_color', selectedColor)
-        .eq('selected_size', selectedSize)
-        .eq('quantity', quantity)
-        .single();
+  if (redirectToCheckout) {
+    const { data: basketItem, error } = await supabase
+      .from('basket')
+      .select('id')
+      .eq('profile_id', user.id)
+      .eq('product_id', productId)
+      .eq('selected_color', selectedColor)
+      .eq('selected_size', selectedSize)
+      .eq('quantity', quantity)
+      .single();
 
     if (error) {
       return {
         message: 'Failed to find added basket item. ' + error.message,
-      }
+      };
     }
 
     redirect(`/order/checkout?basketId=${basketItem.id}`);
@@ -99,7 +99,7 @@ export async function createBasketItem (
 
   return {
     message: '장바구니에 추가되었습니다!',
-  }
+  };
 }
 
 export async function deleteBasketItem(basketId: string) {
@@ -109,37 +109,41 @@ export async function deleteBasketItem(basketId: string) {
   if (error) {
     return {
       message: 'Failed to delete basket item. ' + error.message,
-    }
+    };
   }
 
   revalidatePath('/order/basket');
 
   return {
     message: '장바구니에서 삭제되었습니다!',
-  }
+  };
 }
 
 export async function updateBasketItem(selectedItems: string) {
   const supabase = createClient(cookies());
   const items: string[] = JSON.parse(selectedItems);
-  const {data: {user}, error: authError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
-  const { error: resetError } = await supabase.from('basket')
-    .update({ is_selected: false }).eq('profile_id', user.id);
+  const { error: resetError } = await supabase
+    .from('basket')
+    .update({ is_selected: false })
+    .eq('profile_id', user.id);
 
   if (resetError) {
     return {
-      message: 'Failed to reset basket items. ' + resetError.message
+      message: 'Failed to reset basket items. ' + resetError.message,
     };
   }
 
-  const { error } = await supabase.from('basket')
-    .update({ is_selected: true }).in('id', items);
+  const { error } = await supabase.from('basket').update({ is_selected: true }).in('id', items);
 
   if (error) {
     return {
       message: 'Failed to update basket item. ' + error.message,
-    }
+    };
   }
 
   revalidatePath('/order');

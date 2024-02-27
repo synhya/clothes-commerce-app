@@ -5,9 +5,6 @@ import { notFound } from 'next/navigation';
 import ProductForm, { ProductFormSchema } from '@/components/page/admin/product-form';
 import { DBEnums } from '@/lib/types/database';
 import { fetchProductByName } from '@/lib/fetches';
-import { SubmitHandler } from 'react-hook-form';
-import { toast } from '@/components/ui/use-toast';
-import { createProduct, updateProduct } from '@/lib/actions/actions';
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
   const cookieStore = cookies();
@@ -31,7 +28,6 @@ const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <div>
-      <h1 className="py-4 text-2xl font-semibold">상품 수정</h1>
       <div className="flex flex-col lg:items-center">
         {/* Render your dashboard components here */}
         {data && (

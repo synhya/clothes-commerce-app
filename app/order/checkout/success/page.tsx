@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { productDataToCardData } from '@/lib/utils';
 import { Product } from '@/lib/types/database';
-import TrendingClothes from '@/components/page/trending-clothes';
+import TrendingClothes from '@/components/page/shared/trending-clothes';
 
 // ------ Payment 객체 ------
 // @docs https://docs.tosspayments.com/reference#payment-객체
@@ -24,7 +24,9 @@ interface Payment {
 }
 
 const fetchPayment = async (
-  paymentKey: string, orderId: string, amount: string,
+  paymentKey: string,
+  orderId: string,
+  amount: string,
 ): Promise<Payment> => {
   try {
     const { data: payment } = await axios.post<Payment>(
@@ -36,9 +38,9 @@ const fetchPayment = async (
       },
       {
         headers: {
-          Authorization: `Basic ${Buffer.from(
-            `${process.env.TOSS_SECRET_KEY}:`,
-          ).toString('base64')}`,
+          Authorization: `Basic ${Buffer.from(`${process.env.TOSS_SECRET_KEY}:`).toString(
+            'base64',
+          )}`,
         },
       },
     );
@@ -54,8 +56,10 @@ const Page = async ({
   searchParams,
 }: {
   searchParams: {
-    paymentKey: string, orderId: string, amount: string
-  }
+    paymentKey: string;
+    orderId: string;
+    amount: string;
+  };
 }) => {
   const { paymentKey, orderId, amount } = searchParams;
   const cookieStore = cookies();
@@ -63,52 +67,58 @@ const Page = async ({
   const payment = await fetchPayment(paymentKey, orderId, amount);
 
   const supabase = createClient(cookieStore);
-  const { data: basketData } = await supabase.from('invoice_products')
-    .select('basket_id').eq('invoice_id', payment.orderId);
+  const { data: basketData } = await supabase
+    .from('invoice_products')
+    .select('basket_id')
+    .eq('invoice_id', payment.orderId);
 
-  const { error: deleteError } = await supabase.from('basket')
-    .delete().in('id', basketData.map((data) => data.basket_id));
+  const { error: deleteError } = await supabase
+    .from('basket')
+    .delete()
+    .in(
+      'id',
+      basketData.map((data) => data.basket_id),
+    );
 
   if (deleteError) {
     console.error(deleteError);
     // show toast instead of throwing error
   }
 
-  const { error: invoiceError } = await supabase.from('invoices')
-    .update({state: '결제완료'}).eq('id', payment.orderId);
+  const { error: invoiceError } = await supabase
+    .from('invoices')
+    .update({ state: '결제완료' })
+    .eq('id', payment.orderId);
 
   if (invoiceError) {
     console.error(invoiceError);
     throw new Error('주문 상태를 변경하는데 실패했습니다. 관리자에게 문의해주세요.');
   }
 
-  const {
-    data: trendingProducts,
-    error: trendingFetchError,
-  } = await supabase.from('products').select('*').limit(5).order('sold', { ascending: false });
+  const { data: trendingProducts, error: trendingFetchError } = await supabase
+    .from('products')
+    .select('*')
+    .limit(5)
+    .order('sold', { ascending: false });
 
   const trendingClothes = trendingProducts.map((product) => {
     return productDataToCardData(product as Product, supabase);
   });
 
   return (
-    <div className='flex h-full flex-col items-center justify-center'>
-      <div className='h-[400px] flex flex-col justify-center items-center gap-10'>
-        <h2 className='text-4xl font-semibold'>
-          🎉 결제 성공 🎉
-        </h2>
-        <div className='grid grid-cols-2 gap-8'>
-          <Button variant='default' size='lg' asChild>
-            <Link href='/category/all'>쇼핑 계속하기</Link>
+    <div className="flex h-full flex-col items-center justify-center">
+      <div className="flex h-[400px] flex-col items-center justify-center gap-10">
+        <h2 className="text-4xl font-semibold">🎉 결제 성공 🎉</h2>
+        <div className="grid grid-cols-2 gap-8">
+          <Button variant="default" size="lg" asChild>
+            <Link href="/category/all">쇼핑 계속하기</Link>
           </Button>
-          <Button variant='default' size='lg' asChild>
-            <Link href='/order/list'>주문 내역</Link>
+          <Button variant="default" size="lg" asChild>
+            <Link href="/order/list">주문 내역</Link>
           </Button>
         </div>
       </div>
-      <div>
-        {!trendingFetchError && <TrendingClothes trendingClothes={trendingClothes} />}
-      </div>
+      <div>{!trendingFetchError && <TrendingClothes trendingClothes={trendingClothes} />}</div>
     </div>
   );
 };

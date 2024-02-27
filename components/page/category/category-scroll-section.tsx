@@ -12,9 +12,12 @@ import { motion } from 'framer-motion';
 
 const PAGE_COUNT = 6;
 
-const CategoryScrollSection = ({ category, prefetchedData }: {
-  category: string,
-  prefetchedData: ProductCardData[]
+const CategoryScrollSection = ({
+  category,
+  prefetchedData,
+}: {
+  category: string;
+  prefetchedData: ProductCardData[];
 }) => {
   const { ref, inView, entry } = useInView();
   const [isLoading, setIsLoading] = useState(false);
@@ -27,12 +30,11 @@ const CategoryScrollSection = ({ category, prefetchedData }: {
     setIsLoading(true);
     setOffset((prev) => prev + 1);
     const newProducts = await fetchMoreProducts(offset);
-    if (newProducts.length < PAGE_COUNT)
-      setIsLast(true);
+    if (newProducts.length < PAGE_COUNT) setIsLast(true);
 
-    const newCardData = newProducts.map((product) => (
-      productDataToCardData(product as Product, supabase)
-    ));
+    const newCardData = newProducts.map((product) =>
+      productDataToCardData(product as Product, supabase),
+    );
     setLoadedProducts((prev) => [...prev, ...newCardData]);
 
     setIsLoading(false);
@@ -63,13 +65,14 @@ const CategoryScrollSection = ({ category, prefetchedData }: {
 
   const handleChevronsUpClick = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   return (
     <>
-      <div className='grid gap-8 grid-cols-1 mx-6 md:mx-10 md:grid-cols-2 lg:grid-cols-3'>
+      <div className="mx-6 grid grid-cols-1 gap-8 md:mx-10 md:grid-cols-2 lg:grid-cols-3">
         {loadedProducts?.map((product, i) => {
-          const recalculatedDelay = i >= PAGE_COUNT * 2 ? (i - PAGE_COUNT * (offset - 1)) / 15 : i / 15;
+          const recalculatedDelay =
+            i >= PAGE_COUNT * 2 ? (i - PAGE_COUNT * (offset - 1)) / 15 : i / 15;
 
           return (
             <motion.div
@@ -84,21 +87,22 @@ const CategoryScrollSection = ({ category, prefetchedData }: {
             >
               <ProductCard cardData={product} />
             </motion.div>
-
           );
         })}
         {/* stream with infinite scroll */}
-
       </div>
-      <div className='flex justify-center'>
-        {!isLast ?
-          <ChevronsDownIcon ref={ref} className='w-10 h-10 m-8' /> :
-          <ChevronsUpIcon className='w-10 h-10 m-8 cursor-pointer' onClick={handleChevronsUpClick}/>
-        }
+      <div className="flex justify-center">
+        {!isLast ? (
+          <ChevronsDownIcon ref={ref} className="m-8 h-10 w-10" />
+        ) : (
+          <ChevronsUpIcon
+            className="m-8 h-10 w-10 cursor-pointer"
+            onClick={handleChevronsUpClick}
+          />
+        )}
       </div>
     </>
-  )
-    ;
+  );
 };
 
 export default CategoryScrollSection;

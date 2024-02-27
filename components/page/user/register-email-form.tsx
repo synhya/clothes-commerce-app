@@ -1,25 +1,30 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { cn } from '@/lib/utils';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Icons } from '@/components/ui/icons';
 import { useToast } from '@/components/ui/use-toast';
-import { signUp } from '@/lib/actions/actions';
+import { signUp } from '@/lib/actions/profile-actions';
 import { Toaster } from '@/components/ui/toaster';
 
-
 const formSchema = z.object({
-  email: z
-    .string()
-    .email({
-      message: '이메일 형식이 아닙니다.',
-    }),
+  email: z.string().email({
+    message: '이메일 형식이 아닙니다.',
+  }),
   password: z
     .string()
     .min(6, {
@@ -33,7 +38,6 @@ const formSchema = z.object({
 export type SignupFormSchema = Required<z.infer<typeof formSchema>>;
 
 interface RegisterFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
 
 // form signUp
 const RegisterEmailForm = ({ className, ...props }: RegisterFormProps) => {
@@ -49,12 +53,12 @@ const RegisterEmailForm = ({ className, ...props }: RegisterFormProps) => {
 
     const error = await signUp(data);
 
-    if(error) {
+    if (error) {
       setIsLoading(false);
       toast({
         title: '회원가입 실패',
-        description: error.message as string ?? '회원가입에 실패했습니다. 다시 시도해주세요.',
-      })
+        description: (error.message as string) ?? '회원가입에 실패했습니다. 다시 시도해주세요.',
+      });
     }
   };
 
@@ -112,9 +116,7 @@ const RegisterEmailForm = ({ className, ...props }: RegisterFormProps) => {
                       {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
                     </Button>
                     <FormDescription />
-                    <FormMessage className="h-3.5">
-
-                    </FormMessage>
+                    <FormMessage className="h-3.5"></FormMessage>
                   </FormItem>
                 )}
               />

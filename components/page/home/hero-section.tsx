@@ -62,16 +62,14 @@ const HeroSection = ({ options, className }: PropType) => {
         <CarouselContent>
           {Array.from({ length: 3 }).map((_, index) => (
             <CarouselItem key={index} className="flex items-center justify-center">
-              <div
-                className={cn('relative m-0 rounded-md')}
-              >
+              <div className={cn('relative m-0 rounded-md')}>
                 <Image
                   src={`/sample-slides/slide-${index + 1}.png`}
                   alt="sampleImage"
                   width={800}
                   height={500}
-                  style={{ objectFit: 'cover'}}
-                  className="rounded-md aspect-video"
+                  style={{ objectFit: 'cover' }}
+                  className="aspect-video rounded-md"
                   priority={index === 0}
                 />
               </div>

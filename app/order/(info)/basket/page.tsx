@@ -7,26 +7,32 @@ import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { z } from 'zod';
 import BasketFormSection from '@/components/page/order/basket-form-section';
-import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import NotFoundAlertDialog from '@/components/page/shared/not-fount-alert-dialog';
 
 const Page = async () => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    return <NotFoundAlertDialog description='로그인이 필요합니다' additionalLink={
-      { href: '/user/login', label: '로그인' }
-    } />;
+    return (
+      <NotFoundAlertDialog
+        description="로그인이 필요합니다"
+        additionalLink={{ href: '/user/login', label: '로그인' }}
+      />
+    );
   }
 
-  const { data: basketInfo, error } = await supabase.from('basket_info')
-    .select('*').eq('profile_id', user.id);
+  const { data: basketInfo, error } = await supabase
+    .from('basket_info')
+    .select('*')
+    .eq('profile_id', user.id);
 
-  return (
-    <BasketFormSection basketInfo={basketInfo} />
-  );
+  return <BasketFormSection basketInfo={basketInfo} />;
 };
 
 export default Page;

@@ -36,7 +36,6 @@ export async function GET(request: Request) {
     } = await supabase.auth.exchangeCodeForSession(code);
 
     if (user) {
-
       // check if user has a profile
       const { data, error } = await supabase
         .from('profiles')
@@ -47,7 +46,7 @@ export async function GET(request: Request) {
 
       if (!data) {
         console.log(origin + NEW_USER_PATH);
-        return NextResponse.redirect(origin + NEW_USER_PATH)
+        return NextResponse.redirect(origin + NEW_USER_PATH);
       }
 
       return NextResponse.redirect(`${origin}${next}`);

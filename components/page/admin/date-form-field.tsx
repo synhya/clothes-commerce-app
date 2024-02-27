@@ -9,12 +9,12 @@ import { CalendarIcon } from '@radix-ui/react-icons';
 import { Calendar } from '@/components/ui/calendar';
 import { ArrayPath, FieldValues, useFormContext } from 'react-hook-form';
 
-type Props<T extends FieldValues>  = {
-  arrayPath : ArrayPath<T>
-  label : string
-} & React.ComponentPropsWithoutRef<'div'>
+type Props<T extends FieldValues> = {
+  arrayPath: ArrayPath<T>;
+  label: string;
+} & React.ComponentPropsWithoutRef<'div'>;
 
-const DateFormField = ({arrayPath, label, className} : Props<FieldValues>) => {
+const DateFormField = ({ arrayPath, label, className }: Props<FieldValues>) => {
   const form = useFormContext();
 
   return (
@@ -22,7 +22,7 @@ const DateFormField = ({arrayPath, label, className} : Props<FieldValues>) => {
       name={arrayPath}
       control={form.control}
       render={({ field }) => (
-        <FormItem className={cn("flex flex-col", className)} >
+        <FormItem className={cn('flex flex-col', className)}>
           <FormLabel className="mb-2 text-sm font-medium" htmlFor="category">
             {label}
           </FormLabel>
@@ -31,13 +31,12 @@ const DateFormField = ({arrayPath, label, className} : Props<FieldValues>) => {
               <FormControl>
                 <Button
                   variant="outline"
-                  className={cn(
-                    "font-normal",
-                    !field.value && "text-muted-foreground"
-                  )}
+                  className={cn('font-normal', !field.value && 'text-muted-foreground')}
                 >
-                  {field.value ? format(field.value, "PPP", { locale: ko }) : `${label}을 선택하세요`}
-                  <CalendarIcon className="w-4 h-4 ml-2 opacity-50" />
+                  {field.value
+                    ? format(field.value, 'PPP', { locale: ko })
+                    : `${label}을 선택하세요`}
+                  <CalendarIcon className="ml-2 h-4 w-4 opacity-50" />
                 </Button>
               </FormControl>
             </PopoverTrigger>
@@ -47,12 +46,12 @@ const DateFormField = ({arrayPath, label, className} : Props<FieldValues>) => {
                 selected={field.value}
                 onSelect={field.onChange}
                 defaultMonth={field.value}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("2000-01-01")
-                }
+                disabled={(date) => date > new Date() || date < new Date('2000-01-01')}
                 initialFocus
                 locale={ko}
-                captionLayout="buttons" fromYear={2000} toYear={new Date().getFullYear()}
+                captionLayout="buttons"
+                fromYear={2000}
+                toYear={new Date().getFullYear()}
               />
             </PopoverContent>
           </Popover>
