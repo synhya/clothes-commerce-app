@@ -1,30 +1,30 @@
-import Google, { GoogleProfile } from '@auth/core/providers/google';
+import Google from '@auth/core/providers/google';
 import Kakao from '@auth/core/providers/kakao';
 import NextAuth, { NextAuthConfig, Session, User } from 'next-auth';
 
-import { NextRequest, NextResponse } from 'next/server';
-import Credentials, { CredentialInput } from '@auth/core/providers/credentials';
+import { NextResponse } from 'next/server';
+import Credentials from '@auth/core/providers/credentials';
 import { SupabaseAdapter } from '@auth/supabase-adapter';
 import { Adapter } from '@auth/core/adapters';
 import { sign } from '@/lib/jwtutils';
-import { LOGIN_PATH, NEW_USER_PATH } from '@/lib/paths';
 import { env } from '@/lib/env';
+import { Route } from 'next';
 
 export const authConfig: NextAuthConfig = {
   // debug: true,
   pages: {
-    signIn: LOGIN_PATH,
+    signIn: '/user/login' satisfies Route,
     // verifyRequest: '/login?verify=1', // (used for check email message)
-    error: LOGIN_PATH, // NotFound code passed in query string as ?error=
-    newUser: NEW_USER_PATH, // New users will be directed here on first sign in (leave the property out if not of interest)
+    error: '/user/login' satisfies Route, // NotFound code passed in query string as ?error=
+    newUser: '/user/create-profile' satisfies Route, // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   providers: [
     Google,
     Kakao,
     Credentials({
       credentials: {
-        username: { label: 'Username' },
-        password: { label: 'Password', type: 'password' },
+        username: { title: 'Username' },
+        password: { title: 'Password', type: 'password' },
       },
       async authorize(credentials) {
         if (credentials.username === 'admin' && credentials.password === 'admin') {

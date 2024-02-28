@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { metaCategories, productCategories } from '@/lib/types/client';
+import { usePathname, useRouter } from 'next/navigation';
+import { metaCategories, productCategories } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import {
@@ -19,10 +19,8 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
 import { HamburgerMenuIcon, PersonIcon, RowsIcon } from '@radix-ui/react-icons';
-import useSideBar from '@/lib/stores/useSidebar';
-import { LOGIN_PATH, NEW_USER_PATH, SIGNUP_PATH } from '@/lib/paths';
+import useSideBar from '@/lib/hooks/useSidebar';
 import UserMenuDropdown from '@/components/layout/user-menu-dropdown';
-import { User } from 'next-auth';
 import { LogInIcon, LogOutIcon } from 'lucide-react';
 import { useThrottledCallback } from 'use-debounce';
 
@@ -30,6 +28,7 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
   const router = useRouter();
   const [loggedInState, setLoggedInState] = useState(isLoggedIn);
   const [accentBg, setAccentBg] = useState(false);
+  const pathname = usePathname();
 
   const handleScroll = useThrottledCallback(() => {
     if (window.scrollY > 0) {
@@ -56,8 +55,8 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
 
     if (session) {
       await supabase.auth.signOut();
-      if (window.location.pathname.startsWith(NEW_USER_PATH)) {
-        router.push(LOGIN_PATH);
+      if (pathname.startsWith('/user/create-profile')) {
+        router.push('/user/login');
         router.refresh();
         return;
       }
@@ -115,11 +114,9 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
         <NavigationMenuList className="ml-5 hidden nav-md:flex">
           {metaCategories.map((upperCategory, index) => (
             <NavigationMenuItem key={upperCategory} className="hidden nav-md:flex">
-              {/*<Link href={`/category/${category}`}>*/}
               <NavigationMenuTrigger className="submenu-trigger bg-transparent">
                 {upperCategory}
               </NavigationMenuTrigger>
-              {/*</Link>*/}
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-1">
                   {productCategories[upperCategory].map((productCategory) => (
@@ -162,7 +159,7 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
           </>
         ) : (
           <>
-            <Link href={LOGIN_PATH}>
+            <Link href={'/user/login'}>
               <Button variant="link" className="px-1 max-[320px]:hidden">
                 로그인
               </Button>

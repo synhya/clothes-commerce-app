@@ -1,11 +1,7 @@
-import LoginForm from '@/components/page/user/login-form';
+import LoginForm from '@/components/forms/login-form';
 import React from 'react';
 import loginSideImg from '@/public/login-side-img.png';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import { Toaster } from '@/components/ui/sonner';
-import ToasterOnMount from '@/components/page/shared/toaster-on-mount';
 
 const LoginPage = () => {
   return (

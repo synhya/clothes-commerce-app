@@ -29,7 +29,7 @@ const ProfileAlertDialog = () => {
         <AlertDialogFooter>
           <AlertDialogCancel>그냥 쓸래요</AlertDialogCancel>
           <AlertDialogAction asChild>
-            <Link href="user/create-profile">프로필 입력</Link>
+            <Link href="/user/create-profile">프로필 입력</Link>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

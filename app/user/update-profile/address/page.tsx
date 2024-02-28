@@ -1,7 +1,7 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import UpdateAddressForm from '@/components/page/user/update-address-form';
+import UpdateAddressForm from '@/components/forms/update-address-form';
 
 const Page = async () => {
   const cookieStore = cookies();

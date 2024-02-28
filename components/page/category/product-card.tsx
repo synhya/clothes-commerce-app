@@ -3,10 +3,10 @@ import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
-import { ProductCardData } from '@/lib/types/client';
+import { ProductCardData } from '@/lib/types';
 import Image from 'next/image';
 import { Circle } from 'lucide-react';
-import ColorOption from '@/components/page/shared/color-option';
+import ColorOption from '@/components/page/color-option';
 
 type ProductCardProps = {
   cardData: ProductCardData;

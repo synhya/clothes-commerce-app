@@ -2,7 +2,7 @@ import React from 'react';
 
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import SearchProductForm from '@/components/page/admin/search-product-form';
+import SearchProductForm from '@/components/forms/search-product-form';
 import ProductTable from '@/components/page/admin/product-table';
 import { Product, productSaleState } from '@/lib/types/database';
 

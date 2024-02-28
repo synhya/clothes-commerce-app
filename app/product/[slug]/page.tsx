@@ -1,7 +1,7 @@
 import React from 'react';
-import { fetchProductByName } from '@/lib/fetches';
+import { fetchProductByName } from '@/lib/fetchers/product';
 import { notFound } from 'next/navigation';
-import ProductOptionForm from '@/components/page/product/product-option-form';
+import ProductOptionForm from '@/components/forms/product-option-form';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 import Image from 'next/image';

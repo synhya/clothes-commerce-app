@@ -1,8 +1,10 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import UpdateProfileForm from '@/components/page/user/update-profile-form';
+import UpdateProfileForm from '@/components/forms/update-profile-form';
 import { notFound } from 'next/navigation';
+import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import { Route } from 'next';
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -12,6 +14,13 @@ const Page = async () => {
     data: { user },
     error: authError,
   } = await supabase.auth.getUser();
+
+  if (authError) {
+    return <NotFoundAlertDialog description="로그인이 필요합니다." additionalLink={
+      { href: '/user/login' satisfies Route, title: '로그인' }
+    } />;
+  }
+
   const { data: profile, error: profileError } = await supabase
     .from('profiles')
     .select('*')

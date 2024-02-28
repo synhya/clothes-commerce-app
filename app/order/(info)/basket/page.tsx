@@ -6,8 +6,8 @@ import BasketItem from '@/components/page/order/basket-item';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { z } from 'zod';
-import BasketFormSection from '@/components/page/order/basket-form-section';
-import NotFoundAlertDialog from '@/components/page/shared/not-fount-alert-dialog';
+import BasketForm from '@/components/forms/basket-form';
+import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -22,7 +22,7 @@ const Page = async () => {
     return (
       <NotFoundAlertDialog
         description="로그인이 필요합니다"
-        additionalLink={{ href: '/user/login', label: '로그인' }}
+        additionalLink={{ href: '/user/login', title: '로그인' }}
       />
     );
   }
@@ -32,7 +32,7 @@ const Page = async () => {
     .select('*')
     .eq('profile_id', user.id);
 
-  return <BasketFormSection basketInfo={basketInfo} />;
+  return <BasketForm basketInfo={basketInfo} />;
 };
 
 export default Page;

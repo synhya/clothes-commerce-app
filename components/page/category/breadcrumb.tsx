@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { BreadCrumb } from '@/lib/types/client';
+import { BreadCrumb } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
@@ -17,14 +17,14 @@ const Breadcrumb = ({ paths }: { paths: BreadCrumb[] }) => {
             })}
           >
             {index === paths.length - 1 ? (
-              <p>{path.label}</p>
+              <p>{path.title}</p>
             ) : (
               <div className="flex items-center gap-2">
                 <Link
                   href={path.href}
                   className="no-underline hover:underline hover:underline-offset-2"
                 >
-                  {path.label}
+                  {path.title}
                 </Link>
                 <ArrowRightIcon
                   className={cn('h-4 w-4', {

@@ -55,6 +55,8 @@ const config = {
     extend: {
       screens: {
         'nav-md': '978px',
+        xs: "480px",
+        xxs: "380px",
       },
       colors: {
         border: 'hsl(var(--border))',

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { BasketItemData } from '@/lib/types/client';
+import { BasketItemData } from '@/lib/types';
 
 const BasketItem = ({
   imageUrl,

@@ -2,7 +2,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { ADMIN_PATH } from '@/lib/paths';
 import { Profile } from '@/lib/types/database';
 import Image from 'next/image';
 
@@ -18,7 +17,7 @@ const ProfileSection = ({ profile, isAdmin, className, ...props }: HomeProfilePr
         <h1>Profile</h1>
         <p>{profile?.name ?? '고객'}님 환영합니다</p>
 
-        {isAdmin && <Link href={ADMIN_PATH}>Go to Admin</Link>}
+        {isAdmin && <Link href='/admin'>Go to Admin</Link>}
       </div>
       {/* banner part */}
       <div className="relative space-y-2">

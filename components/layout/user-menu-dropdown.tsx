@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { PersonIcon } from '@radix-ui/react-icons';
 import _ from 'lodash';
 import { useDebouncedCallback } from 'use-debounce';
+import { Route } from 'next';
 
 const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -61,7 +62,7 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
             },
           ].map((menus, index) => (
             <li key={index} className="w-full">
-              <Link href={menus.href}>
+              <Link href={menus.href as Route}>
                 <Button variant="link" className="w-full">
                   {menus.label}
                 </Button>

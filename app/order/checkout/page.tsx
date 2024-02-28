@@ -1,11 +1,11 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import NotFoundAlertDialog from '@/components/page/shared/not-fount-alert-dialog';
-import { LOGIN_PATH } from '@/lib/paths';
-import InvoiceFormSection from '@/components/page/order/invoice-form-section';
+import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import InvoiceForm from '@/components/forms/invoice-form';
 import OrderItemsSection from '@/components/page/order/order-items-section';
 import { basketInfoToLineItem } from '@/lib/utils';
+import { Route } from 'next';
 
 const Page = async ({
   searchParams: { basketId },
@@ -26,7 +26,7 @@ const Page = async ({
     // show dialog and redirect to login page
     return (
       <NotFoundAlertDialog
-        additionalLink={{ href: LOGIN_PATH, label: '로그인페이지로' }}
+        additionalLink={{ href: '/user/login' satisfies Route, title: '로그인페이지로' }}
         description="로그인이 필요합니다."
       />
     );
@@ -61,7 +61,7 @@ const Page = async ({
       <div className="mb-6 text-3xl font-bold">주문서작성</div>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <OrderItemsSection basketInfos={basketInfos} totalPrice={totalPrice} />
-        <InvoiceFormSection
+        <InvoiceForm
           lineItems={basketInfos.map((info) => basketInfoToLineItem(info))}
           itemsPrice={totalPrice}
           customInfoFromUser={profileInfo}

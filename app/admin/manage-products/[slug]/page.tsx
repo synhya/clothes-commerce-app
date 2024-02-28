@@ -2,9 +2,9 @@ import React, { useCallback } from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
-import ProductForm, { ProductFormSchema } from '@/components/page/admin/product-form';
+import ProductForm, { Inputs } from '@/components/forms/product-form';
 import { DBEnums } from '@/lib/types/database';
-import { fetchProductByName } from '@/lib/fetches';
+import { fetchProductByName } from '@/lib/fetchers/product';
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {
   const cookieStore = cookies();

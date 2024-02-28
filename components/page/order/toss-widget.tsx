@@ -5,10 +5,11 @@ import { usePathname } from 'next/navigation';
 import { BASE_URL } from '@/lib/paths';
 import { useFormContext } from 'react-hook-form';
 import { checkoutAction } from '@/lib/actions/checkout-actions';
-import { InvoiceFormValues } from '@/components/page/order/invoice-form-section';
+import { InvoiceFormValues } from '@/components/forms/invoice-form';
 import { LineItem } from '@/lib/types/database';
 import { usePaymentWidget } from '@/lib/hooks/useTossWidget';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { formatPhoneNumber } from 'react-phone-number-input';
 
 type TossWidgetProps = {
   customerKey: string;
@@ -83,11 +84,12 @@ const TossWidget = ({ customerKey, price, lineItems, ...orderInfo }: TossWidgetP
         orderName: orderInfo.orderName,
         customerEmail: orderInfo.customerEmail,
         customerName: name,
-        customerMobilePhone: phone.replace(/-/g, ''),
+        customerMobilePhone: phone.replace('+82', '0'),
         orderId: invoiceId,
         successUrl: BASE_URL + pathname + '/success',
         failUrl: BASE_URL + pathname + '/fail',
       });
+      setIsOpen(false);
     } catch (error) {
       // 에러 처리하기
       console.error(error);

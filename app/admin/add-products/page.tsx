@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductForm, { ProductFormSchema } from '@/components/page/admin/product-form';
+import ProductForm, { Inputs } from '@/components/forms/product-form';
 
 const Page = async () => {
   return (

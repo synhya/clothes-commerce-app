@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { LOGIN_PATH, ACCOUNT_PATH, NEW_USER_PATH, UPDATE_USER_PATH } from '@/lib/paths';
 import { CookieOptions, createServerClient } from '@supabase/ssr';
+import { Route } from 'next';
 
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
@@ -73,9 +73,9 @@ export async function middleware(request: NextRequest) {
   const isValidUser = signedIn && signedUp;
 
   // new user page
-  if (request.nextUrl.pathname.startsWith(NEW_USER_PATH)) {
+  if (request.nextUrl.pathname.startsWith('/user/create-profile' satisfies Route)) {
     if (!signedIn) {
-      return NextResponse.redirect(new URL(LOGIN_PATH, request.url));
+      return NextResponse.redirect(new URL('/user/login' satisfies Route, request.url));
     }
     if (signedUp) return NextResponse.redirect(new URL('/', request.url));
   }
@@ -90,9 +90,9 @@ export async function middleware(request: NextRequest) {
   // }
 
   // login page
-  if (signedIn && request.nextUrl.pathname.startsWith(LOGIN_PATH)) {
+  if (signedIn && request.nextUrl.pathname.startsWith('/user/login' satisfies Route)) {
     if (isValidUser) return NextResponse.redirect(new URL('/', request.url));
-    else return NextResponse.redirect(new URL(NEW_USER_PATH, request.url));
+    else return NextResponse.redirect(new URL('/user/create-profile' satisfies Route, request.url));
   }
 
   // admin page

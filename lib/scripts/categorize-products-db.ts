@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from '@/lib/supabase/schema';
-import { metaCategories, productCategories } from '@/lib/types/client';
+import { metaCategories, productCategories } from '@/lib/types';
 
 const categorizeProductsDb = async () => {
   const supabase = createClient<Database>(

@@ -1,18 +1,11 @@
 import React from 'react';
-import CreateProfileForm from '@/components/page/user/create-profile-form';
+import CreateProfileForm from '@/components/forms/create-profile-form';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
-import { useRouter } from 'next/navigation';
-import ToasterOnMount from '@/components/page/shared/toaster-on-mount';
+import { toast } from 'sonner';
 
 // new user comes here others should be blocked
-const Page = async ({
-  searchParams,
-}: {
-  searchParams: {
-    email?: string;
-  };
-}) => {
+const Page = async () => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -33,12 +26,6 @@ const Page = async ({
           <p>How did you breakthrough middleware..</p>
         )}
       </div>
-      {searchParams.email && (
-        <ToasterOnMount
-          title="이메일 전송완료"
-          description={`${searchParams.email}로 이메일을 전송했습니다. 이메일을 확인해주세요.`}
-        />
-      )}
     </div>
   );
 };

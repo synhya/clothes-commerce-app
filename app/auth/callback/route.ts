@@ -1,9 +1,7 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { type CookieOptions, createServerClient } from '@supabase/ssr';
-import { redirect } from 'next/navigation';
-import { LOGIN_PATH, NEW_USER_PATH } from '@/lib/paths';
-import { revalidatePath } from 'next/cache';
+import { Route } from 'next';
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -45,8 +43,7 @@ export async function GET(request: Request) {
         .single();
 
       if (!data) {
-        console.log(origin + NEW_USER_PATH);
-        return NextResponse.redirect(origin + NEW_USER_PATH);
+        return NextResponse.redirect(origin + ('/user/create-profile' satisfies Route));
       }
 
       return NextResponse.redirect(`${origin}${next}`);

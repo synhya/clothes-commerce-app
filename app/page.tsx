@@ -1,14 +1,15 @@
 import HeroSection from '@/components/page/home/hero-section';
 import React from 'react';
-import ToasterOnMount from '@/components/page/shared/toaster-on-mount';
-import { fetchProfileById } from '@/lib/fetches';
+import { fetchProfileById } from '@/lib/fetchers/profile';
 import ProfileSection from '@/components/page/home/profile-section';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import TrendingClothes from '@/components/page/shared/trending-clothes';
+import TrendingClothes from '@/components/page/trending-clothes';
 import { productDataToCardData } from '@/lib/utils';
 import { Product } from '@/lib/types/database';
 import ProfileAlertDialog from '@/components/page/home/profile-alert-dialog';
+import { env } from '@/lib/env';
+import ServerEventToast from '@/components/page/server-event-toast';
 
 export default async function Home({
   searchParams,
@@ -28,7 +29,7 @@ export default async function Home({
   const { data, error: profileFetchError } = user
     ? await fetchProfileById(user.id, supabase)
     : { data: null, error: null };
-  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
+  const isAdmin = user?.email === env.ADMIN_EMAIL;
 
   const { data: trendingProducts, error: trendingFetchError } = await supabase
     .from('products')
@@ -52,33 +53,24 @@ export default async function Home({
       </div>
       {/* 모토 설명 */}
       <div className="group mt-5 flex flex-col items-center gap-y-2 bg-background/60 py-12 *:text-pretty *:text-center *:text-foreground/80">
-        <p className="text-5xl">Botique</p>
-        <p className="mt-3 text-2xl">차가운 인터넷 속에서도 따뜻한 나의 쇼핑메이트이고 싶습니다.</p>
-        <p className="mt-2 text-xl">화려하지 않아도 편안하고 담백한 나만의 분위기,</p>
-        <p className="text-md">그 속에서 자주 손이 갈 실용적인 옷들을 제작합니다.</p>
+        <p className="text-5xl">쇼핑몰</p>
+        <p className="mt-3 text-2xl">Made with nextjs</p>
+        <p className="mt-2 text-xl">상품은 매크로로 우겨넣어서 카테고리와 일치하지 않습니다.</p>
+        <p className="text-md">vercel에서 기본 제공하는 이미지를 사용했습니다.</p>
+        <p className="text-md">카테고리는 시중에 나도는 쇼핑몰에서 따왔습니다.</p>
       </div>
       {/* 인기 순위 */}
       <div>{!trendingFetchError && <TrendingClothes trendingClothes={trendingClothes} />}</div>
 
-      {/* toasters */}
-      {searchParams.newUser && (
-        <ToasterOnMount
-          title={`${decodeURIComponent(searchParams.newUser)}님`}
-          description="회원가입을 축하합니다"
-        />
-      )}
-      {searchParams.alert && (
-        <ToasterOnMount title={`경고`} description={`${searchParams.alert}`} />
-      )}
-      {profileFetchError && (
-        <ToasterOnMount title={`알림`} description={`개인정보를 입력하고 가입을 완료해주세요!`} />
-      )}
-      {trendingFetchError && (
-        <ToasterOnMount title={`알림`} description={`트랜딩 의류를 가져오는데 실패했습니다.`} />
-      )}
-
       {/* dialog */}
       {profileFetchError && <ProfileAlertDialog />}
+
+      {searchParams.newUser && (
+        <ServerEventToast
+          message={`${decodeURIComponent(searchParams.newUser)}님 회원가입을 축하합니다`}
+        />
+      )}
+      {searchParams.alert && <ServerEventToast message={`${searchParams.alert}`} />}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 'use server';
-import { InvoiceFormValues } from '@/components/page/order/invoice-form-section';
+import { InvoiceFormValues } from '@/components/forms/invoice-form';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { LineItem } from '@/lib/types/database';

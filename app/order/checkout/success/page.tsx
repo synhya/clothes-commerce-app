@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { productDataToCardData } from '@/lib/utils';
 import { Product } from '@/lib/types/database';
-import TrendingClothes from '@/components/page/shared/trending-clothes';
+import TrendingClothes from '@/components/page/trending-clothes';
 
 // ------ Payment 객체 ------
 // @docs https://docs.tosspayments.com/reference#payment-객체

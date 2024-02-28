@@ -13,6 +13,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { toast } from 'sonner';
 
 interface PropType extends React.HTMLAttributes<typeof Carousel> {
   options?: EmblaOptionsType;
@@ -69,7 +70,7 @@ const HeroSection = ({ options, className }: PropType) => {
                   width={800}
                   height={500}
                   style={{ objectFit: 'cover' }}
-                  className="aspect-video rounded-md"
+                  className="aspect-video rounded-md h-auto"
                   priority={index === 0}
                 />
               </div>

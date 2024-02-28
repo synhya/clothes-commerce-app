@@ -1,4 +1,4 @@
-import { Categories, uniqueCategories } from '@/lib/types/client';
+import { Categories, uniqueCategories } from '@/lib/types/index';
 import { Database } from '@/lib/supabase/schema';
 
 export type Profile = Database['public']['Tables']['profiles']['Row'];

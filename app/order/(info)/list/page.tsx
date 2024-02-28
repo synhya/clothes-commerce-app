@@ -1,9 +1,9 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import NotFoundAlertDialog from '@/components/page/shared/not-fount-alert-dialog';
+import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import InvoicesTable from '@/components/page/shared/invoices-table';
+import InvoicesTable from '@/components/page/invoices-table';
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -18,7 +18,7 @@ const Page = async () => {
     return (
       <NotFoundAlertDialog
         description="로그인이 필요합니다"
-        additionalLink={{ href: '/user/login', label: '로그인' }}
+        additionalLink={{ href: '/user/login', title: '로그인' }}
       />
     );
   }
@@ -27,7 +27,8 @@ const Page = async () => {
     .from('invoices')
     .select('*')
     .eq('profile_id', user.id)
-    .eq('state', '결제완료');
+    .eq('state', '결제완료')
+    .order('created_at', { ascending: false });
 
   return (
     <ScrollArea className="mx-2 my-10 h-[600px] rounded-md border shadow-xl shadow-border md:mx-10">
