@@ -6,8 +6,8 @@ import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { productDataToCardData } from '@/lib/utils';
-import { Product } from '@/lib/types/database';
-import TrendingClothes from '@/components/page/trending-clothes';
+import { Product } from '@/lib/types';
+import TrendingClothes from '@/components/trending-clothes';
 
 // ------ Payment 객체 ------
 // @docs https://docs.tosspayments.com/reference#payment-객체

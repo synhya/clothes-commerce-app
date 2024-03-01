@@ -3,7 +3,7 @@ import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import { notFound } from 'next/navigation';
 import ProductForm, { Inputs } from '@/components/forms/product-form';
-import { DBEnums } from '@/lib/types/database';
+import { DBEnums } from '@/lib/types';
 import { fetchProductByName } from '@/lib/fetchers/product';
 
 const Page = async ({ params: { slug } }: { params: { slug: string } }) => {

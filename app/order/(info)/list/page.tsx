@@ -1,9 +1,9 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import NotFoundAlertDialog from '@/components/not-fount-alert-dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import InvoicesTable from '@/components/page/invoices-table';
+import InvoicesTable from '@/components/invoices-table';
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -18,7 +18,7 @@ const Page = async () => {
     return (
       <NotFoundAlertDialog
         description="로그인이 필요합니다"
-        additionalLink={{ href: '/user/login', title: '로그인' }}
+        additionalLink={{ href: '/sign-in', title: '로그인' }}
       />
     );
   }

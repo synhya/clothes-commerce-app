@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { metaCategories, productCategories } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import {
@@ -23,6 +22,7 @@ import useSideBar from '@/lib/hooks/useSidebar';
 import UserMenuDropdown from '@/components/layout/user-menu-dropdown';
 import { LogInIcon, LogOutIcon } from 'lucide-react';
 import { useThrottledCallback } from 'use-debounce';
+import { productCategories, subCategories } from '@/config/product';
 
 const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin: boolean }) => {
   const router = useRouter();
@@ -55,8 +55,8 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
 
     if (session) {
       await supabase.auth.signOut();
-      if (pathname.startsWith('/user/create-profile')) {
-        router.push('/user/login');
+      if (pathname.startsWith('/sign-up')) {
+        router.push('/sign-in');
         router.refresh();
         return;
       }
@@ -95,7 +95,7 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
         },
       )}
     >
-      <div className="ml-4 text-xl font-semibold text-secondary-foreground underline-offset-4 transition-all duration-300 hover:underline hover:underline-offset-1">
+      <div className="ml-4 text-3xl font-semibold font-header">
         <Link href="/" passHref>
           Boutique
         </Link>
@@ -112,14 +112,14 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
           <HamburgerMenuIcon className="size-6" />
         </Button>
         <NavigationMenuList className="ml-5 hidden nav-md:flex">
-          {metaCategories.map((upperCategory, index) => (
+          {productCategories.map((upperCategory, index) => (
             <NavigationMenuItem key={upperCategory} className="hidden nav-md:flex">
               <NavigationMenuTrigger className="submenu-trigger bg-transparent">
                 {upperCategory}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-3 p-1">
-                  {productCategories[upperCategory].map((productCategory) => (
+                  {subCategories[upperCategory].map((productCategory) => (
                     <li key={productCategory}>
                       <Link
                         href={`/category/${encodeURIComponent(productCategory)}?from=${upperCategory}`}
@@ -159,7 +159,7 @@ const GlobalNavigator = ({ isLoggedIn, isAdmin }: { isLoggedIn: boolean; isAdmin
           </>
         ) : (
           <>
-            <Link href={'/user/login'}>
+            <Link href='/sign-in'>
               <Button variant="link" className="px-1 max-[320px]:hidden">
                 로그인
               </Button>

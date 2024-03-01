@@ -6,17 +6,35 @@ import { NextResponse } from 'next/server';
 import Credentials from '@auth/core/providers/credentials';
 import { SupabaseAdapter } from '@auth/supabase-adapter';
 import { Adapter } from '@auth/core/adapters';
-import { sign } from '@/lib/jwtutils';
 import { env } from '@/lib/env';
 import { Route } from 'next';
+import { SignJWT } from 'jose';
+
+const secretKey = 'secret';
+const key = new TextEncoder().encode(secretKey);
+
+export async function sign(
+  payload: any,
+  exp: string | number | Date,
+  secret: string,
+): Promise<string> {
+  const iat = Math.floor(Date.now() / 1000);
+
+  return new SignJWT({ payload })
+    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+    .setExpirationTime(exp)
+    .setIssuedAt(iat)
+    .setNotBefore(iat)
+    .sign(new TextEncoder().encode(secret));
+}
 
 export const authConfig: NextAuthConfig = {
   // debug: true,
   pages: {
-    signIn: '/user/login' satisfies Route,
+    signIn: '/sign-in' satisfies Route,
     // verifyRequest: '/login?verify=1', // (used for check email message)
-    error: '/user/login' satisfies Route, // NotFound code passed in query string as ?error=
-    newUser: '/user/create-profile' satisfies Route, // New users will be directed here on first sign in (leave the property out if not of interest)
+    error: '/sign-in' satisfies Route, // NotFound code passed in query string as ?error=
+    newUser: '/sign-up' satisfies Route, // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   providers: [
     Google,

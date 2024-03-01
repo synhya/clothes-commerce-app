@@ -1,4 +1,4 @@
-import { Profile, Product } from '@/lib/types/database';
+import { Profile, Product } from '@/lib/types';
 import { AuthError, PostgrestError, SupabaseClient } from '@supabase/supabase-js';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';

@@ -13,8 +13,8 @@ import { Separator } from '@/components/ui/separator';
 import { Cross1Icon, HomeIcon } from '@radix-ui/react-icons';
 import useSideBar from '@/lib/hooks/useSidebar';
 import { cn } from '@/lib/utils';
-import { metaCategories, productCategories } from '@/lib/types';
 import Link from 'next/link';
+import { productCategories, subCategories } from '@/config/product';
 
 const GlobalSidebar = () => {
   const { open, setOpen } = useSideBar();
@@ -39,11 +39,11 @@ const GlobalSidebar = () => {
       </div>
 
       <Accordion type="single" collapsible className="w-full px-4">
-        {metaCategories.map((upperCategory, index) => (
+        {productCategories.map((upperCategory, index) => (
           <AccordionItem key={index} value={`item-${index + 1}`}>
             <AccordionTrigger>{upperCategory}</AccordionTrigger>
             <AccordionContent className="flex flex-col items-start">
-              {productCategories[upperCategory].map((productCategory) => (
+              {subCategories[upperCategory].map((productCategory) => (
                 <div key={productCategory + index} className="flex w-full justify-between">
                   <Button variant="link" className="peer" asChild>
                     <Link

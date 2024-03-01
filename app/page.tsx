@@ -1,15 +1,15 @@
-import HeroSection from '@/components/page/home/hero-section';
+import HeroSection from '@/app/_components/hero-section';
 import React from 'react';
 import { fetchProfileById } from '@/lib/fetchers/profile';
-import ProfileSection from '@/components/page/home/profile-section';
+import ProfileSection from '@/app/_components/profile-section';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import TrendingClothes from '@/components/page/trending-clothes';
+import TrendingClothes from '@/components/trending-clothes';
 import { productDataToCardData } from '@/lib/utils';
-import { Product } from '@/lib/types/database';
-import ProfileAlertDialog from '@/components/page/home/profile-alert-dialog';
+import { Product } from '@/lib/types';
+import ProfileAlertDialog from '@/app/_components/profile-alert-dialog';
 import { env } from '@/lib/env';
-import ServerEventToast from '@/components/page/server-event-toast';
+import ServerEventToast from '@/components/server-event-toast';
 
 export default async function Home({
   searchParams,

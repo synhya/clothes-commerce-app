@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import React, { Suspense } from 'react';
 import { createAdminClient } from '@/lib/supabase/admin';
-import RevenueCard from '@/components/page/admin/cards/revenue-card';
-import DashboardCardSkeleton from '@/components/page/admin/cards/dashboard-card-skeleton';
-import UserCountCard from '@/components/page/admin/cards/user-count-card';
-import SalesCountCard from '@/components/page/admin/cards/sales-count-card';
+import RevenueCard from '@/components/cards/revenue-card';
+import DashboardCardSkeleton from '@/app/admin/_components/dashboard-card-skeleton';
+import UserCountCard from '@/components/cards/user-count-card';
+import SalesCountCard from '@/components/cards/sales-count-card';
 
 const Page = async () => {
   return (

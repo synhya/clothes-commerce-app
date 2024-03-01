@@ -1,9 +1,9 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import NotFoundAlertDialog from '@/components/not-fount-alert-dialog';
 import InvoiceForm from '@/components/forms/invoice-form';
-import OrderItemsSection from '@/components/page/order/order-items-section';
+import OrderItemsSection from '@/app/order/_components/order-items-section';
 import { basketInfoToLineItem } from '@/lib/utils';
 import { Route } from 'next';
 
@@ -26,7 +26,7 @@ const Page = async ({
     // show dialog and redirect to login page
     return (
       <NotFoundAlertDialog
-        additionalLink={{ href: '/user/login' satisfies Route, title: '로그인페이지로' }}
+        additionalLink={{ href: '/sign-in' satisfies Route, title: '로그인페이지로' }}
         description="로그인이 필요합니다."
       />
     );

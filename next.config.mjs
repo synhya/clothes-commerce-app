@@ -5,6 +5,18 @@ const nextConfig = {
   experimental: {
     typedRoutes: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: "/sign-up",
+        destination: "/sign-up/email",
+      },
+      {
+        source: "/sign-up/profile",
+        destination: "/sign-up/profile/name",
+      }
+    ]
+  },
   images: {
     remotePatterns: [
       {

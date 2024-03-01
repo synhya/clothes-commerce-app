@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { BasketInfo } from '@/lib/types/database';
+import { BasketInfo } from '@/lib/types';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import BasketItem from '@/components/page/order/basket-item';
+import BasketItem from '@/app/order/_components/basket-item';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,7 +26,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { revalidatePath } from 'next/cache';
 import { redirect, useRouter } from 'next/navigation';
 import { ExclamationTriangleIcon, ReloadIcon } from '@radix-ui/react-icons';
-import { deleteBasketItem, updateBasketItem } from '@/lib/actions/basket-actions';
+import { deleteBasketItem, updateBasketItem } from '@/lib/actions/basket';
 
 const FormSchema = z.object({
   selectedItems: z.array(z.string()).refine((value) => value.some((item) => item), {

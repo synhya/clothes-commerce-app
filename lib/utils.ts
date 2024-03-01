@@ -1,12 +1,14 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { BasketInfo, LineItem, Product } from '@/lib/types/database';
+import { BasketInfo, LineItem, Product } from '@/lib/types';
 import { BasketItemData, ProductCardData } from '@/lib/types';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
 import { z } from 'zod';
 import { toast } from 'sonner';
 import { env } from '@/lib/env';
+import { isRedirectError } from 'next/dist/client/components/redirect';
+import { redirect } from 'next/navigation';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,17 +21,17 @@ export function isArrayOfFile(files: unknown): files is File[] {
 }
 
 export function absoluteUrl(path: string) {
-  return`${env.NEXT_PUBLIC_APP_URL}${path}`
+  return `${env.NEXT_PUBLIC_APP_URL}${path}`;
 }
 
 export function catchError(err: unknown) {
   if (err instanceof z.ZodError) {
-    const errors = err.issues.map((issue) => issue.message)
-    return toast.error(errors.join('\n'))
+    const errors = err.issues.map((issue) => issue.message);
+    return toast.error(errors.join('\n'));
   } else if (err instanceof Error) {
-    return toast.error(err.message)
+    return toast.error(err.message);
   } else {
-    return toast.error('알 수 없는 오류가 발생했습니다.')
+    return toast.error('알 수 없는 오류가 발생했습니다.');
   }
 }
 

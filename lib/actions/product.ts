@@ -2,7 +2,7 @@
 import { createAdminClient } from '@/lib/supabase/admin';
 import { fetchProductById, fetchProductByName } from '@/lib/fetchers/product';
 import { v5 as uuid } from 'uuid';
-import { DBEnums } from '@/lib/types/database';
+import { DBEnums } from '@/lib/types';
 import { Inputs } from '@/components/forms/product-form';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';

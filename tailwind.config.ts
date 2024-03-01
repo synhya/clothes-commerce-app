@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import colors from 'tailwindcss/colors';
+import { fontFamily } from "tailwindcss/defaultTheme"
 import { nextui } from '@nextui-org/react';
 
 const config = {
@@ -22,7 +22,7 @@ const config = {
     },
     fontFamily: {
       sans: [
-        'var(--font-pretendard)',
+        'var(--font-sans)',
         'Helvetica Neue',
         'Apple SD Gothic Neo',
         'Malgun Gothic',
@@ -36,6 +36,7 @@ const config = {
         'sans-serif',
       ],
       mono: [
+        'var(--font-mono)',
         'ui-monospace',
         'Consolas',
         'SFMono-Regular',
@@ -51,12 +52,13 @@ const config = {
         'monospace',
         'NerdFontsSymbols Nerd Font',
       ],
+      header: ["var(--font-header)", ...fontFamily.sans],
     },
     extend: {
       screens: {
         'nav-md': '978px',
-        xs: "480px",
-        xxs: "380px",
+        xs: '480px',
+        xxs: '380px',
       },
       colors: {
         border: 'hsl(var(--border))',

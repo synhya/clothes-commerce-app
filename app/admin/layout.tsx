@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
-import AdminSidebar from '@/components/page/admin/admin-sidebar';
+import AdminSidebar from '@/components/layout/admin-sidebar';
 import DefaultLayout from '@/components/layout/default-layout';
 
 const routes = [
@@ -15,11 +15,7 @@ const routes = [
   { label: '대시보드', pathname: '/admin' },
 ];
 
-const Layout = async ({ children }: { children: React.ReactNode }) => {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
-  const data = await supabase.auth.getUser();
-
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex h-full bg-background">
       {/* 사이드바 */}

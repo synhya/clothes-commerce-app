@@ -18,7 +18,8 @@ import { Button } from '@/components/ui/button';
 import { Icons } from '@/components/ui/icons';
 import { updateProfile } from '@/lib/actions/profile';
 import { toast } from 'sonner';
-import { updateProfileSchema } from '@/lib/validations/profile';
+import { updateProfileSchema } from '@/lib/validations/user';
+import { catchError } from '@/lib/utils';
 
 
 export type UpdateFormSchema = z.infer<typeof updateProfileSchema>;
@@ -40,11 +41,12 @@ const UpdateProfileForm = (props: UpdateProfileFormProps) => {
   });
 
   const onSubmit: SubmitHandler<UpdateFormSchema> = async (data) => {
-    // redirect는 try내부에서 쓰지 말자!
-    const res = await updateProfile(data);
-
-    if (res.message)
-      toast('알림',{ description: res.message, });
+    try {
+      await updateProfile(data);
+      toast.success('프로필 업데이트 성공');
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   return (
@@ -98,10 +100,9 @@ const UpdateProfileForm = (props: UpdateProfileFormProps) => {
           )}
         />
         <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting && (
+          {form.formState.isSubmitting ? (
             <Icons.spinner className="ml-0.5 mr-2.5 h-4 w-4 animate-spin" />
-          )}
-          저장
+          ) : "저장"}
         </Button>
       </form>
     </Form>

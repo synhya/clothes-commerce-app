@@ -1,8 +1,8 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { Database } from '@/lib/supabase/schema';
 import * as fs from 'fs';
-import { uniqueCategories } from '@/lib/types';
-import { productSizeEnums, ProductSubmit } from '@/lib/types/database';
+import { ProductSubmit } from '@/lib/types';
+import { productSizeEnums, uniqueCategories } from '@/config/product';
 
 const dirName = process.cwd() + '\\public\\products';
 

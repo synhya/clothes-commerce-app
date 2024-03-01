@@ -1,8 +1,8 @@
-import { SidebarLink } from '@/components/page/sidebar-nav';
+import { SidebarNavItem } from '@/lib/types';
 
 type AdditionalLinks = {
   title: string;
-  links: SidebarLink[];
+  links: SidebarNavItem[];
 };
 
 // export const defaultLinks: SidebarLink[] = [
@@ -15,8 +15,8 @@ export const additionalLinks: AdditionalLinks[] = [
   {
     title: 'user',
     links: [
-      { href: '/user/update-profile', title: '프로필 수정' },
-      { href: '/user/update-profile/address', title: '배송주소 관리' },
+      { href: '/user/update-profile', label: '프로필 수정' },
+      { href: '/user/update-profile/address', label: '배송주소 관리' },
     ],
   },
 ];

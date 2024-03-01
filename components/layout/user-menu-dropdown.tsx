@@ -13,7 +13,7 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
 
   const debouncedHoverEvent = useDebouncedCallback((bool) => {
     setShowDropdown(bool);
-  }, 300);
+  }, 200);
 
   useEffect(() => {
     setAdminState(isAdmin);
@@ -35,7 +35,7 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
       </Button>
       <div
         data-state={showDropdown ? 'open' : 'close'}
-        className="relative scale-0 transition-all duration-300 data-[state=open]:scale-100"
+        className="relative scale-0 transition-all duration-200 data-[state=open]:scale-100"
         onMouseOver={() => {
           debouncedHoverEvent(true);
         }}

@@ -1,13 +1,13 @@
 import React from 'react';
-import OrderItemsSection from '@/components/page/order/order-items-section';
+import OrderItemsSection from '@/app/order/_components/order-items-section';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import BasketItem from '@/components/page/order/basket-item';
+import BasketItem from '@/app/order/_components/basket-item';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { z } from 'zod';
 import BasketForm from '@/components/forms/basket-form';
-import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import NotFoundAlertDialog from '@/components/not-fount-alert-dialog';
 
 const Page = async () => {
   const cookieStore = cookies();
@@ -22,7 +22,7 @@ const Page = async () => {
     return (
       <NotFoundAlertDialog
         description="로그인이 필요합니다"
-        additionalLink={{ href: '/user/login', title: '로그인' }}
+        additionalLink={{ href: '/sign-in', title: '로그인' }}
       />
     );
   }

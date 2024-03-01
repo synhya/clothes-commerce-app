@@ -1,6 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { Database } from '@/lib/supabase/schema';
-import { metaCategories, productCategories } from '@/lib/types';
+import { productCategories, subCategories } from '@/config/product';
 
 const categorizeProductsDb = async () => {
   const supabase = createClient<Database>(
@@ -19,8 +19,8 @@ const categorizeProductsDb = async () => {
     let newCategories: string[] = Array.from(new Set(product.categories));
 
     product.categories.forEach((category) => {
-      metaCategories.forEach((meta) => {
-        if (productCategories[meta].includes(category as never)) {
+      productCategories.forEach((meta) => {
+        if (subCategories[meta].includes(category as never)) {
           console.log(meta + ' category added to ' + product.name);
           newCategories.push(meta);
         }

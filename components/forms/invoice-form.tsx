@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { CustomerInfo, LineItem, shipmentMethodEnums } from '@/lib/types/database';
+import { CustomerInfo, LineItem } from '@/lib/types';
 import { z, ZodTypeAny } from 'zod';
 import {
   Form,
@@ -9,12 +9,12 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
+  FormLabel, FormMessage,
 } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/ui/input';
 import AddressFormField from '@/components/forms/address-form-field';
-import TossWidget from '@/components/page/order/toss-widget';
+import TossWidget from '@/app/order/_components/toss-widget';
 import { PhoneInput } from '@/components/ui/phone-input';
 import {
   Dialog,
@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { isValidPhoneNumber } from 'react-phone-number-input/min';
+import { shipmentMethodEnums } from '@/config/product';
 
 const formSchema = z.object({
   name: z
@@ -116,6 +117,7 @@ const InvoiceForm = ({
                       <FormControl>
                         <Input {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -129,11 +131,12 @@ const InvoiceForm = ({
                         <PhoneInput {...field} defaultCountry="KR" international={false} />
                       </FormControl>
                       <FormDescription>결제에 사용됩니다 정확히 입력해주세요!</FormDescription>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
                 <AddressFormField
-                  isMainAddress
+                  isMainAddress={false}
                   mainAddressName="main_address"
                   extraAddressName="extra_address"
                 />
@@ -141,7 +144,7 @@ const InvoiceForm = ({
             </div>
           </div>
           <div>
-            <div className="mb-4 text-xl font-semibold">결제/예약</div>
+            <div className="mb-4 mt-6 text-xl font-semibold">결제/예약</div>
             <div className="border-b border-t-2 border-gray-200 py-4">
               <div className="flex flex-col space-y-4">
                 <div className="flex justify-between">

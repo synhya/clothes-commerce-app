@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { DBEnums, productSaleState, ProductSubmit } from '@/lib/types/database';
+import { DBEnums, ProductSubmit } from '@/lib/types';
 import { z, ZodTypeAny } from 'zod';
 import { createProduct, deleteProduct, updateProduct } from '@/lib/actions/product';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/select';
 import { toast } from 'sonner';
 import { productSchema } from '@/lib/validations/product';
+import { productSaleState } from '@/config/product';
 
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
 
@@ -179,7 +180,7 @@ const ProductForm = ({ defaultValues, defaultImageUrl, action, productId }: Prod
           <CategoryFormField />
           <SizeFormField />
           <HashtagFormField arrayPath={'tags'} label='태그' />
-          <HashtagFormField arrayPath={'available_colors'} label='색상' />
+          <HashtagFormField arrayPath={'available_colors'} label='색상' required />
           <DropzoneFormField defaultImageUrl={defaultImageUrl} />
           <div className='pt-1.5'>
             <FormField

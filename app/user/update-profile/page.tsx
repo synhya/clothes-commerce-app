@@ -2,8 +2,8 @@ import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
 import UpdateProfileForm from '@/components/forms/update-profile-form';
-import { notFound } from 'next/navigation';
-import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import { notFound, redirect } from 'next/navigation';
+import NotFoundAlertDialog from '@/components/not-fount-alert-dialog';
 import { Route } from 'next';
 
 const Page = async () => {
@@ -17,7 +17,7 @@ const Page = async () => {
 
   if (authError) {
     return <NotFoundAlertDialog description="로그인이 필요합니다." additionalLink={
-      { href: '/user/login' satisfies Route, title: '로그인' }
+      { href: '/sign-in' satisfies Route, title: '로그인' }
     } />;
   }
 
@@ -28,7 +28,7 @@ const Page = async () => {
     .single();
 
   if (profileError) {
-    notFound();
+    redirect('/sign-up/profile');
   }
 
   return (

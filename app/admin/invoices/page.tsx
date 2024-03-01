@@ -1,9 +1,9 @@
 import React from 'react';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import NotFoundAlertDialog from '@/components/page/not-fount-alert-dialog';
+import NotFoundAlertDialog from '@/components/not-fount-alert-dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import InvoicesTable from '@/components/page/invoices-table';
+import InvoicesTable from '@/components/invoices-table';
 
 const Page = async () => {
   const cookieStore = cookies();

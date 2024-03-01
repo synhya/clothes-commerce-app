@@ -18,11 +18,10 @@ import {
   CommandItem,
 } from '@/components/ui/command';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { metaCategories, productCategories } from '@/lib/types';
 import { Inputs } from '@/components/forms/product-form';
 import { useFormContext } from 'react-hook-form';
-import { productSizeEnums } from '@/lib/types/database';
 import { Badge } from '@/components/ui/badge';
+import { productCategories, subCategories, productSizeEnums } from '@/config/product';
 
 export const CategoryFormField = () => {
   const form = useFormContext<Inputs>();
@@ -53,7 +52,7 @@ export const CategoryFormField = () => {
                 <CommandEmpty>결과 없음</CommandEmpty>
                 <ScrollArea className="h-72 w-full">
                   <CommandGroup>
-                    {metaCategories.map((subCategory) => (
+                    {productCategories.map((subCategory) => (
                       <React.Fragment key={subCategory}>
                         <CommandItem
                           value={subCategory}
@@ -64,7 +63,7 @@ export const CategoryFormField = () => {
                               : field.value.filter((c) => c !== subCategory);
 
                             if (!isAdding) {
-                              const removingCategories = productCategories[subCategory] as string[];
+                              const removingCategories = subCategories[subCategory] as string[];
                               newCategories = newCategories.filter(
                                 (c) => !removingCategories.includes(c),
                               );
@@ -82,7 +81,7 @@ export const CategoryFormField = () => {
                           />
                           {subCategory}
                         </CommandItem>
-                        {productCategories[subCategory].map((category, index) => (
+                        {subCategories[subCategory].map((category, index) => (
                           <CommandItem
                             value={category}
                             key={category + index}

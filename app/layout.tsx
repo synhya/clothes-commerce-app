@@ -1,59 +1,48 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import GlobalNavigator from '@/components/layout/global-navigator';
-import Providers from '@/components/page/providers';
+import Providers from '@/components/providers';
 import GlobalFooter from '@/components/layout/global-footer';
 import GlobalSidebar from '@/components/layout/global-sidebar';
 import { cookies } from 'next/headers';
 import { createClient } from '@/lib/supabase/server';
-import { TailwindIndicator } from '@/components/page/tailwind-indicator';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
 import { Toaster } from '@/components/ui/sonner';
-import NavigationEvents from '@/components/page/navigation-events';
-import { Suspense } from 'react';
+import { fontHeader, fontSans } from '@/lib/fonts';
+import { absoluteUrl, cn } from '@/lib/utils';
+import { env } from '@/lib/env';
+import { siteConfig } from '@/config/site';
 
-const inter = Inter({ subsets: ['latin'] });
+export const metadata: Metadata = {
+  // metadataBase has default values
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  keywords: ['nextjs', 'react', 'e-commerce', 'clothing', 'fashion'],
+  authors: [
+    {
+      name: 'synhya',
+      url: 'https://www.github.com/synhya',
+    },
+  ],
+  creator: 'synhya',
+  openGraph: {
+    type: 'website',
+    locale: 'ko_KR',
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+  },
+  icons: {
+    icon: "/icon.png",
+  },
+  manifest: absoluteUrl("/site.webmanifest"),
+};
 
-// export const metadata: Metadata = {
-//   title: "Shadcn Phone Input",
-//   description: `A phone input component implementation of Shadcn's input component`,
-//   keywords: [
-//     "shadcn",
-//     "phone input",
-//     "shadcn/ui",
-//     "shadcn phone input",
-//     "phone input component",
-//     "shadcn phone input component",
-//     "input",
-//     "radix ui",
-//     "react phone input",
-//   ],
-//   authors: [
-//     {
-//       name: "Omer Alpi",
-//       url: "https://jaleelbennett.com",
-//     },
-//   ],
-//   creator: "Omer Alpi",
-//   themeColor: [
-//     { media: "(prefers-color-scheme: light)", color: "white" },
-//     { media: "(prefers-color-scheme: dark)", color: "black" },
-//   ],
-//   openGraph: {
-//     type: "website",
-//     locale: "en_US",
-//     url: siteConfig.url,
-//     title: siteConfig.name,
-//     description: siteConfig.description,
-//     siteName: siteConfig.name,
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: siteConfig.name,
-//     description: siteConfig.description,
-//     creator: "@omeralpi",
-//   },
-// };
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -68,8 +57,8 @@ export default async function RootLayout({
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={`${fontHeader.variable} ${fontSans.variable}`}>
+      <body className={'min-h-screen bg-background font-sans antialiased'}>
         <Providers attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="relative flex min-h-screen flex-col">
             <div className="sticky top-0 z-10">
@@ -81,9 +70,9 @@ export default async function RootLayout({
             </div>
             <GlobalFooter />
           </div>
-          <Suspense fallback={null}>
-            <NavigationEvents />
-          </Suspense>
+          {/*<Suspense fallback={null}>*/}
+          {/*  <NavigationEvents />*/}
+          {/*</Suspense>*/}
           <Toaster />
           <TailwindIndicator />
         </Providers>

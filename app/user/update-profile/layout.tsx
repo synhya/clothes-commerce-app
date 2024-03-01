@@ -1,6 +1,6 @@
 import React from 'react';
 import { Separator } from '@/components/ui/separator';
-import { SidebarNav } from '@/components/page/sidebar-nav';
+import { SidebarNav } from '@/components/sidebar-nav';
 import { Route } from 'next';
 
 const ProfilesLayout = ({ children }: { children: React.ReactNode }) => {

@@ -1,10 +1,25 @@
-import { DBEnums } from '@/lib/types/database';
 import { Route } from 'next';
-import { type FileWithPath } from "react-dropzone"
+import { type FileWithPath } from 'react-dropzone';
+import { Database } from '@/lib/supabase/schema';
+import { productCategories, subCategories } from '@/config/product';
 
 export type FileWithPreview = FileWithPath & {
   preview: string;
 };
+
+export type SidebarNavItem = {
+  label: string;
+  href: Route;
+  // icon: LucideIcon
+}
+
+export type HeaderItem = {
+  title: string;
+  description: string;
+  href: Route;
+}
+
+export type AuthHeaderItem = HeaderItem & { progress?: number };
 
 export type BreadCrumb = {
   title: string;
@@ -31,37 +46,56 @@ export type BasketItemData = {
 };
 
 export type Categories = (
-  | (typeof productCategories)[keyof typeof productCategories][number]
-  | (typeof metaCategories)[number]
+  | (typeof subCategories)[keyof typeof subCategories][number]
+  | (typeof productCategories)[number]
 )[];
 
-export const metaCategories = [
-  'made',
-  'new',
-  'top',
-  'shirt',
-  'knit',
-  'bottom',
-  'outer',
-  'ops/sk',
-] as const;
-
-export type MetaCategory = (typeof metaCategories)[number];
-export type ProductCategory = {
-  [K in MetaCategory]: string[];
+export type ProductCategory = (typeof productCategories)[number];
+export type SubCategory = {
+  [K in ProductCategory]: string[];
 };
 
-export const productCategories = {
-  made: ['outer', 'top', 'bottom', 'ops', 'lento', 'acc'],
-  new: ['상의', '셔츠', '니트', '하의', '아우터', '원피스/스커트'],
-  top: ['티셔츠', '맨투맨/후드', '슬리브리스'],
-  shirt: ['셔츠', '블라우스', '폴로/카라티'],
-  knit: ['니트', '가디건', '베스트'],
-  bottom: ['데님', '팬츠', '슬랙스', '쇼츠', '조거팬츠', '스판혼방'],
-  outer: ['코트', '자켓', '가디건', '점퍼', '핸드메이드'],
-  'ops/sk': ['원피스', '스커트', '미디-롱 스커트'],
-} as const satisfies ProductCategory;
+export type Option = {
+  label: string
+  value: string
+  icon?: React.ComponentType<{ className?: string }>
+}
 
-export const uniqueCategories = Array.from(
-  new Set(metaCategories.map((meta) => [meta, ...productCategories[meta]]).flat()),
-);
+export interface DataTableFilterOption<TData> {
+  id?: string
+  label: string
+  value: keyof TData | string
+  items: Option[]
+  isMulti?: boolean
+}
+
+export interface DataTableSearchableColumn<TData> {
+  id: keyof TData
+  title: string
+}
+
+export interface DataTableFilterableColumn<TData>
+  extends DataTableSearchableColumn<TData> {
+  options: Option[]
+}
+
+
+// db
+
+export type Profile = Database['public']['Tables']['profiles']['Row'];
+export type ProfileInfo = Database['public']['Views']['profile_info']['Row'];
+
+export type Product = Omit<Database['public']['Tables']['products']['Row'], 'categories'> & {
+  categories: Categories;
+};
+export type ProductSubmit = Omit<Product, 'id' | 'created_at' | 'updated_at' | 'sold'>;
+
+export type BasketInfo = Database['public']['Views']['basket_info']['Row'];
+export type Invoice = Database['public']['Tables']['invoices']['Row'];
+export type CustomerInfo = Database['public']['CompositeTypes']['invoice_customer'];
+export type LineItem = Omit<
+  Database['public']['Tables']['invoice_products']['Row'],
+  'id' | 'invoice_id'
+>;
+export type DBEnums = Database['public']['Enums'];
+

@@ -8,9 +8,49 @@ export async function middleware(request: NextRequest) {
       headers: request.headers,
     },
   });
+  const supabase = updateCookies(request, response);
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const signedIn = user !== null;
+  let signedUp = false;
+  if (signedIn) {
+    //.eq('id', user?.id) is not necessary because of rls in supabase
+    const { data } = await supabase.from('profiles').select().eq('id', user.id).limit(1).single();
+    signedUp = data !== null;
+  }
+  const isValidUser = signedIn && signedUp;
+
+  // add profile page
+  if (isValidUser && request.nextUrl.pathname.startsWith('/sign-up/profile')) {
+    return NextResponse.redirect(new URL('/' satisfies Route, request.url));
+  }
+
+  // login page
+  if (signedIn && request.nextUrl.pathname.startsWith('/sign-in' satisfies Route)) {
+    if (isValidUser) return NextResponse.redirect(new URL('/', request.url));
+    else
+      return NextResponse.redirect(new URL('/sign-up/profile/name' satisfies Route, request.url));
+  }
+
+  // admin page
+  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
+  if (!isAdmin && request.nextUrl.pathname.startsWith('/admin')) {
+    return NextResponse.redirect(new URL('/?alert=권한이없습니다.', request.url));
+  }
+
+  return response;
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};
+
+function updateCookies(request: NextRequest, response: NextResponse) {
   // cookie, header forwarding
-  const supabase = createServerClient(
+  return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -55,56 +95,4 @@ export async function middleware(request: NextRequest) {
       },
     },
   );
-
-  // Always use supabase.auth.getUser() to protect pages and user data.
-  // Never trust supabase.auth.getSession() inside server code such as middleware.
-  // isn't guaranteed to revalidate the Auth token.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser(); // refresh session
-
-  const signedIn = user !== null;
-  let signedUp = false;
-  if (signedIn) {
-    //.eq('id', user?.id) is not necessary because of rls in supabase
-    const { data } = await supabase.from('profiles').select().limit(1).single();
-    signedUp = data !== null;
-  }
-  const isValidUser = signedIn && signedUp;
-
-  // new user page
-  if (request.nextUrl.pathname.startsWith('/user/create-profile' satisfies Route)) {
-    if (!signedIn) {
-      return NextResponse.redirect(new URL('/user/login' satisfies Route, request.url));
-    }
-    if (signedUp) return NextResponse.redirect(new URL('/', request.url));
-  }
-
-  // // personal page
-  // const personalPage = request.nextUrl.pathname.startsWith(ACCOUNT_PATH) ||
-  //   request.nextUrl.pathname.startsWith(UPDATE_USER_PATH);
-  //
-  // if (!isValidUser && personalPage) {
-  //   if(!signedIn) return NextResponse.redirect(new URL(LOGIN_PATH, request.url));
-  //   if(!signedUp) return NextResponse.redirect(new URL(NEW_USER_PATH, request.url));
-  // }
-
-  // login page
-  if (signedIn && request.nextUrl.pathname.startsWith('/user/login' satisfies Route)) {
-    if (isValidUser) return NextResponse.redirect(new URL('/', request.url));
-    else return NextResponse.redirect(new URL('/user/create-profile' satisfies Route, request.url));
-  }
-
-  // admin page
-  const isAdmin = user?.email === process.env.ADMIN_EMAIL;
-  if (!isAdmin && request.nextUrl.pathname.startsWith('/admin')) {
-    return NextResponse.redirect(new URL('/?alert=권한이없습니다.', request.url));
-  }
-
-  // 리디렉션해야하는 경우 쿠키 업데이트를 하지는 않지만 괜찮을듯
-  return response;
 }
-
-export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-};

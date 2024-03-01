@@ -15,16 +15,32 @@ ___
 ![Next.js](https://img.shields.io/badge/Next.js-%23000000.svg?style=for-the-badge&logo=nextdotjs&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%2306B6D4.svg?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Shadcn/ui](https://img.shields.io/badge/Shadcn%20UI-%23319798.svg?style=for-the-badge&logo=shadcnui)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23047A9A.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-%23FF3E00.svg?style=for-the-badge&color=green&logo=supabase&logoColor=white)
 
 ### 주요 기능 
 ___
 - [x] 유저
-  - [x] 로그인, 로그아웃, 회원가입
+  - [x] 로그인, 로그아웃, 회원가입 (멀티스탭)
+  - [x] OAuth 연동(Google, Kakao)
   - [x] 회원정보 수정
+  - [ ] 비번 찾기 (미구현예정)
 - [x] 관리자
   - [x] 상품 검색, 등록, 수정, 삭제
-  - [x] 주문 관리
+  - [x] 주문 내역 확인 (검색,관리기능 아직 미구현)
 - [x] 상품 카테고리, 선택페이지
-- [x] 주문내역, 장바구니, 결제
+- [x] 주문내역, 장바구니, 결제(토스연동)
+- [x] SEO
+  - [x] SiteMap
+  - [x] OpenGraph
+
+### 소감
+___
+supabase-js는 여타 orm과 비교해서
+DX가 떨어지는 느낌을 많이 받는다.
+특히 transaction을 지원하지 않는다는 점에서
+불편함을 느꼈다. 다음에는 Drizzle로 구성해보려한다.
+
+쇼핑몰이다 보니 폼을 많이 사용하는데 
+동적인 필드, 멀티 스탭등 다양한 사용법에 대해 배울 수있었다.

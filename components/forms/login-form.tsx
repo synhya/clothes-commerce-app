@@ -25,7 +25,7 @@ import { useRouter } from 'next/navigation';
 
 import { toast } from 'sonner';
 import { Route } from 'next';
-import { signInSchema } from '@/lib/validations/auth';
+import { signInSchema } from '@/lib/validations/user';
 
 type Inputs = Required<z.infer<typeof signInSchema>>;
 
@@ -74,7 +74,7 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
           .limit(1)
           .single();
         if (!!data) {
-          router.push('/user/create-profile' satisfies Route);
+          router.push('/sign-up' satisfies Route);
         }
       }
 
@@ -221,7 +221,7 @@ const LoginForm = ({ className, ...props }: LoginFormProps) => {
         구글로 로그인
       </Button>
       <p className="px-8 text-center text-sm text-muted-foreground">
-        아직 계정이 없으신가요? <Link href={'/user/register'}>회원가입</Link>
+        아직 계정이 없으신가요? <Link href={'/sign-up'}>회원가입</Link>
       </p>
     </div>
   );

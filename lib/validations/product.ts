@@ -1,6 +1,7 @@
 import * as z from 'zod';
-import { DBEnums, productSaleState, ProductSubmit } from '@/lib/types/database';
+import { DBEnums, ProductSubmit } from '@/lib/types';
 import { ZodTypeAny } from 'zod';
+import { productSaleState } from '@/config/product';
 
 export const productSchema = z.object({
   name: z
@@ -34,11 +35,11 @@ export const productSchema = z.object({
     .object({
       value: z
         .string({
-          required_error: '색상을 입력해주세요.',
+          invalid_type_error: '색상을 입력해주세요.',
         })
         .min(1, { message: '색상을 입력해주세요.' }),
     })
-    .array(),
+    .array().nonempty({ message: '색상을 한개 이상 선택해주세요' }),
   imageFiles: z.custom<FileList>(),
   sale_state: z.enum(productSaleState),
 } satisfies Record<keyof Omit<ProductSubmit, 'image_url'> | 'imageFiles', ZodTypeAny>);

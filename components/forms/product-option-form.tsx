@@ -10,11 +10,12 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { useFormState } from 'react-dom';
-import { createBasketItem } from '@/lib/actions/basket-actions';
-import { DBEnums, productSizeEnums } from '@/lib/types/database';
-import RadioInput from '@/components/page/radio-input';
-import SubmitButton from '@/components/page/product/submit-button';
+import { createBasketItem } from '@/lib/actions/basket';
+import { DBEnums } from '@/lib/types';
+import RadioInput from '@/components/radio-input';
+import SubmitButton from '@/app/product/submit-button';
 import { toast } from 'sonner';
+import { productSizeEnums } from '@/config/product';
 
 type ProductOptionFormProps = {
   productId: string;

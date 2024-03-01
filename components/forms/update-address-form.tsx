@@ -20,6 +20,7 @@ import { updateAddress, updateProfile } from '@/lib/actions/profile';
 import AddressFormField from '@/components/forms/address-form-field';
 import { DoubleArrowDownIcon, DoubleArrowUpIcon, StarIcon, TrashIcon } from '@radix-ui/react-icons';
 import { toast } from 'sonner';
+import { catchError } from '@/lib/utils';
 
 const formSchema = z.object({
   addressList: z.array(
@@ -52,17 +53,19 @@ const UpdateAddressForm = ({ addressList }: { addressList: AddressInfo[] }) => {
   });
 
   const onSubmit: SubmitHandler<UpdateFormSchema> = async (data) => {
-    console.log();
+    try {
+      const newAddressData = data.addressList.map((address, index) => {
+        if (index === 0) {
+          return { ...address, is_main: true };
+        }
+        return { ...address, is_main: false };
+      });
 
-    const newAddressData = data.addressList.map((address, index) => {
-      if (index === 0) {
-        return { ...address, is_main: true };
-      }
-      return { ...address, is_main: false };
-    });
-
-    const { message } = await updateAddress(JSON.stringify(newAddressData));
-    toast('알림',{ description: message });
+      await updateAddress(JSON.stringify(newAddressData));
+      toast.success('주소 업데이트 성공');
+    } catch (error) {
+      catchError(error);
+    }
   };
 
   return (
@@ -109,16 +112,14 @@ const UpdateAddressForm = ({ addressList }: { addressList: AddressInfo[] }) => {
           className="mr-2"
           onClick={() => fields.length < 5 && append({ main_address: '', extra_address: '' })}
         >
-          {form.formState.isSubmitting && (
-            <Icons.spinner className="ml-0.5 mr-2.5 h-4 w-4 animate-spin" />
-          )}
-          추가
+          {form.formState.isSubmitting ? (
+            <Icons.spinner className="mx-1.5 h-4 w-4 animate-spin" />
+          ): "추가"}
         </Button>
         <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting && (
-            <Icons.spinner className="ml-0.5 mr-2.5 h-4 w-4 animate-spin" />
-          )}
-          저장
+          {form.formState.isSubmitting ? (
+            <Icons.spinner className="mx-1.5 h-4 w-4 animate-spin" />
+          ): "저장"}
         </Button>
       </form>
     </Form>

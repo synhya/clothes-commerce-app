@@ -12,28 +12,27 @@ import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
 import { z, ZodTypeAny } from 'zod';
-import { add, endOfDay, format, startOfDay, sub } from 'date-fns';
+import {  endOfDay, startOfDay, sub } from 'date-fns';
 import DateFormField from '@/components/forms/date-form-field';
-import { categoryOptions, sellStatusOptions } from '@/lib/types/database';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { metaCategories } from '@/lib/types';
 import { Route } from 'next';
+import { categoryOptions, sellStatusOptions } from '@/config/product';
 
 type SearchParams = {
   category: (typeof categoryOptions)[number];
-  startDate: Date;
-  endDate: Date;
-  saleState: (typeof sellStatusOptions)[number];
-  searchText: string;
+  from: Date;
+  to: Date;
+  sale_state: (typeof sellStatusOptions)[number];
+  name: string;
 };
 
 const formSchema = z.object<Record<keyof SearchParams, ZodTypeAny>>({
   category: z.enum(categoryOptions),
-  startDate: z.date(),
-  endDate: z.date(),
-  saleState: z.enum(sellStatusOptions),
-  searchText: z.string(),
+  from: z.date(),
+  to: z.date(),
+  sale_state: z.enum(sellStatusOptions),
+  name: z.string(),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -45,10 +44,10 @@ const SearchProductForm = () => {
   const form = useForm<FormValues>({
     defaultValues: {
       category: '전체',
-      startDate: sub(new Date(), { days: 7 }),
-      endDate: new Date(),
-      saleState: '전체',
-      searchText: '',
+      from: sub(new Date(), { days: 7 }),
+      to: new Date(),
+      sale_state: '전체',
+      name: '',
     },
   });
 
@@ -56,10 +55,10 @@ const SearchProductForm = () => {
     const newSearchParams = new URLSearchParams(searchParams);
     if (values.category !== '전체') newSearchParams.set('category', values.category);
 
-    newSearchParams.set('startDate', startOfDay(values.startDate).toISOString());
-    newSearchParams.set('endDate', endOfDay(values.endDate).toISOString());
-    if (values.saleState !== '전체') newSearchParams.set('saleState', values.saleState);
-    if (values.searchText) newSearchParams.set('searchText', values.searchText);
+    newSearchParams.set('from', startOfDay(values.from).toISOString());
+    newSearchParams.set('to', endOfDay(values.to).toISOString());
+    if (values.sale_state !== '전체') newSearchParams.set('sale_state', values.sale_state);
+    newSearchParams.set('name', values.name);
     router.push(`${pathname}?${newSearchParams.toString()}` as Route);
   };
 
@@ -97,8 +96,8 @@ const SearchProductForm = () => {
               )}
             />
             <div className="flex max-w-[500px] flex-col gap-2 max-md:max-w-[250px] md:flex-row">
-              <DateFormField arrayPath="startDate" label="시작일" className="w-full" />
-              <DateFormField arrayPath="endDate" label="종료일" className="w-full" />
+              <DateFormField arrayPath="from" label="시작일" className="w-full" />
+              <DateFormField arrayPath="to" label="종료일" className="w-full" />
             </div>
             <div className="col-start-2 row-start-2 flex flex-wrap gap-2">
               {['오늘', '1주일', '1개월', '3개월', '6개월', '1년'].map((text) => (
@@ -108,7 +107,7 @@ const SearchProductForm = () => {
                   type="button"
                   onClick={() => {
                     form.setValue(
-                      'startDate',
+                      'from',
                       sub(new Date(), {
                         days:
                           text === '오늘'
@@ -132,7 +131,7 @@ const SearchProductForm = () => {
             </div>
             <div className="flex flex-col space-y-2">
               <FormField
-                name="searchText"
+                name="name"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
@@ -149,7 +148,7 @@ const SearchProductForm = () => {
               <div className="flex items-center gap-2 pt-1">
                 <FormField
                   control={form.control}
-                  name="saleState"
+                  name="sale_state"
                   render={({ field }) => (
                     <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                       <FormControl>
