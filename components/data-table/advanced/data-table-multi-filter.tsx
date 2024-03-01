@@ -1,6 +1,6 @@
 import * as React from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import type { DataTableFilterOption } from "@/types"
+import type { DataTableFilterOption } from "@/lib/types"
 import {
   CopyIcon,
   DotsHorizontalIcon,
@@ -9,7 +9,7 @@ import {
 } from "@radix-ui/react-icons"
 import type { Table } from "@tanstack/react-table"
 
-import { useDebounce } from "@/hooks/use-debounce"
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -34,6 +34,8 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 import { DataTableFacetedFilter } from "../data-table-faceted-filter"
+import { useDebounce } from '@/lib/hooks/useDebounce';
+import { Route } from 'next';
 
 const operators = [
   {
@@ -179,7 +181,7 @@ export function MultiFilterRow<TData>({
           [selectedOption?.value ?? ""]: `${debounceValue}${
             debounceValue.length > 0 ? `.${filterVariety}` : ""
           }`,
-        })}`,
+        })}` as Route,
         {
           scroll: false,
         }
@@ -190,7 +192,7 @@ export function MultiFilterRow<TData>({
       router.push(
         `${pathname}?${createQueryString({
           [selectedOption?.value ?? ""]: null,
-        })}`,
+        })}` as Route,
         {
           scroll: false,
         }
@@ -205,7 +207,7 @@ export function MultiFilterRow<TData>({
       router.push(
         `${pathname}?${createQueryString({
           operator: operator.value,
-        })}`,
+        })}` as Route,
         {
           scroll: false,
         }

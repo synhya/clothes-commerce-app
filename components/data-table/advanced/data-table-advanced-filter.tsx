@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import type { DataTableFilterOption } from "@/types"
 import {
   CaretSortIcon,
   ChevronDownIcon,
@@ -23,6 +22,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { DataTableFilterOption } from '@/lib/types';
 
 interface DataTableAdvancedFilterProps<TData> {
   options: DataTableFilterOption<TData>[]

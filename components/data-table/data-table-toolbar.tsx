@@ -5,7 +5,7 @@ import Link from "next/link"
 import type {
   DataTableFilterableColumn,
   DataTableSearchableColumn,
-} from "@/types"
+} from "@/lib/types"
 import { Cross2Icon, PlusCircledIcon, TrashIcon } from "@radix-ui/react-icons"
 import type { Table } from "@tanstack/react-table"
 
@@ -14,6 +14,7 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { DataTableFacetedFilter } from "@/components/data-table/data-table-faceted-filter"
 import { DataTableViewOptions } from "@/components/data-table/data-table-view-options"
+import { Route } from 'next';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>
@@ -100,7 +101,7 @@ export function DataTableToolbar<TData>({
             Delete
           </Button>
         ) : newRowLink ? (
-          <Link aria-label="Create new row" href={newRowLink}>
+          <Link aria-label="Create new row" href={newRowLink as Route}>
             <div
               className={cn(
                 buttonVariants({

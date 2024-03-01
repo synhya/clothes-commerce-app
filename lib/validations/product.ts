@@ -39,7 +39,7 @@ export const productSchema = z.object({
         })
         .min(1, { message: '색상을 입력해주세요.' }),
     })
-    .array().nonempty({ message: '색상을 한개 이상 선택해주세요' }),
+    .array(),
   imageFiles: z.custom<FileList>(),
   sale_state: z.enum(productSaleState),
 } satisfies Record<keyof Omit<ProductSubmit, 'image_url'> | 'imageFiles', ZodTypeAny>);

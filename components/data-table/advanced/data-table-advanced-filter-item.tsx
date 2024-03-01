@@ -1,11 +1,10 @@
 import * as React from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import type { DataTableFilterOption } from "@/types"
+import type { DataTableFilterOption } from "@/lib/types"
 import { TrashIcon } from "@radix-ui/react-icons"
 import type { Table } from "@tanstack/react-table"
 
 import { cn } from "@/lib/utils"
-import { useDebounce } from "@/hooks/use-debounce"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -23,6 +22,8 @@ import {
 } from "@/components/ui/select"
 
 import { DataTableFacetedFilter } from "../data-table-faceted-filter"
+import { useDebounce } from '@/lib/hooks/useDebounce';
+import { Route } from 'next';
 
 interface DataTableAdvancedFilterItemProps<TData> {
   table: Table<TData>
@@ -87,7 +88,7 @@ export function DataTableAdvancedFilterItem<TData>({
           [selectedOption.value]: `${debounceValue}${
             debounceValue.length > 0 ? `.${filterVariety}` : ""
           }`,
-        })}`,
+        })}` as Route,
         {
           scroll: false,
         }
@@ -98,7 +99,7 @@ export function DataTableAdvancedFilterItem<TData>({
       router.push(
         `${pathname}?${createQueryString({
           [selectedOption.value]: null,
-        })}`,
+        })}` as Route,
         {
           scroll: false,
         }
@@ -166,7 +167,7 @@ export function DataTableAdvancedFilterItem<TData>({
               router.push(
                 `${pathname}?${createQueryString({
                   [selectedOption.value]: null,
-                })}`,
+                })}` as Route,
                 {
                   scroll: false,
                 }
