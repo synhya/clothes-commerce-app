@@ -34,7 +34,7 @@ const NotFoundAlertDialog = ({ additionalLink, description }: NotFoundAlertDialo
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogAction asChild>
-            <Link href="/public">홈으로</Link>
+            <Link href="/">홈으로</Link>
           </AlertDialogAction>
           {additionalLink && (
             <AlertDialogAction asChild>
