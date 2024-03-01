@@ -32,9 +32,6 @@ const ProductsTable = ({ tableData, rowCount }: { tableData: Product[], rowCount
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>
-                <Checkbox id="select-all" />
-              </TableHead>
               <TableHead>상품명</TableHead>
               <TableHead>금액</TableHead>
               <TableHead>카테고리</TableHead>
@@ -47,9 +44,6 @@ const ProductsTable = ({ tableData, rowCount }: { tableData: Product[], rowCount
           <TableBody>
             {tableData?.map((product) => (
               <TableRow key={product.id}>
-                <TableCell>
-                  <Checkbox />
-                </TableCell>
                 <TableCell>
                   {product.name}
                   <Button size="icon" variant="ghost" className="size-5 lg:hidden">

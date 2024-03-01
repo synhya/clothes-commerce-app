@@ -21,11 +21,10 @@ const RevenueCard = async () => {
     .then((invoices) => {
       return invoices.data.reduce((acc, invoice) => acc + invoice.total_price, 0);
     });
-  const revenueIncreaseRate = Intl.NumberFormat('ko-KR', { maximumFractionDigits: 2 }).format(
-    ((totalRevenue - totalRevenueYesterday) /
-      (totalRevenueYesterday == 0 ? 100 : totalRevenueYesterday)) *
-      100,
-  );
+  const revenueIncreaseRate = Intl.NumberFormat('ko-KR', {
+    style: 'percent',
+    maximumFractionDigits: 2,
+  }).format((totalRevenue - totalRevenueYesterday) / totalRevenueYesterday);
 
   return (
     <Card>
@@ -46,7 +45,7 @@ const RevenueCard = async () => {
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{totalRevenue}원</div>
-        <p className="text-xs text-muted-foreground">어제부터 +{revenueIncreaseRate}%</p>
+        <p className="text-xs text-muted-foreground">어제부터 +{revenueIncreaseRate}</p>
       </CardContent>
     </Card>
   );

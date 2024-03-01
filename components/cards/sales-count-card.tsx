@@ -31,8 +31,10 @@ const SalesCountCard = async () => {
     .neq('invoices.state', '결제대기')
     .then((products) => products.data.reduce((acc, product) => acc + product.quantity, 0));
 
-  const increaseRate =
-    ((totalSold - totalSoldYesterday) / (totalSoldYesterday == 0 ? 1 : totalSoldYesterday)) * 100;
+  const increaseRate = Intl.NumberFormat('ko-KR', {
+    style: 'percent',
+    maximumFractionDigits: 2,
+  }).format((totalSold - totalSoldYesterday) / totalSoldYesterday);
 
   return (
     <Card>
@@ -54,7 +56,7 @@ const SalesCountCard = async () => {
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">+{totalSold}</div>
-        <p className="text-xs text-muted-foreground">저번 주부터 +{increaseRate}%</p>
+        <p className="text-xs text-muted-foreground">저번 주부터 +{increaseRate}</p>
       </CardContent>
     </Card>
   );

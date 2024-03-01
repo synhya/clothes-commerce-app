@@ -73,30 +73,32 @@ const UpdateAddressForm = ({ addressList }: { addressList: AddressInfo[] }) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {fields.map((field, index) => (
           <div
-            key={field.id}
+            key={field.id + index}
             className="relative rounded-md border px-4 pb-4 pt-2 shadow-lg shadow-border"
           >
-            <div className="absolute right-3 top-3 flex items-center gap-2">
+            <div className="absolute right-1.5 top-1 flex items-center gap-1">
               {index !== 0 && (
-                <DoubleArrowUpIcon
-                  className="size-5 cursor-pointer"
-                  onClick={() => move(index, index - 1)}
-                />
+                <Button type="button" size="icon" variant="ghost" onClick={() => swap(index, index - 1)}>
+                  <DoubleArrowUpIcon
+                    className="size-4 cursor-pointer"
+                  />
+                </Button>
               )}
               {index !== fields.length - 1 && (
-                <DoubleArrowDownIcon
-                  className="size-5 cursor-pointer"
-                  onClick={() => move(index, index + 1)}
-                />
+                <Button type="button" size="icon" variant="ghost" onClick={() => swap(index, index + 1)}>
+                  <DoubleArrowDownIcon
+                    className="size-4 cursor-pointer"
+                  />
+                </Button>
               )}
               <Button
                 type="button"
                 disabled={form.formState.isSubmitting}
                 size="icon"
-                variant="destructive"
+                variant="ghost"
                 onClick={() => remove(index)}
               >
-                <TrashIcon className="size-6" />
+                <TrashIcon className="size-4 text-red-500" />
               </Button>
             </div>
             <AddressFormField

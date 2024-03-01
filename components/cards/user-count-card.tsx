@@ -1,6 +1,7 @@
 import React from 'react';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 const lastWeek = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
 const UserCountCard = async () => {
@@ -11,9 +12,10 @@ const UserCountCard = async () => {
   } = await supabase.auth.admin.listUsers();
   const currentUsers = users.length;
   const usersLastWeek = users.filter((user) => new Date(user.created_at) > lastWeek).length;
-  const userIncreaseRate = Intl.NumberFormat('ko-KR', { maximumFractionDigits: 0 }).format(
-    ((currentUsers - usersLastWeek) / usersLastWeek) * 100,
-  );
+  const userIncreaseRate = Intl.NumberFormat('ko-KR', {
+    style: 'percent',
+    maximumFractionDigits: 0,
+  }).format((currentUsers - usersLastWeek) / usersLastWeek);
 
   return (
     <Card>
@@ -36,7 +38,7 @@ const UserCountCard = async () => {
       </CardHeader>
       <CardContent>
         <div className="text-2xl font-bold">{currentUsers}</div>
-        <p className="text-xs text-muted-foreground">저번주부터 +{userIncreaseRate}%</p>
+        <p className="text-xs text-muted-foreground">저번주부터 +{userIncreaseRate}</p>
       </CardContent>
     </Card>
   );

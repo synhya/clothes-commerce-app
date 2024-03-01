@@ -23,6 +23,12 @@ export async function middleware(request: NextRequest) {
   }
   const isValidUser = signedIn && signedUp;
 
+  // const personalRoutes = ['/user/update-profile']
+
+  if(!isValidUser && request.nextUrl.pathname.startsWith('/user/update-profile')) {
+    return NextResponse.redirect(new URL('/sign-in' satisfies Route, request.url));
+  }
+
   // add profile page
   if (isValidUser && request.nextUrl.pathname.startsWith('/sign-up/profile')) {
     return NextResponse.redirect(new URL('/' satisfies Route, request.url));

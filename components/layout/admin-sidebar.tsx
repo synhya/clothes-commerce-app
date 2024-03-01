@@ -15,12 +15,12 @@ const AdminSidebar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="relative h-full border-r">
+    <div className="relative h-full">
       <div className="fixed left-1 top-8 z-10 mt-0.5">
         <Hamburger toggled={open} toggle={setOpen} color="grey" size={24} />
       </div>
       <div
-        className={cn('flex h-full min-w-[200px] flex-col justify-between', {
+        className={cn('flex h-full min-w-[200px] flex-col justify-between border-r', {
           hidden: !open,
         })}
       >

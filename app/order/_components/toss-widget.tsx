@@ -28,7 +28,7 @@ const TossWidget = ({ customerKey, price, lineItems, ...orderInfo }: TossWidgetP
 
   const debouncedClose = useDebouncedCallback(async () => {
     setIsOpen(false);
-  }, 300);
+  }, 1000);
   
   const delayedWidgetRendering = useCallback(
     async (ms: number) => await new Promise((res) => setTimeout(res, ms)).then(
@@ -55,7 +55,7 @@ const TossWidget = ({ customerKey, price, lineItems, ...orderInfo }: TossWidgetP
       return;
     }
 
-    delayedWidgetRendering(400);
+    delayedWidgetRendering(100);
   }, [paymentWidget, isOpen]);
 
   const onSubmit = async (data: InvoiceFormValues) => {
@@ -93,6 +93,7 @@ const TossWidget = ({ customerKey, price, lineItems, ...orderInfo }: TossWidgetP
     } catch (error) {
       // 에러 처리하기
       console.error(error);
+      setIsOpen(true);
     }
   };
 
