@@ -20,7 +20,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex h-full bg-background">
       {/* 사이드바 */}
       <AdminSidebar />
-      <div className="mb-5 ml-2 flex-grow">
+      <div className="mb-5 flex-grow">
         <DefaultLayout routes={routes}>{children}</DefaultLayout>
       </div>
     </div>

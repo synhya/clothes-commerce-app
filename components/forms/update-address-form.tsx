@@ -78,17 +78,23 @@ const UpdateAddressForm = ({ addressList }: { addressList: AddressInfo[] }) => {
           >
             <div className="absolute right-1.5 top-1 flex items-center gap-1">
               {index !== 0 && (
-                <Button type="button" size="icon" variant="ghost" onClick={() => swap(index, index - 1)}>
-                  <DoubleArrowUpIcon
-                    className="size-4 cursor-pointer"
-                  />
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => swap(index, index - 1)}
+                >
+                  <DoubleArrowUpIcon className="size-4 cursor-pointer" />
                 </Button>
               )}
               {index !== fields.length - 1 && (
-                <Button type="button" size="icon" variant="ghost" onClick={() => swap(index, index + 1)}>
-                  <DoubleArrowDownIcon
-                    className="size-4 cursor-pointer"
-                  />
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => swap(index, index + 1)}
+                >
+                  <DoubleArrowDownIcon className="size-4 cursor-pointer" />
                 </Button>
               )}
               <Button
@@ -106,6 +112,9 @@ const UpdateAddressForm = ({ addressList }: { addressList: AddressInfo[] }) => {
               mainAddressName={`addressList.${index}.main_address`}
               extraAddressName={`addressList.${index}.extra_address`}
             />
+            {index === 0 && (
+              <div className="absolute inset-x-0  -bottom-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
+            )}
           </div>
         ))}
         <Button
@@ -116,12 +125,16 @@ const UpdateAddressForm = ({ addressList }: { addressList: AddressInfo[] }) => {
         >
           {form.formState.isSubmitting ? (
             <Icons.spinner className="mx-1.5 h-4 w-4 animate-spin" />
-          ): "추가"}
+          ) : (
+            '추가'
+          )}
         </Button>
         <Button type="submit" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? (
             <Icons.spinner className="mx-1.5 h-4 w-4 animate-spin" />
-          ): "저장"}
+          ) : (
+            '저장'
+          )}
         </Button>
       </form>
     </Form>

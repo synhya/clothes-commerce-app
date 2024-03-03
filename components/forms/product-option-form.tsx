@@ -13,7 +13,7 @@ import { useFormState } from 'react-dom';
 import { createBasketItem } from '@/lib/actions/basket';
 import { DBEnums } from '@/lib/types';
 import RadioInput from '@/components/radio-input';
-import SubmitButton from '@/app/product/submit-button';
+import SubmitButton from '@/components/ui/submit-button';
 import { toast } from 'sonner';
 import { productSizeEnums } from '@/config/product';
 
@@ -43,7 +43,7 @@ const ProductOptionForm = ({
       <form className="grid gap-4 md:gap-10" action={dispatch}>
         <div className="grid gap-2">
           <Label className="text-base">색상</Label>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {availableColors.map((color) => (
               <RadioInput label={color} key={color} value={color} name="selectedColor" />
             ))}
@@ -54,7 +54,7 @@ const ProductOptionForm = ({
         </div>
         <div className="grid gap-2">
           <Label className="text-base">사이즈</Label>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {availableSizes
               .sort((a, b) => productSizeEnums.indexOf(a) - productSizeEnums.indexOf(b))
               .map((size) => (

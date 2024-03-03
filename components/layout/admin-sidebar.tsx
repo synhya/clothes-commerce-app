@@ -15,18 +15,17 @@ const AdminSidebar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className="relative h-full">
-      <div className="fixed left-1 top-8 z-10 mt-0.5">
+    <div className="relative h-full ">
+      <div className="fixed left-1 top-16 z-10 mt-0.5">
         <Hamburger toggled={open} toggle={setOpen} color="grey" size={24} />
       </div>
       <div
-        className={cn('flex h-full min-w-[200px] flex-col justify-between border-r', {
+        className={cn('flex h-full min-w-48 flex-col justify-between', {
           hidden: !open,
         })}
       >
-        <div className="sticky top-12 mx-4 flex flex-col items-center gap-y-4">
-          <p className="mt-8 text-xl font-medium">관리자 페이지</p>
-
+        <div className="fixed inset-y-0 top-16 flex flex-col px-8 border-r items-center gap-y-4">
+          <p className="mt-16 text-xl font-medium">관리자 페이지</p>
           <Accordion type="multiple" className="w-full">
             <AccordionItem value="dashboard">
               <AccordionTrigger>메인</AccordionTrigger>

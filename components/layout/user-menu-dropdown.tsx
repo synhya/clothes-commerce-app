@@ -1,15 +1,18 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PersonIcon } from '@radix-ui/react-icons';
-import _ from 'lodash';
 import { useDebouncedCallback } from 'use-debounce';
 import { Route } from 'next';
+import { createClient } from '@/lib/supabase/client';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useRouter } from 'next/navigation';
 
-const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
+const UserMenuDropdown = ({ isAdmin, avatarUrl }: { isAdmin: boolean, avatarUrl:string }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [adminState, setAdminState] = useState(isAdmin);
+  const router = useRouter();
 
   const debouncedHoverEvent = useDebouncedCallback((bool) => {
     setShowDropdown(bool);
@@ -19,19 +22,31 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
     setAdminState(isAdmin);
   }, [isAdmin]);
 
+  const handleSignOut = async () => {
+    await createClient().auth.signOut();
+    router.refresh();
+  };
+
   return (
     <div className="flex flex-col">
       <Button
         variant="ghost"
-        className="px-1.5"
         onMouseOver={() => {
           debouncedHoverEvent(true);
         }}
         onMouseOut={() => {
           debouncedHoverEvent(false);
         }}
+        className="rounded-full size-8"
       >
-        <PersonIcon className="size-6" />
+        <Avatar>
+          <AvatarImage src={
+            avatarUrl ? avatarUrl : "https://github.com/synhya.png"
+          } alt="@shadcn" />
+          <AvatarFallback>
+            <PersonIcon className="w-6 h-6" />
+          </AvatarFallback>
+        </Avatar>
       </Button>
       <div
         data-state={showDropdown ? 'open' : 'close'}
@@ -69,6 +84,11 @@ const UserMenuDropdown = ({ isAdmin }: { isAdmin: boolean }) => {
               </Link>
             </li>
           ))}
+          <li className="w-full">
+            <Button variant="link" className="w-full" onClick={()=>handleSignOut()}>
+              로그아웃
+            </Button>
+          </li>
           {adminState && (
             <li className="w-full">
               <Link href="/admin">

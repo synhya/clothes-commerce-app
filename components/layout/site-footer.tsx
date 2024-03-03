@@ -2,8 +2,10 @@
 import React from 'react';
 import { Icons } from '@/components/ui/icons';
 import { usePathname } from 'next/navigation';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
 
-const GlobalFooter = () => {
+const SiteFooter = () => {
   const pathname = usePathname();
 
   if (pathname.startsWith('/user/login') || pathname.startsWith('/admin')) return;
@@ -42,14 +44,9 @@ const GlobalFooter = () => {
         <div className=" sm:w-1/4">
           <h3 className="mb-4 line-clamp-1 text-lg font-semibold">팔로우하기</h3>
           <p className="line-clamp-2">최신 소식과 업데이트를 받아보세요.</p>
-          <ul className="social-icons mt-2 flex gap-3">
-            <li>
-              <Icons.twitter className="h-6 w-6 cursor-pointer" />
-            </li>
-            <li>
-              <Icons.kakao className="h-6 w-6 cursor-pointer" />
-            </li>
-          </ul>
+          <Link href="https://github.com/synhya/clothes-commerce-app">
+            <GitHubLogoIcon className="size-8 cursor-pointer" />
+          </Link>
         </div>
       </div>
 
@@ -60,4 +57,4 @@ const GlobalFooter = () => {
   );
 };
 
-export default GlobalFooter;
+export default SiteFooter;

@@ -69,7 +69,7 @@ const CategoryScrollSection = ({
 
   return (
     <>
-      <div className="mx-6 grid grid-cols-1 gap-8 md:mx-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-6 grid grid-cols-1 gap-8 md:mx-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {loadedProducts?.map((product, i) => {
           const recalculatedDelay =
             i >= PAGE_COUNT * 2 ? (i - PAGE_COUNT * (offset - 1)) / 15 : i / 15;

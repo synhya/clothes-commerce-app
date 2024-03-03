@@ -2,16 +2,38 @@ import { Route } from 'next';
 import { type FileWithPath } from 'react-dropzone';
 import { Database } from '@/lib/supabase/schema';
 import { productCategories, subCategories } from '@/config/product';
+import { Icons } from '@/components/icons';
 
-export type FileWithPreview = FileWithPath & {
-  preview: string;
-};
-
-export type SidebarNavItem = {
-  label: string;
-  href: Route;
-  // icon: LucideIcon
+export interface NavItem {
+  title: string
+  href?: string
+  disabled?: boolean
+  external?: boolean
+  icon?: keyof typeof Icons
+  label?: string
+  description?: string
 }
+
+export interface NavItemWithChildren extends NavItem {
+  items: NavItemWithChildren[]
+}
+
+export interface NavItemWithOptionalChildren extends NavItem {
+  items?: NavItemWithChildren[]
+}
+
+export interface FooterItem {
+  title: string
+  items: {
+    title: string
+    href: string
+    external?: boolean
+  }[]
+}
+
+export type MainNavItem = NavItemWithOptionalChildren
+
+export type SidebarNavItem = NavItemWithChildren
 
 export type HeaderItem = {
   title: string;
@@ -26,12 +48,36 @@ export type BreadCrumb = {
   href: Route;
 };
 
+export type Category = (
+  | (typeof subCategories)[keyof typeof subCategories][number]
+  | (typeof productCategories)[number]
+  )[];
+
+export type ProductCategory = (typeof productCategories)[number];
+export type SubCategory = {
+  [K in ProductCategory]: string[];
+};
+
+// export interface Category {
+//   title: Product["categories"]
+//   image?: string
+//   icon?: React.ComponentType<{ className?: string }>
+//   subcategories: Subcategory[]
+// }
+//
+// export interface Subcategory {
+//   title: string
+//   description?: string
+//   image?: string
+//   slug: string
+// }
+
 export type ProductCardData = {
   name: string;
   description: string;
   price: number;
   imageUrl: string;
-  categories: Categories;
+  categories: Category;
   tags?: string[];
   availableColors?: string[];
 };
@@ -43,16 +89,6 @@ export type BasketItemData = {
   selectedColor: string;
   selectedSize: DBEnums['product_size'];
   quantity: number;
-};
-
-export type Categories = (
-  | (typeof subCategories)[keyof typeof subCategories][number]
-  | (typeof productCategories)[number]
-)[];
-
-export type ProductCategory = (typeof productCategories)[number];
-export type SubCategory = {
-  [K in ProductCategory]: string[];
 };
 
 export type Option = {
@@ -86,7 +122,7 @@ export type Profile = Database['public']['Tables']['profiles']['Row'];
 export type ProfileInfo = Database['public']['Views']['profile_info']['Row'];
 
 export type Product = Omit<Database['public']['Tables']['products']['Row'], 'categories'> & {
-  categories: Categories;
+  categories: Category;
 };
 export type ProductSubmit = Omit<Product, 'id' | 'created_at' | 'updated_at' | 'sold'>;
 
@@ -98,4 +134,3 @@ export type LineItem = Omit<
   'id' | 'invoice_id'
 >;
 export type DBEnums = Database['public']['Enums'];
-

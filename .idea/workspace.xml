@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="fix: fix type errors" />
+    <list default="true" id="a1905d83-2d37-4b17-87ff-c3e5bb3926bd" name="Changes" comment="fix: minor bug fix">
+      <change afterPath="$PROJECT_DIR$/components/ui/hero-parallax.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,35 +58,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/Administrator/Desktop/AfterGrad/jang-admin-app/app/order/list&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ja/Desktop/AfterGrad/jang-admin-app/components&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.build.executor&quot;: &quot;Run&quot;,
-    &quot;npm.categorize-products db.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.format.executor&quot;: &quot;Run&quot;,
-    &quot;npm.generate db type.executor&quot;: &quot;Run&quot;,
-    &quot;npm.populate db.executor&quot;: &quot;Run&quot;,
-    &quot;npm.seed.executor&quot;: &quot;Run&quot;,
-    &quot;npm.start.executor&quot;: &quot;Run&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.tailwindcss&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_directory_selection": "C:/Users/Administrator/Desktop/AfterGrad/jang-admin-app/app/order/list",
+    "last_opened_file_path": "C:/Users/ja/Desktop/AfterGrad/_expo/real-estate-app",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.build.executor": "Run",
+    "npm.categorize-products db.executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.format.executor": "Run",
+    "npm.generate db type.executor": "Run",
+    "npm.populate db.executor": "Run",
+    "npm.seed.executor": "Run",
+    "npm.start.executor": "Run",
+    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\prettier",
+    "settings.editor.selected.configurable": "configurable.tailwindcss",
+    "ts.external.directory.path": "C:\\Users\\ja\\Desktop\\AfterGrad\\jang-admin-app\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\components" />
@@ -104,7 +107,7 @@
       <recent name="C:\Users\ja\Desktop\AfterGrad\jang-admin-app\config\product.ts" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -157,8 +160,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.generate db type" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.format" />
@@ -206,6 +209,8 @@
       <workItem from="1709302890235" duration="20702000" />
       <workItem from="1709324818380" duration="2179000" />
       <workItem from="1709327585625" duration="1305000" />
+      <workItem from="1709329714299" duration="4436000" />
+      <workItem from="1709366174117" duration="221000" />
     </task>
     <task id="LOCAL-00001" summary="chore: moved file location">
       <option name="closed" value="true" />
@@ -383,7 +388,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709328761132</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="fix: minor bug fix">
+      <option name="closed" value="true" />
+      <created>1709333605572</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1709333605572</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +434,8 @@
     <MESSAGE value="feat: add multi-step form" />
     <MESSAGE value="chore: rm unused images" />
     <MESSAGE value="fix: fix type errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fix type errors" />
+    <MESSAGE value="fix: minor bug fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: minor bug fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

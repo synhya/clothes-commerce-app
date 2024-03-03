@@ -154,3 +154,20 @@ export async function deleteProduct(productId: string) {
   revalidatePath('/', 'layout');
   redirect(`/admin/search-products`);
 }
+
+export async function filterProducts(query: string) {
+  if(query.length === 0) return null;
+
+  const supabase = createAdminClient();
+  const { data, error } = await supabase.from('products')
+    .select('id, name, categories')
+    //     .ilike('name', `%${query}%`)
+    .order('created_at', { ascending: false })
+    .limit(10);
+
+  if (error) {
+    throw '요청 실패: ' + error.message;
+  }
+
+  return data;
+}

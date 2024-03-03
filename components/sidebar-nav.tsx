@@ -18,7 +18,7 @@ export function SidebarNav () {
               <React.Fragment key={item.title}>
                 {item.links.map((l) => (
                   <Link
-                    key={l.label}
+                    key={l.title}
                     href={l.href}
                     className={cn(
                       buttonVariants({ variant: 'ghost' }),
@@ -28,7 +28,7 @@ export function SidebarNav () {
                       'justify-start',
                     )}
                   >
-                    {l.label}
+                    {l.title}
                   </Link>
                 ))}
               </React.Fragment>
