@@ -7,7 +7,8 @@ import ProductsTable from '@/app/admin/_components/products-table';
 import { Product } from '@/lib/types';
 import { productSaleState } from '@/config/product';
 import { productsSearchParamsSchema } from '@/lib/validations/params';
-import { DataTableSkeleton } from '@/components/data-table/data-table-skeleton';
+import { DataTableSkeleton } from '@/app/admin/_components/data-table-skeleton';
+
 
 //
 //

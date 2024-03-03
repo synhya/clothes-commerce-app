@@ -18,10 +18,10 @@ import { MainNavItem } from '@/lib/types';
 import { Route } from 'next';
 
 interface MainNavProps {
-  items: MainNavItem[]
+  items: MainNavItem[];
 }
 
-const MainNav = ({items} : MainNavProps) => {
+const MainNav = ({ items }: MainNavProps) => {
   const onNavChange = useCallback(() => {
     setTimeout(() => {
       const triggers = document.querySelectorAll('.submenu-trigger[data-state="open"]');
@@ -47,30 +47,31 @@ const MainNav = ({items} : MainNavProps) => {
       </Link>
       <NavigationMenu onValueChange={onNavChange}>
         <NavigationMenuList className="ml-5">
-          {items.map((item, index) => (
-            <NavigationMenuItem key={item.title}>
-              <NavigationMenuTrigger className="submenu-trigger bg-transparent">
-                {item.title}
-              </NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid gap-3 p-1">
-                  {item.items.map((subItem) => (
-                    <li key={subItem.title}>
-                      {subItem.href ? (
-                        <Link href={subItem.href as Route} className="w-fit">
-                          <Button variant="link">{subItem.title}</Button>
-                        </Link>
-                      ) : (
-                        <div className="text-foreground/70 transition-colors">
-                          {item.title}
-                        </div>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          ))}
+          {items.map(
+            (item, index) =>
+              index !== 0 && (
+                <NavigationMenuItem key={item.title}>
+                  <NavigationMenuTrigger className="submenu-trigger bg-transparent">
+                    {item.title}
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid gap-3 p-1">
+                      {item.items.map((subItem) => (
+                        <li key={subItem.title}>
+                          {subItem.href ? (
+                            <Link href={subItem.href as Route} className="w-fit">
+                              <Button variant="link">{subItem.title}</Button>
+                            </Link>
+                          ) : (
+                            <div className="text-foreground/70 transition-colors">{item.title}</div>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              ),
+          )}
         </NavigationMenuList>
         <NavigationMenuViewport className="submenu-viewport min-w-[130px] items-center bg-background/90 backdrop-blur-lg" />
       </NavigationMenu>

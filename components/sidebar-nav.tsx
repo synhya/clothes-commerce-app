@@ -4,37 +4,30 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
-import { additionalLinks } from '@/config/nav';
 import React from 'react';
+import { Route } from 'next';
+import { profileMenu, siteConfig, userMenu } from '@/config/site';
 
-export function SidebarNav () {
+export function SidebarNav() {
   const pathname = usePathname();
 
   return (
     <nav className={'flex  space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1'}>
-      {additionalLinks.length > 0
-        && additionalLinks.map((item) => {
-            return (
-              <React.Fragment key={item.title}>
-                {item.links.map((l) => (
-                  <Link
-                    key={l.title}
-                    href={l.href}
-                    className={cn(
-                      buttonVariants({ variant: 'ghost' }),
-                      pathname === l.href
-                        ? 'bg-muted hover:bg-muted'
-                        : 'hover:bg-transparent hover:underline',
-                      'justify-start',
-                    )}
-                  >
-                    {l.title}
-                  </Link>
-                ))}
-              </React.Fragment>
-            );
-          },
-        )}
+      {profileMenu.map((item) => (
+        <Link
+          key={item.title}
+          href={item.href as Route}
+          className={cn(
+            buttonVariants({ variant: 'ghost' }),
+            pathname === item.href
+              ? 'bg-muted hover:bg-muted'
+              : 'hover:bg-transparent hover:underline',
+            'justify-start',
+          )}
+        >
+          {item.title}
+        </Link>
+      ))}
     </nav>
   );
 }
