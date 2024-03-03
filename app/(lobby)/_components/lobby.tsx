@@ -18,7 +18,7 @@ export default function Lobby ({
   userName,
 }: LobbyProps) {
   return (
-    <Shell variant="stretched" className="max-w-6xl">
+    <Shell variant="stretched">
       <HeroSectionSlider isAdmin={isAdmin} userName={userName} />
       <div
         className="group mt-5 flex flex-col items-center gap-y-2 bg-background/60 py-12 *:text-pretty *:text-center *:text-foreground/80">

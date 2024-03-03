@@ -118,7 +118,7 @@ const Page = async ({
           </Button>
         </div>
       </div>
-      <div>{!trendingFetchError && <TrendingClothes trendingClothes={trendingClothes} />}</div>
+      <TrendingClothes trendingClothes={trendingClothes} />
     </div>
   );
 };
