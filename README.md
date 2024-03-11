@@ -1,5 +1,8 @@
 ## 웹앱 프로젝트 #2
 
+![スクリーンショット 2024-03-11 225915](https://github.com/synhya/clothes-commerce-app/assets/25860861/22728abe-9e69-4312-a86e-0c4dff5ec2c6)
+
+
 ### 설명
 ___
 옷 쇼핑몰 웹앱입니다.
