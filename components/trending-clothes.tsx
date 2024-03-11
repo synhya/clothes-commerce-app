@@ -27,11 +27,11 @@ const TrendingClothes = ({ trendingClothes, className, ...props }: TrendingCloth
           align: 'start',
           loop: true,
         }}
-        className="w-[calc(100vw-8rem)] max-w-min"
+        className="w-[calc(100dvw-8rem)] max-w-screen-2xl"
       >
         <CarouselContent>
           {trendingClothes.map((product, index) => (
-            <CarouselItem key={index} className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
+            <CarouselItem key={index} className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
               <motion.div
                 key={product.name}
                 initial={{
