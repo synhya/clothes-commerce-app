@@ -22,7 +22,7 @@ export default async function SiteHeader() {
   const isAdmin = user?.email === process.env.ADMIN_EMAIL;
   return (
     <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md bg-background/60">
-      <div className="container flex h-16 items-center">
+      <div className="px-8 flex h-16 items-center">
         <MainNav items={siteConfig.mainNav} />
         <MobileNav items={siteConfig.mainNav} />
         <div className="flex flex-1 items-center justify-end space-x-4">

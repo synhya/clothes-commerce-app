@@ -22,7 +22,7 @@ export default function AuthLayout ({children}: LayoutProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-background/60 md:to-background/40" />
       </AspectRatio>
-      <div className="mt-10 w-full md:mt-8 lg:mt-0 absolute md:static col-span-1 flex flex-col left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 items-center space-y-6 lg:p-8 md:col-span-2 lg:col-span-1">
+      <div className="top-1/4 sm:top-1/3 -translate-y-1/2 md:translate-y-0 w-full md:my-auto md:pb-20 absolute md:static col-span-1 flex flex-col left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 items-center space-y-6 md:col-span-2 lg:col-span-1">
         <AuthHeader />
         {children}
       </div>
